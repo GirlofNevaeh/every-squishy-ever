@@ -1,0 +1,17 @@
+node_modules/
+.vercel/
+.tanstack/
+screenshots/
+artifacts/
+attachments/
+dist/
+*.log
+.env
+.env.*
+.node_modules.lock
+
+.grok/preview.log
+.grok/skills/
+.grok/references/
+.grok/status
+.grok/favicon-*.png

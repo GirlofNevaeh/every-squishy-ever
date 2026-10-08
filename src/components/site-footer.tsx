@@ -1,0 +1,37 @@
+import { Link } from "@tanstack/react-router";
+import { EMPTY_SEARCH } from "@/lib/catalog";
+
+export function SiteFooter() {
+  return (
+    <footer className="mt-16 border-t border-line">
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-sm text-muted">
+        <nav className="flex flex-wrap gap-4 font-bold" aria-label="Footer">
+          <Link to="/" search={EMPTY_SEARCH} className="inline-flex min-h-11 items-center">
+            Squishies
+          </Link>
+          <Link to="/top" className="inline-flex min-h-11 items-center">
+            Top 20
+          </Link>
+          <Link to="/play" className="inline-flex min-h-11 items-center">
+            Quiz
+          </Link>
+          <Link to="/color" className="inline-flex min-h-11 items-center">
+            Color
+          </Link>
+          <Link to="/about" className="inline-flex min-h-11 items-center">
+            About
+          </Link>
+          <Link to="/suggest" className="inline-flex min-h-11 items-center">
+            Suggest a squishy
+          </Link>
+        </nav>
+        <p>
+          Pictures are original catalog photos, not brand photos. The words are ours. Amazon and YouTube links are
+          searches, so other toys and videos can show up. Prices change. The top 20 is a hall of fame, not an official
+          sales chart. This site is not part of Schylling, NeeDoh, Amazon, YouTube, or other brands unless an affiliate
+          tag is added later.
+        </p>
+      </div>
+    </footer>
+  );
+}

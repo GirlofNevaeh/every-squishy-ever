@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #fbf6ec;
+  --color-cream-deep: #f3ead7;
+  --color-surface: #fffdf8;
+  --color-ink: #3c3228;
+  --color-muted: #5e5348;
+  --color-butter: #f6c945;
+  --color-blush: #f4b6c6;
+  --color-mint: #8fd4b0;
+  --color-line: #eadfce;
+  --color-studio: #fff8ee;
+  --color-cat-needoh: #b7e4f2;
+  --color-cat-cheese: #f8dc78;
+  --color-cat-bread: #f8d0a8;
+  --color-cat-dumpling: #f6c2d6;
+  --color-cat-mochi: #ddd0f8;
+  --color-cat-fruit: #b7e7c8;
+  --color-cat-animal: #f6c6d4;
+  --color-cat-cube: #f3ddb0;
+  --color-cat-mystery: #e4d4f8;
+  --color-cat-other: #f0d0c0;
+  --color-swatch-butter: #f6c945;
+  --color-swatch-cheddar: #f0a202;
+  --color-swatch-cream: #fff6e4;
+  --color-swatch-blush: #f7b7c8;
+  --color-swatch-berry: #e15b73;
+  --color-swatch-mint: #8fd4b0;
+  --color-swatch-leaf: #3f9a62;
+  --color-swatch-sky: #7ec8e3;
+  --color-swatch-ice: #d7f3ff;
+  --color-swatch-lilac: #c9b6f2;
+  --color-swatch-grape: #7d6bb5;
+  --color-swatch-coral: #f28b74;
+  --color-swatch-cocoa: #8c5a3c;
+  --color-swatch-nori: #2f6b4f;
+  --color-swatch-yolk: #f5c518;
+  --color-swatch-peach: #ffc4a3;
+  --color-swatch-toast: #e0a85c;
+  --color-swatch-amber: #e8a317;
+  --color-swatch-melon: #f47c96;
+  --color-swatch-ink: #3c3228;
+  --color-swatch-pearl: #f4f7ff;
+  --color-swatch-glow: #b6f3c4;
+  --color-swatch-galaxy: #5c4d86;
+  --font-sans: "Nunito", ui-rounded, "Trebuchet MS", sans-serif;
+  --font-display: "Fredoka", "Nunito", ui-rounded, "Trebuchet MS", sans-serif;
+  --shadow-card:
+    0 0 0 1px rgba(60, 50, 40, 0.06), 0 1px 2px -1px rgba(60, 50, 40, 0.06),
+    0 12px 28px -16px rgba(60, 50, 40, 0.28);
+  --shadow-lift:
+    0 0 0 1px rgba(60, 50, 40, 0.08), 0 2px 4px -2px rgba(60, 50, 40, 0.08),
+    0 18px 36px -18px rgba(60, 50, 40, 0.32);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-padding-top: 11rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    line-height: 1.15;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+}
+
+.squish-card {
+  transition: transform 420ms cubic-bezier(0.34, 1.35, 0.5, 1);
+}
+
+.squish-card:active {
+  transform: scale(0.96);
+}
+
+.toy-squish {
+  transform-origin: center 70%;
+  transition: transform 420ms cubic-bezier(0.34, 1.45, 0.5, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .squish-card:hover {
+    transform: scale(1.03);
+  }
+
+  .squish-card:hover .toy-squish {
+    transform: scale(1.05, 0.95);
+  }
+}
+
+.squish-card:active .toy-squish {
+  transform: scale(0.94, 1.05);
+}
+
+.hero-rise {
+  animation: hero-rise 520ms ease-out both;
+}
+
+.hero-rise-2 {
+  animation: hero-rise 520ms ease-out 90ms both;
+}
+
+.hero-rise-3 {
+  animation: hero-rise 520ms ease-out 160ms both;
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .squish-card,
+  .toy-squish,
+  .hero-rise,
+  .hero-rise-2,
+  .hero-rise-3 {
+    animation: none;
+    transition: none;
+  }
+
+  .squish-card:hover,
+  .squish-card:active,
+  .squish-card:hover .toy-squish,
+  .squish-card:active .toy-squish {
+    transform: none;
+  }
+}
+
+@media print {
+  header,
+  footer,
+  .compare-bar {
+    display: none !important;
+  }
+
+  .color-sheet {
+    box-shadow: none;
+  }
+}
