@@ -72,7 +72,6 @@ async function saveShelfOffline(onProgress?: (done: number, total: number) => vo
     "/color",
     "/about",
     "/suggest",
-    "/compare",
     "/favicon.svg",
     ...squishies.flatMap((item) => [item.image, `/squishy/${item.id}`]),
     ...loaded,

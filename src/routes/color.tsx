@@ -141,7 +141,7 @@ function ColorPage() {
   }
 
   return (
-    <main id="main" className="mx-auto max-w-3xl px-4 py-8 pb-28">
+    <main id="main" className="mx-auto max-w-3xl px-4 py-8">
       <p className="text-sm font-extrabold tracking-wide text-muted uppercase">Color</p>
       <h1 className="mt-2 font-display text-5xl">Coloring sheets</h1>
       <p className="mt-3 text-lg">Pick a crayon, tap the picture, then print it if you want a paper sheet.</p>

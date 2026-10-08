@@ -165,8 +165,7 @@
 
 @media print {
   header,
-  footer,
-  .compare-bar {
+  footer {
     display: none !important;
   }
 

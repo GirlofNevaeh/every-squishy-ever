@@ -4,8 +4,6 @@ import { SquishyCard } from "@/components/squishy-card";
 import { SquishyPhoto } from "@/components/squishy-photo";
 import { buttonClass } from "@/components/ui/button";
 import { amazonUrl, CATEGORY_CHIP, EMPTY_SEARCH, getSquishy, relatedSquishies, youtubeUrl } from "@/lib/catalog";
-import { useCompare } from "@/lib/compare";
-import { cn } from "@/lib/cn";
 import { swatch } from "@/lib/swatches";
 
 export const Route = createFileRoute("/squishy/$id")({
@@ -27,7 +25,6 @@ export const Route = createFileRoute("/squishy/$id")({
 function Detail() {
   const { id } = Route.useParams();
   const item = getSquishy(id);
-  const { ids, toggle } = useCompare();
 
   if (!item) {
     return (
@@ -45,7 +42,6 @@ function Detail() {
 
   const related = relatedSquishies(item);
   const year = item.yearIntroduced ?? "Not listed";
-  const picked = ids.includes(item.id);
 
   return (
     <main id="main" className="mx-auto max-w-6xl px-4 py-8">
@@ -115,14 +111,6 @@ function Detail() {
               Watch on YouTube
               <CirclePlay className="size-4" aria-hidden="true" />
             </a>
-            <button
-              type="button"
-              aria-pressed={picked}
-              onClick={() => toggle(item.id)}
-              className={cn(buttonClass(picked ? "mint" : "ink"))}
-            >
-              {picked ? "Added to compare" : "Compare"}
-            </button>
           </div>
           <p className="mt-2 text-sm text-muted">
             {item.amazonAsin

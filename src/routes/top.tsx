@@ -18,7 +18,7 @@ export const Route = createFileRoute("/top")({
 function TopPage() {
   const items = topSellers();
   return (
-    <main id="main" className="mx-auto max-w-6xl px-4 py-8 pb-28">
+    <main id="main" className="mx-auto max-w-6xl px-4 py-8">
       <p className="text-sm font-extrabold tracking-wide text-muted uppercase">Hall of fame</p>
       <h1 className="mt-2 font-display text-5xl">Top 20 best sellers</h1>
       <p className="mt-3 max-w-2xl text-lg">

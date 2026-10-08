@@ -3,13 +3,8 @@ import { CirclePlay, ExternalLink } from "lucide-react";
 import { SquishyPhoto } from "@/components/squishy-photo";
 import { buttonClass } from "@/components/ui/button";
 import { amazonUrl, CATEGORY_CHIP, feelLine, youtubeUrl, type Squishy } from "@/lib/catalog";
-import { useCompare } from "@/lib/compare";
-import { cn } from "@/lib/cn";
 
 export function SquishyCard({ item }: { item: Squishy }) {
-  const { ids, toggle } = useCompare();
-  const picked = ids.includes(item.id);
-
   return (
     <article className="squish-card group flex h-full min-w-0 flex-col rounded-3xl bg-surface p-2 shadow-card">
       <Link
@@ -44,14 +39,6 @@ export function SquishyCard({ item }: { item: Squishy }) {
           <Link to="/squishy/$id" params={{ id: item.id }} className={buttonClass("ink", "flex-1")}>
             See it
           </Link>
-          <button
-            type="button"
-            aria-pressed={picked}
-            onClick={() => toggle(item.id)}
-            className={cn(buttonClass(picked ? "mint" : "surface"), "flex-1")}
-          >
-            {picked ? "Added" : "Compare"}
-          </button>
         </div>
         <div className="flex flex-wrap gap-2">
           <a

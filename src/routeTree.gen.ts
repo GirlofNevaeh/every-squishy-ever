@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ColorRouteImport } from './routes/color'
-import { Route as CompareRouteImport } from './routes/compare'
 import { Route as PlayRouteImport } from './routes/play'
 import { Route as SuggestRouteImport } from './routes/suggest'
 import { Route as TopRouteImport } from './routes/top'
@@ -31,11 +30,6 @@ const AboutRoute = AboutRouteImport.update({
 const ColorRoute = ColorRouteImport.update({
   id: '/color',
   path: '/color',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CompareRoute = CompareRouteImport.update({
-  id: '/compare',
-  path: '/compare',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlayRoute = PlayRouteImport.update({
@@ -63,7 +57,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/color': typeof ColorRoute
-  '/compare': typeof CompareRoute
   '/play': typeof PlayRoute
   '/suggest': typeof SuggestRoute
   '/top': typeof TopRoute
@@ -73,7 +66,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/color': typeof ColorRoute
-  '/compare': typeof CompareRoute
   '/play': typeof PlayRoute
   '/suggest': typeof SuggestRoute
   '/top': typeof TopRoute
@@ -84,7 +76,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/color': typeof ColorRoute
-  '/compare': typeof CompareRoute
   '/play': typeof PlayRoute
   '/suggest': typeof SuggestRoute
   '/top': typeof TopRoute
@@ -93,30 +84,14 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/about'
-    | '/color'
-    | '/compare'
-    | '/play'
-    | '/suggest'
-    | '/top'
-    | '/squishy/$id'
+    '/' | '/about' | '/color' | '/play' | '/suggest' | '/top' | '/squishy/$id'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/about'
-    | '/color'
-    | '/compare'
-    | '/play'
-    | '/suggest'
-    | '/top'
-    | '/squishy/$id'
+  to: '/' | '/about' | '/color' | '/play' | '/suggest' | '/top' | '/squishy/$id'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/color'
-    | '/compare'
     | '/play'
     | '/suggest'
     | '/top'
@@ -127,7 +102,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ColorRoute: typeof ColorRoute
-  CompareRoute: typeof CompareRoute
   PlayRoute: typeof PlayRoute
   SuggestRoute: typeof SuggestRoute
   TopRoute: typeof TopRoute
@@ -155,13 +129,6 @@ declare module '@tanstack/react-router' {
       path: '/color'
       fullPath: '/color'
       preLoaderRoute: typeof ColorRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/compare': {
-      id: '/compare'
-      path: '/compare'
-      fullPath: '/compare'
-      preLoaderRoute: typeof CompareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/play': {
@@ -199,7 +166,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ColorRoute: ColorRoute,
-  CompareRoute: CompareRoute,
   PlayRoute: PlayRoute,
   SuggestRoute: SuggestRoute,
   TopRoute: TopRoute,

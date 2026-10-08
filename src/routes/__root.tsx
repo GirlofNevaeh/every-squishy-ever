@@ -1,10 +1,8 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
-import { CompareBar } from "@/components/compare-bar";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { CompareProvider } from "@/lib/compare";
 import appCss from "../styles.css?url";
 
 export const Route = createRootRoute({
@@ -40,16 +38,13 @@ export const Route = createRootRoute({
       <body>
         <PreviewHostBridge />
         <AuthProvider>
-          <CompareProvider>
-            <div className="flex min-h-screen flex-col">
-              <SiteHeader />
-              <div className="flex-1">
-                <Outlet />
-              </div>
-              <SiteFooter />
-              <CompareBar />
+          <div className="flex min-h-screen flex-col">
+            <SiteHeader />
+            <div className="flex-1">
+              <Outlet />
             </div>
-          </CompareProvider>
+            <SiteFooter />
+          </div>
         </AuthProvider>
         <Scripts />
       </body>

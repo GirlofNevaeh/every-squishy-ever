@@ -268,7 +268,7 @@ function PlayPage() {
   const tied = ranked.filter((team) => team.score === leader?.score).length > 1;
 
   return (
-    <main id="main" className="mx-auto max-w-3xl px-4 py-8 pb-28">
+    <main id="main" className="mx-auto max-w-3xl px-4 py-8">
       <p className="text-sm font-extrabold tracking-wide text-muted uppercase">Play</p>
       <h1 className="mt-2 font-display text-5xl">Squish quiz</h1>
       {phase === "setup" ? (
