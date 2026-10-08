@@ -19,6 +19,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Nice Cube",
+    "amazonAsin": "B0BQZFVJTB",
     "priceNote": "often around $8–15",
     "imageKey": "nice-cube",
     "image": "/squishies/nice-cube.jpg",
@@ -46,6 +47,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Nice Cube Swirl",
+    "amazonAsin": null,
     "priceNote": "often around $8–15",
     "imageKey": "nice-cube-swirl",
     "image": "/squishies/nice-cube-swirl.jpg",
@@ -73,6 +75,7 @@
       "jumbo"
     ],
     "amazonQuery": "Schylling Nice Berg",
+    "amazonAsin": "B0D9ZP62TR",
     "priceNote": "jumbos often around $10–20",
     "imageKey": "nice-berg",
     "image": "/squishies/nice-berg.jpg",
@@ -100,6 +103,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Groovy Glob",
+    "amazonAsin": "B076FGVCRH",
     "priceNote": "often around $8–15",
     "imageKey": "groovy-glob",
     "image": "/squishies/groovy-glob.jpg",
@@ -127,6 +131,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Gumdrop",
+    "amazonAsin": "B0C6XBP4CW",
     "priceNote": "often around $8–15",
     "imageKey": "gumdrop",
     "image": "/squishies/gumdrop.jpg",
@@ -154,6 +159,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Gummy Bear",
+    "amazonAsin": null,
     "priceNote": "often around $8–15",
     "imageKey": "needoh-gummy-bear",
     "image": "/squishies/needoh-gummy-bear.jpg",
@@ -181,6 +187,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Cloud Pleaser",
+    "amazonAsin": null,
     "priceNote": "often around $8–15",
     "imageKey": "cloud-pleaser",
     "image": "/squishies/cloud-pleaser.jpg",
@@ -208,6 +215,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Nice Cube Glow",
+    "amazonAsin": "B0DV4BFJBY",
     "priceNote": "often around $8–15",
     "imageKey": "nice-cube-glow",
     "image": "/squishies/nice-cube-glow.jpg",
@@ -235,6 +243,7 @@
       "jumbo"
     ],
     "amazonQuery": "Schylling Super Groovy Glob",
+    "amazonAsin": null,
     "priceNote": "jumbos often around $10–20",
     "imageKey": "super-groovy-glob",
     "image": "/squishies/super-groovy-glob.jpg",
@@ -262,6 +271,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Nice Cube Cherry",
+    "amazonAsin": null,
     "priceNote": "often around $8–15",
     "imageKey": "nice-cube-cherry",
     "image": "/squishies/nice-cube-cherry.jpg",
@@ -289,6 +299,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Nice Cube Ocean",
+    "amazonAsin": null,
     "priceNote": "often around $8–15",
     "imageKey": "nice-cube-ocean",
     "image": "/squishies/nice-cube-ocean.jpg",
@@ -316,6 +327,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Nice Cube Grape",
+    "amazonAsin": null,
     "priceNote": "often around $8–15",
     "imageKey": "nice-cube-grape",
     "image": "/squishies/nice-cube-grape.jpg",
@@ -343,6 +355,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Nice Cube Lemon",
+    "amazonAsin": null,
     "priceNote": "often around $8–15",
     "imageKey": "nice-cube-lemon",
     "image": "/squishies/nice-cube-lemon.jpg",
@@ -370,6 +383,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Nice Cube Mint",
+    "amazonAsin": null,
     "priceNote": "often around $8–15",
     "imageKey": "nice-cube-mint",
     "image": "/squishies/nice-cube-mint.jpg",
@@ -397,6 +411,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Dream Drop",
+    "amazonAsin": null,
     "priceNote": "often around $8–15",
     "imageKey": "dream-drop",
     "image": "/squishies/dream-drop.jpg",
@@ -424,6 +439,7 @@
       "mini"
     ],
     "amazonQuery": "Schylling Groovy Fruit",
+    "amazonAsin": null,
     "priceNote": "multi-packs often around $10–18",
     "imageKey": "groovy-fruit",
     "image": "/squishies/groovy-fruit.jpg",
@@ -451,6 +467,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Galactic Glow Dream Drop",
+    "amazonAsin": null,
     "priceNote": "often around $8–15",
     "imageKey": "galactic-dream-drop",
     "image": "/squishies/galactic-dream-drop.jpg",
@@ -478,6 +495,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Dream Drop Peach",
+    "amazonAsin": null,
     "priceNote": "often around $8–15",
     "imageKey": "dream-drop-peach",
     "image": "/squishies/dream-drop-peach.jpg",
@@ -505,6 +523,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Dream Drop Mint",
+    "amazonAsin": null,
     "priceNote": "often around $8–15",
     "imageKey": "dream-drop-mint",
     "image": "/squishies/dream-drop-mint.jpg",
@@ -532,6 +551,7 @@
       "super-solid"
     ],
     "amazonQuery": "Schylling Nice Ice Baby",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "nice-ice-baby",
     "image": "/squishies/nice-ice-baby.jpg",
@@ -559,6 +579,7 @@
       "super-solid"
     ],
     "amazonQuery": "Schylling Nice Ice Baby Lemon",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "nice-ice-baby-lemon",
     "image": "/squishies/nice-ice-baby-lemon.jpg",
@@ -586,6 +607,7 @@
       "super-solid"
     ],
     "amazonQuery": "Schylling Nice Ice Baby Berry",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "nice-ice-baby-berry",
     "image": "/squishies/nice-ice-baby-berry.jpg",
@@ -613,6 +635,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Fuzz Ball",
+    "amazonAsin": null,
     "priceNote": "often around $8–15",
     "imageKey": "fuzz-ball",
     "image": "/squishies/fuzz-ball.jpg",
@@ -640,6 +663,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Fuzz Ball Flower Power",
+    "amazonAsin": null,
     "priceNote": "often around $8–15",
     "imageKey": "fuzz-ball-flower",
     "image": "/squishies/fuzz-ball-flower.jpg",
@@ -667,6 +691,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Fuzz Ball Sky",
+    "amazonAsin": null,
     "priceNote": "often around $8–15",
     "imageKey": "fuzz-ball-sky",
     "image": "/squishies/fuzz-ball-sky.jpg",
@@ -694,6 +719,7 @@
       "standard"
     ],
     "amazonQuery": "Schylling Fuzz Ball Mint",
+    "amazonAsin": null,
     "priceNote": "often around $8–15",
     "imageKey": "fuzz-ball-mint",
     "image": "/squishies/fuzz-ball-mint.jpg",
@@ -723,6 +749,7 @@
       "other"
     ],
     "amazonQuery": "Schylling Panic Pete",
+    "amazonAsin": "B001R57O88",
     "priceNote": "often around $8–14",
     "imageKey": "panic-pete",
     "image": "/squishies/panic-pete.jpg",
@@ -751,6 +778,7 @@
       "standard"
     ],
     "amazonQuery": "Cheese Wedge Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "cheese-wedge",
     "image": "/squishies/cheese-wedge.jpg",
@@ -779,6 +807,7 @@
       "standard"
     ],
     "amazonQuery": "Swiss Cheese Slice Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "swiss-cheese-slice",
     "image": "/squishies/swiss-cheese-slice.jpg",
@@ -807,6 +836,7 @@
       "mini"
     ],
     "amazonQuery": "Mini Cheddar Wedge",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "mini-cheddar-wedge",
     "image": "/squishies/mini-cheddar-wedge.jpg",
@@ -835,6 +865,7 @@
       "standard"
     ],
     "amazonQuery": "Marble Cheese Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "marble-cheese-squishy",
     "image": "/squishies/marble-cheese-squishy.jpg",
@@ -863,6 +894,7 @@
       "standard"
     ],
     "amazonQuery": "Cheese Wheel Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "cheese-wheel-squishy",
     "image": "/squishies/cheese-wheel-squishy.jpg",
@@ -891,6 +923,7 @@
       "standard"
     ],
     "amazonQuery": "String Cheese Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "string-cheese-squishy",
     "image": "/squishies/string-cheese-squishy.jpg",
@@ -919,6 +952,7 @@
       "standard"
     ],
     "amazonQuery": "Pepper Jack Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "pepper-jack-squishy",
     "image": "/squishies/pepper-jack-squishy.jpg",
@@ -947,6 +981,7 @@
       "standard"
     ],
     "amazonQuery": "Grilled Cheese Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "grilled-cheese-squishy",
     "image": "/squishies/grilled-cheese-squishy.jpg",
@@ -975,6 +1010,7 @@
       "standard"
     ],
     "amazonQuery": "Mac and Cheese Cup Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "mac-and-cheese-cup-squishy",
     "image": "/squishies/mac-and-cheese-cup-squishy.jpg",
@@ -1003,6 +1039,7 @@
       "standard"
     ],
     "amazonQuery": "Cheese Puff Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "cheese-puff-squishy",
     "image": "/squishies/cheese-puff-squishy.jpg",
@@ -1031,6 +1068,7 @@
       "standard"
     ],
     "amazonQuery": "Blue Cheese Wedge",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "blue-cheese-wedge",
     "image": "/squishies/blue-cheese-wedge.jpg",
@@ -1059,6 +1097,7 @@
       "standard"
     ],
     "amazonQuery": "Cheese Toastie Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "cheese-toastie-squishy",
     "image": "/squishies/cheese-toastie-squishy.jpg",
@@ -1087,6 +1126,7 @@
       "mini"
     ],
     "amazonQuery": "Baby Cheese Trio",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "baby-cheese-trio",
     "image": "/squishies/baby-cheese-trio.jpg",
@@ -1115,6 +1155,7 @@
       "standard"
     ],
     "amazonQuery": "Cheese Moon Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "cheese-moon-squishy",
     "image": "/squishies/cheese-moon-squishy.jpg",
@@ -1143,6 +1184,7 @@
       "standard"
     ],
     "amazonQuery": "Smoked Cheese Block",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "smoked-cheese-block",
     "image": "/squishies/smoked-cheese-block.jpg",
@@ -1171,6 +1213,7 @@
       "jumbo"
     ],
     "amazonQuery": "Sunny Days Entertainment Squishy Cheese Block",
+    "amazonAsin": "B0CNTWGK1F",
     "priceNote": "jumbos often around $10–20",
     "imageKey": "cheese-block",
     "image": "/squishies/cheese-block.jpg",
@@ -1199,6 +1242,7 @@
       "butter"
     ],
     "amazonQuery": "Butter Stick Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "butter-stick",
     "image": "/squishies/butter-stick.jpg",
@@ -1227,6 +1271,7 @@
       "butter"
     ],
     "amazonQuery": "Bread Loaf Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "bread-loaf",
     "image": "/squishies/bread-loaf.jpg",
@@ -1255,6 +1300,7 @@
       "butter"
     ],
     "amazonQuery": "Bread-and-Butter Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "bread-and-butter",
     "image": "/squishies/bread-and-butter.jpg",
@@ -1283,6 +1329,7 @@
       "butter"
     ],
     "amazonQuery": "Croissant Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "croissant",
     "image": "/squishies/croissant.jpg",
@@ -1311,6 +1358,7 @@
       "butter"
     ],
     "amazonQuery": "Toast Slice Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "toast-slice",
     "image": "/squishies/toast-slice.jpg",
@@ -1339,6 +1387,7 @@
       "butter"
     ],
     "amazonQuery": "Bagel Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "bagel-squishy",
     "image": "/squishies/bagel-squishy.jpg",
@@ -1367,6 +1416,7 @@
       "butter"
     ],
     "amazonQuery": "Pretzel Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "pretzel-squishy",
     "image": "/squishies/pretzel-squishy.jpg",
@@ -1395,6 +1445,7 @@
       "butter"
     ],
     "amazonQuery": "Cinnamon Roll Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "cinnamon-roll-squishy",
     "image": "/squishies/cinnamon-roll-squishy.jpg",
@@ -1423,6 +1474,7 @@
       "butter"
     ],
     "amazonQuery": "Pancake Stack Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "pancake-stack-squishy",
     "image": "/squishies/pancake-stack-squishy.jpg",
@@ -1451,6 +1503,7 @@
       "butter"
     ],
     "amazonQuery": "Waffle Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "waffle-squishy",
     "image": "/squishies/waffle-squishy.jpg",
@@ -1479,6 +1532,7 @@
       "butter"
     ],
     "amazonQuery": "Biscuit Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "biscuit-squishy",
     "image": "/squishies/biscuit-squishy.jpg",
@@ -1507,6 +1561,7 @@
       "butter"
     ],
     "amazonQuery": "Baguette Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "baguette-squishy",
     "image": "/squishies/baguette-squishy.jpg",
@@ -1535,6 +1590,7 @@
       "butter"
     ],
     "amazonQuery": "Dinner Roll Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "dinner-roll-squishy",
     "image": "/squishies/dinner-roll-squishy.jpg",
@@ -1563,6 +1619,7 @@
       "butter"
     ],
     "amazonQuery": "Banana Bread Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "banana-bread-squishy",
     "image": "/squishies/banana-bread-squishy.jpg",
@@ -1591,6 +1648,7 @@
       "butter"
     ],
     "amazonQuery": "Cornbread Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "cornbread-squishy",
     "image": "/squishies/cornbread-squishy.jpg",
@@ -1619,6 +1677,7 @@
       "butter"
     ],
     "amazonQuery": "Honey Butter Pat",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "honey-butter-pat",
     "image": "/squishies/honey-butter-pat.jpg",
@@ -1647,6 +1706,7 @@
       "butter"
     ],
     "amazonQuery": "Garlic Bread Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "garlic-bread-squishy",
     "image": "/squishies/garlic-bread-squishy.jpg",
@@ -1675,6 +1735,7 @@
       "butter"
     ],
     "amazonQuery": "English Muffin Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "english-muffin-squishy",
     "image": "/squishies/english-muffin-squishy.jpg",
@@ -1703,6 +1764,7 @@
       "butter"
     ],
     "amazonQuery": "Whipped Butter Swirl",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "whipped-butter-swirl",
     "image": "/squishies/whipped-butter-swirl.jpg",
@@ -1731,6 +1793,7 @@
       "butter"
     ],
     "amazonQuery": "Breadstick Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "breadstick-squishy",
     "image": "/squishies/breadstick-squishy.jpg",
@@ -1759,6 +1822,7 @@
       "jumbo"
     ],
     "amazonQuery": "Sunny Days Entertainment Toymendous Squeeze Butter",
+    "amazonAsin": "B0GZR1J7K1",
     "priceNote": "jumbos often around $10–20",
     "imageKey": "toymendous-butter",
     "image": "/squishies/toymendous-butter.jpg",
@@ -1786,6 +1850,7 @@
       "standard"
     ],
     "amazonQuery": "Bao Bun Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "bao-bun",
     "image": "/squishies/bao-bun.jpg",
@@ -1813,6 +1878,7 @@
       "standard"
     ],
     "amazonQuery": "Onigiri Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "onigiri",
     "image": "/squishies/onigiri.jpg",
@@ -1840,6 +1906,7 @@
       "standard"
     ],
     "amazonQuery": "Gyoza Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "gyoza-squishy",
     "image": "/squishies/gyoza-squishy.jpg",
@@ -1867,6 +1934,7 @@
       "standard"
     ],
     "amazonQuery": "Soup Dumpling Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "soup-dumpling-squishy",
     "image": "/squishies/soup-dumpling-squishy.jpg",
@@ -1894,6 +1962,7 @@
       "standard"
     ],
     "amazonQuery": "Pierogi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "pierogi-squishy",
     "image": "/squishies/pierogi-squishy.jpg",
@@ -1921,6 +1990,7 @@
       "standard"
     ],
     "amazonQuery": "Samosa Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "samosa-squishy",
     "image": "/squishies/samosa-squishy.jpg",
@@ -1948,6 +2018,7 @@
       "standard"
     ],
     "amazonQuery": "Potsticker Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "potsticker-squishy",
     "image": "/squishies/potsticker-squishy.jpg",
@@ -1975,6 +2046,7 @@
       "standard"
     ],
     "amazonQuery": "Shumai Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "shumai-squishy",
     "image": "/squishies/shumai-squishy.jpg",
@@ -2002,6 +2074,7 @@
       "standard"
     ],
     "amazonQuery": "Mandu Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "mandu-squishy",
     "image": "/squishies/mandu-squishy.jpg",
@@ -2029,6 +2102,7 @@
       "standard"
     ],
     "amazonQuery": "Empanada Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "empanada-squishy",
     "image": "/squishies/empanada-squishy.jpg",
@@ -2056,6 +2130,7 @@
       "standard"
     ],
     "amazonQuery": "Spring Roll Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "spring-roll-squishy",
     "image": "/squishies/spring-roll-squishy.jpg",
@@ -2083,6 +2158,7 @@
       "standard"
     ],
     "amazonQuery": "Har Gow Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "har-gow-squishy",
     "image": "/squishies/har-gow-squishy.jpg",
@@ -2110,6 +2186,7 @@
       "mini"
     ],
     "amazonQuery": "Dumpling Family",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "dumpling-family",
     "image": "/squishies/dumpling-family.jpg",
@@ -2137,6 +2214,7 @@
       "standard"
     ],
     "amazonQuery": "Glitter Dumpling",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "glitter-dumpling",
     "image": "/squishies/glitter-dumpling.jpg",
@@ -2164,6 +2242,7 @@
       "standard"
     ],
     "amazonQuery": "Galaxy Dumpling",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "galaxy-dumpling",
     "image": "/squishies/galaxy-dumpling.jpg",
@@ -2191,6 +2270,7 @@
       "standard"
     ],
     "amazonQuery": "Pink Glitter Dumpling",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "pink-glitter-dumpling",
     "image": "/squishies/pink-glitter-dumpling.jpg",
@@ -2218,6 +2298,7 @@
       "standard"
     ],
     "amazonQuery": "Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "mochi-squishy",
     "image": "/squishies/mochi-squishy.jpg",
@@ -2245,6 +2326,7 @@
       "standard"
     ],
     "amazonQuery": "Strawberry Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "strawberry-mochi-squishy",
     "image": "/squishies/strawberry-mochi-squishy.jpg",
@@ -2272,6 +2354,7 @@
       "standard"
     ],
     "amazonQuery": "Mango Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "mango-mochi-squishy",
     "image": "/squishies/mango-mochi-squishy.jpg",
@@ -2299,6 +2382,7 @@
       "standard"
     ],
     "amazonQuery": "Matcha Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "matcha-mochi-squishy",
     "image": "/squishies/matcha-mochi-squishy.jpg",
@@ -2326,6 +2410,7 @@
       "standard"
     ],
     "amazonQuery": "Taro Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "taro-mochi-squishy",
     "image": "/squishies/taro-mochi-squishy.jpg",
@@ -2353,6 +2438,7 @@
       "standard"
     ],
     "amazonQuery": "Ube Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "ube-mochi-squishy",
     "image": "/squishies/ube-mochi-squishy.jpg",
@@ -2380,6 +2466,7 @@
       "standard"
     ],
     "amazonQuery": "Chocolate Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "chocolate-mochi-squishy",
     "image": "/squishies/chocolate-mochi-squishy.jpg",
@@ -2407,6 +2494,7 @@
       "standard"
     ],
     "amazonQuery": "Vanilla Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "vanilla-mochi-squishy",
     "image": "/squishies/vanilla-mochi-squishy.jpg",
@@ -2434,6 +2522,7 @@
       "standard"
     ],
     "amazonQuery": "Blueberry Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "blueberry-mochi-squishy",
     "image": "/squishies/blueberry-mochi-squishy.jpg",
@@ -2461,6 +2550,7 @@
       "standard"
     ],
     "amazonQuery": "Peach Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "peach-mochi-squishy",
     "image": "/squishies/peach-mochi-squishy.jpg",
@@ -2488,6 +2578,7 @@
       "standard"
     ],
     "amazonQuery": "Lemon Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "lemon-mochi-squishy",
     "image": "/squishies/lemon-mochi-squishy.jpg",
@@ -2515,6 +2606,7 @@
       "standard"
     ],
     "amazonQuery": "Coconut Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "coconut-mochi-squishy",
     "image": "/squishies/coconut-mochi-squishy.jpg",
@@ -2542,6 +2634,7 @@
       "standard"
     ],
     "amazonQuery": "Raspberry Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "raspberry-mochi-squishy",
     "image": "/squishies/raspberry-mochi-squishy.jpg",
@@ -2569,6 +2662,7 @@
       "standard"
     ],
     "amazonQuery": "Sesame Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "sesame-mochi-squishy",
     "image": "/squishies/sesame-mochi-squishy.jpg",
@@ -2596,6 +2690,7 @@
       "standard"
     ],
     "amazonQuery": "Milk Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "milk-mochi-squishy",
     "image": "/squishies/milk-mochi-squishy.jpg",
@@ -2623,6 +2718,7 @@
       "standard"
     ],
     "amazonQuery": "Banana Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "banana-mochi-squishy",
     "image": "/squishies/banana-mochi-squishy.jpg",
@@ -2650,6 +2746,7 @@
       "standard"
     ],
     "amazonQuery": "Melon Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "melon-mochi-squishy",
     "image": "/squishies/melon-mochi-squishy.jpg",
@@ -2677,6 +2774,7 @@
       "standard"
     ],
     "amazonQuery": "Lychee Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "lychee-mochi-squishy",
     "image": "/squishies/lychee-mochi-squishy.jpg",
@@ -2704,6 +2802,7 @@
       "standard"
     ],
     "amazonQuery": "Red Bean Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "red-bean-mochi-squishy",
     "image": "/squishies/red-bean-mochi-squishy.jpg",
@@ -2731,6 +2830,7 @@
       "standard"
     ],
     "amazonQuery": "Pistachio Mochi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "pistachio-mochi-squishy",
     "image": "/squishies/pistachio-mochi-squishy.jpg",
@@ -2759,6 +2859,7 @@
       "mochi"
     ],
     "amazonQuery": "Macaron Squishy",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "macaron",
     "image": "/squishies/macaron.jpg",
@@ -2787,6 +2888,7 @@
       "mochi"
     ],
     "amazonQuery": "Rose Macaron",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "rose-macaron",
     "image": "/squishies/rose-macaron.jpg",
@@ -2815,6 +2917,7 @@
       "mochi"
     ],
     "amazonQuery": "Pistachio Macaron",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "pistachio-macaron",
     "image": "/squishies/pistachio-macaron.jpg",
@@ -2843,6 +2946,7 @@
       "mochi"
     ],
     "amazonQuery": "Chocolate Macaron",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "chocolate-macaron",
     "image": "/squishies/chocolate-macaron.jpg",
@@ -2871,6 +2975,7 @@
       "mochi"
     ],
     "amazonQuery": "Lemon Macaron",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "lemon-macaron",
     "image": "/squishies/lemon-macaron.jpg",
@@ -2899,6 +3004,7 @@
       "mochi"
     ],
     "amazonQuery": "Raspberry Macaron",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "raspberry-macaron",
     "image": "/squishies/raspberry-macaron.jpg",
@@ -2927,6 +3033,7 @@
       "mochi"
     ],
     "amazonQuery": "Vanilla Macaron",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "vanilla-macaron",
     "image": "/squishies/vanilla-macaron.jpg",
@@ -2955,6 +3062,7 @@
       "mochi"
     ],
     "amazonQuery": "Lavender Macaron",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "lavender-macaron",
     "image": "/squishies/lavender-macaron.jpg",
@@ -2983,6 +3091,7 @@
       "mochi"
     ],
     "amazonQuery": "Caramel Macaron",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "caramel-macaron",
     "image": "/squishies/caramel-macaron.jpg",
@@ -3011,6 +3120,7 @@
       "mochi"
     ],
     "amazonQuery": "Candy Corn Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "candy-corn",
     "image": "/squishies/candy-corn.jpg",
@@ -3039,6 +3149,7 @@
       "mochi"
     ],
     "amazonQuery": "Heart Candy Squishy",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "heart-candy-squishy",
     "image": "/squishies/heart-candy-squishy.jpg",
@@ -3067,6 +3178,7 @@
       "mochi"
     ],
     "amazonQuery": "Star Candy Squishy",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "star-candy-squishy",
     "image": "/squishies/star-candy-squishy.jpg",
@@ -3095,6 +3207,7 @@
       "mochi"
     ],
     "amazonQuery": "Lollipop Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "lollipop-squishy",
     "image": "/squishies/lollipop-squishy.jpg",
@@ -3123,6 +3236,7 @@
       "mochi"
     ],
     "amazonQuery": "Peppermint Squishy",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "peppermint-squishy",
     "image": "/squishies/peppermint-squishy.jpg",
@@ -3151,6 +3265,7 @@
       "mochi"
     ],
     "amazonQuery": "Marshmallow Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "marshmallow-squishy",
     "image": "/squishies/marshmallow-squishy.jpg",
@@ -3179,6 +3294,7 @@
       "mochi"
     ],
     "amazonQuery": "Gummy Worm Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "gummy-worm-squishy",
     "image": "/squishies/gummy-worm-squishy.jpg",
@@ -3207,6 +3323,7 @@
       "mochi"
     ],
     "amazonQuery": "Chocolate Bar Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "chocolate-bar-squishy",
     "image": "/squishies/chocolate-bar-squishy.jpg",
@@ -3235,6 +3352,7 @@
       "mochi"
     ],
     "amazonQuery": "Cookie Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "cookie-squishy",
     "image": "/squishies/cookie-squishy.jpg",
@@ -3263,6 +3381,7 @@
       "mochi"
     ],
     "amazonQuery": "Brownie Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "brownie-squishy",
     "image": "/squishies/brownie-squishy.jpg",
@@ -3291,6 +3410,7 @@
       "mochi"
     ],
     "amazonQuery": "Cupcake Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "cupcake-squishy",
     "image": "/squishies/cupcake-squishy.jpg",
@@ -3319,6 +3439,7 @@
       "mochi"
     ],
     "amazonQuery": "Cake Pop Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "cake-pop-squishy",
     "image": "/squishies/cake-pop-squishy.jpg",
@@ -3347,6 +3468,7 @@
       "mochi"
     ],
     "amazonQuery": "Cotton Candy Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "cotton-candy-squishy",
     "image": "/squishies/cotton-candy-squishy.jpg",
@@ -3375,6 +3497,7 @@
       "mochi"
     ],
     "amazonQuery": "Jelly Bean Squishy",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "jelly-bean-squishy",
     "image": "/squishies/jelly-bean-squishy.jpg",
@@ -3403,6 +3526,7 @@
       "mochi"
     ],
     "amazonQuery": "Bubblegum Squishy",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "bubblegum-squishy",
     "image": "/squishies/bubblegum-squishy.jpg",
@@ -3431,6 +3555,7 @@
       "mochi"
     ],
     "amazonQuery": "Licorice Twist Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "licorice-twist-squishy",
     "image": "/squishies/licorice-twist-squishy.jpg",
@@ -3459,6 +3584,7 @@
       "mochi"
     ],
     "amazonQuery": "Caramel Cube Squishy",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "caramel-cube-squishy",
     "image": "/squishies/caramel-cube-squishy.jpg",
@@ -3487,6 +3613,7 @@
       "mochi"
     ],
     "amazonQuery": "Fudge Square Squishy",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "fudge-square-squishy",
     "image": "/squishies/fudge-square-squishy.jpg",
@@ -3515,6 +3642,7 @@
       "mochi"
     ],
     "amazonQuery": "Truffle Squishy",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "truffle-squishy",
     "image": "/squishies/truffle-squishy.jpg",
@@ -3543,6 +3671,7 @@
       "mochi"
     ],
     "amazonQuery": "Gingerbread Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "gingerbread-squishy",
     "image": "/squishies/gingerbread-squishy.jpg",
@@ -3571,6 +3700,7 @@
       "mochi"
     ],
     "amazonQuery": "Candy Cane Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "candy-cane-squishy",
     "image": "/squishies/candy-cane-squishy.jpg",
@@ -3600,6 +3730,7 @@
       "mochi"
     ],
     "amazonQuery": "Gummy Bear Foam Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "gummy-bear-foam",
     "image": "/squishies/gummy-bear-foam.jpg",
@@ -3629,6 +3760,7 @@
       "mochi"
     ],
     "amazonQuery": "Gummy Bear Foam Berry",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "gummy-bear-foam-berry",
     "image": "/squishies/gummy-bear-foam-berry.jpg",
@@ -3658,6 +3790,7 @@
       "mochi"
     ],
     "amazonQuery": "Gummy Bear Foam Grape",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "gummy-bear-foam-grape",
     "image": "/squishies/gummy-bear-foam-grape.jpg",
@@ -3687,6 +3820,7 @@
       "mochi"
     ],
     "amazonQuery": "Gummy Bear Foam Clear",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "gummy-bear-foam-clear",
     "image": "/squishies/gummy-bear-foam-clear.jpg",
@@ -3715,6 +3849,7 @@
       "fruit"
     ],
     "amazonQuery": "Avocado Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "avocado",
     "image": "/squishies/avocado.jpg",
@@ -3743,6 +3878,7 @@
       "fruit"
     ],
     "amazonQuery": "Egg Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "egg",
     "image": "/squishies/egg.jpg",
@@ -3771,6 +3907,7 @@
       "fruit"
     ],
     "amazonQuery": "Pizza Slice Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "pizza-slice",
     "image": "/squishies/pizza-slice.jpg",
@@ -3799,6 +3936,7 @@
       "fruit"
     ],
     "amazonQuery": "Donut Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "donut",
     "image": "/squishies/donut.jpg",
@@ -3827,6 +3965,7 @@
       "fruit"
     ],
     "amazonQuery": "Ice Cream Cone Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "ice-cream-cone",
     "image": "/squishies/ice-cream-cone.jpg",
@@ -3855,6 +3994,7 @@
       "fruit"
     ],
     "amazonQuery": "Burger Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "burger",
     "image": "/squishies/burger.jpg",
@@ -3883,6 +4023,7 @@
       "fruit"
     ],
     "amazonQuery": "Watermelon Slice Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "watermelon",
     "image": "/squishies/watermelon.jpg",
@@ -3911,6 +4052,7 @@
       "fruit"
     ],
     "amazonQuery": "Peach Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "peach",
     "image": "/squishies/peach.jpg",
@@ -3939,6 +4081,7 @@
       "fruit"
     ],
     "amazonQuery": "Slow-Rise Foam Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "slow-rise-foam",
     "image": "/squishies/slow-rise-foam.jpg",
@@ -3967,6 +4110,7 @@
       "fruit"
     ],
     "amazonQuery": "Fries Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "fries-squishy",
     "image": "/squishies/fries-squishy.jpg",
@@ -3995,6 +4139,7 @@
       "fruit"
     ],
     "amazonQuery": "Hot Dog Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "hot-dog-squishy",
     "image": "/squishies/hot-dog-squishy.jpg",
@@ -4023,6 +4168,7 @@
       "fruit"
     ],
     "amazonQuery": "Taco Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "taco-squishy",
     "image": "/squishies/taco-squishy.jpg",
@@ -4051,6 +4197,7 @@
       "fruit"
     ],
     "amazonQuery": "Sushi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "sushi-squishy",
     "image": "/squishies/sushi-squishy.jpg",
@@ -4079,6 +4226,7 @@
       "fruit"
     ],
     "amazonQuery": "Ramen Bowl Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "ramen-bowl-squishy",
     "image": "/squishies/ramen-bowl-squishy.jpg",
@@ -4107,6 +4255,7 @@
       "fruit"
     ],
     "amazonQuery": "Popcorn Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "popcorn-squishy",
     "image": "/squishies/popcorn-squishy.jpg",
@@ -4135,6 +4284,7 @@
       "fruit"
     ],
     "amazonQuery": "Bacon Strip Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "bacon-strip-squishy",
     "image": "/squishies/bacon-strip-squishy.jpg",
@@ -4163,6 +4313,7 @@
       "fruit"
     ],
     "amazonQuery": "Sandwich Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "sandwich-squishy",
     "image": "/squishies/sandwich-squishy.jpg",
@@ -4191,6 +4342,7 @@
       "fruit"
     ],
     "amazonQuery": "Chicken Nugget Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "chicken-nugget-squishy",
     "image": "/squishies/chicken-nugget-squishy.jpg",
@@ -4219,6 +4371,7 @@
       "fruit"
     ],
     "amazonQuery": "Apple Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "apple-squishy",
     "image": "/squishies/apple-squishy.jpg",
@@ -4247,6 +4400,7 @@
       "fruit"
     ],
     "amazonQuery": "Banana Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "banana-squishy",
     "image": "/squishies/banana-squishy.jpg",
@@ -4275,6 +4429,7 @@
       "fruit"
     ],
     "amazonQuery": "Grape Bunch Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "grape-bunch-squishy",
     "image": "/squishies/grape-bunch-squishy.jpg",
@@ -4303,6 +4458,7 @@
       "fruit"
     ],
     "amazonQuery": "Orange Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "orange-squishy",
     "image": "/squishies/orange-squishy.jpg",
@@ -4331,6 +4487,7 @@
       "fruit"
     ],
     "amazonQuery": "Lemon Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "lemon-squishy",
     "image": "/squishies/lemon-squishy.jpg",
@@ -4359,6 +4516,7 @@
       "fruit"
     ],
     "amazonQuery": "Blueberry Squishy",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "blueberry-squishy",
     "image": "/squishies/blueberry-squishy.jpg",
@@ -4387,6 +4545,7 @@
       "fruit"
     ],
     "amazonQuery": "Mango Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "mango-squishy",
     "image": "/squishies/mango-squishy.jpg",
@@ -4415,6 +4574,7 @@
       "fruit"
     ],
     "amazonQuery": "Kiwi Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "kiwi-squishy",
     "image": "/squishies/kiwi-squishy.jpg",
@@ -4443,6 +4603,7 @@
       "fruit"
     ],
     "amazonQuery": "Pineapple Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "pineapple-squishy",
     "image": "/squishies/pineapple-squishy.jpg",
@@ -4471,6 +4632,7 @@
       "fruit"
     ],
     "amazonQuery": "Cherry Pair Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "cherry-pair-squishy",
     "image": "/squishies/cherry-pair-squishy.jpg",
@@ -4499,6 +4661,7 @@
       "fruit"
     ],
     "amazonQuery": "Pear Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "pear-squishy",
     "image": "/squishies/pear-squishy.jpg",
@@ -4527,6 +4690,7 @@
       "fruit"
     ],
     "amazonQuery": "Corn Cob Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "corn-cob-squishy",
     "image": "/squishies/corn-cob-squishy.jpg",
@@ -4555,6 +4719,7 @@
       "fruit"
     ],
     "amazonQuery": "Tomato Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "tomato-squishy",
     "image": "/squishies/tomato-squishy.jpg",
@@ -4583,6 +4748,7 @@
       "fruit"
     ],
     "amazonQuery": "Carrot Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "carrot-squishy",
     "image": "/squishies/carrot-squishy.jpg",
@@ -4611,6 +4777,7 @@
       "fruit"
     ],
     "amazonQuery": "Broccoli Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "broccoli-squishy",
     "image": "/squishies/broccoli-squishy.jpg",
@@ -4639,6 +4806,7 @@
       "fruit"
     ],
     "amazonQuery": "Mushroom Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "mushroom-squishy",
     "image": "/squishies/mushroom-squishy.jpg",
@@ -4667,6 +4835,7 @@
       "fruit"
     ],
     "amazonQuery": "Bento Box Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "bento-box-squishy",
     "image": "/squishies/bento-box-squishy.jpg",
@@ -4695,6 +4864,7 @@
       "fruit"
     ],
     "amazonQuery": "Milkshake Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "milkshake-squishy",
     "image": "/squishies/milkshake-squishy.jpg",
@@ -4723,6 +4893,7 @@
       "fruit"
     ],
     "amazonQuery": "Pie Slice Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "pie-slice-squishy",
     "image": "/squishies/pie-slice-squishy.jpg",
@@ -4751,6 +4922,7 @@
       "fruit"
     ],
     "amazonQuery": "Pudding Cup Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "pudding-cup-squishy",
     "image": "/squishies/pudding-cup-squishy.jpg",
@@ -4779,6 +4951,7 @@
       "fruit"
     ],
     "amazonQuery": "Yogurt Cup Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "yogurt-cup-squishy",
     "image": "/squishies/yogurt-cup-squishy.jpg",
@@ -4807,6 +4980,7 @@
       "fruit"
     ],
     "amazonQuery": "Onion Ring Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "onion-ring-squishy",
     "image": "/squishies/onion-ring-squishy.jpg",
@@ -4835,6 +5009,7 @@
       "fruit"
     ],
     "amazonQuery": "Nugget Box Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "nugget-box-squishy",
     "image": "/squishies/nugget-box-squishy.jpg",
@@ -4863,6 +5038,7 @@
       "fruit"
     ],
     "amazonQuery": "Milk Carton Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "milk-carton-squishy",
     "image": "/squishies/milk-carton-squishy.jpg",
@@ -4891,6 +5067,7 @@
       "fruit"
     ],
     "amazonQuery": "Juice Box Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "juice-box-squishy",
     "image": "/squishies/juice-box-squishy.jpg",
@@ -4919,6 +5096,7 @@
       "fruit"
     ],
     "amazonQuery": "Pancake Single Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "pancake-single-squishy",
     "image": "/squishies/pancake-single-squishy.jpg",
@@ -4947,6 +5125,7 @@
       "fruit"
     ],
     "amazonQuery": "Fried Chicken Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "fried-chicken-squishy",
     "image": "/squishies/fried-chicken-squishy.jpg",
@@ -4976,6 +5155,7 @@
       "fruit"
     ],
     "amazonQuery": "Sunny Days Entertainment Sunny Days Squeezy Strawberry",
+    "amazonAsin": null,
     "priceNote": "jumbos often around $10–20",
     "imageKey": "sunny-days-squeezy",
     "image": "/squishies/sunny-days-squeezy.jpg",
@@ -5005,6 +5185,7 @@
       "fruit"
     ],
     "amazonQuery": "Sunny Days Entertainment Toymendous Squeezy Donut",
+    "amazonAsin": null,
     "priceNote": "jumbos often around $10–20",
     "imageKey": "toymendous-squeezy-donut",
     "image": "/squishies/toymendous-squeezy-donut.jpg",
@@ -5034,6 +5215,7 @@
       "fruit"
     ],
     "amazonQuery": "Sunny Days Entertainment Toymendous Squeezy Burger",
+    "amazonAsin": null,
     "priceNote": "jumbos often around $10–20",
     "imageKey": "toymendous-squeezy-burger",
     "image": "/squishies/toymendous-squeezy-burger.jpg",
@@ -5063,6 +5245,7 @@
       "fruit"
     ],
     "amazonQuery": "Sunny Days Entertainment Toymendous Ice Cream",
+    "amazonAsin": null,
     "priceNote": "jumbos often around $10–20",
     "imageKey": "toymendous-ice-cream",
     "image": "/squishies/toymendous-ice-cream.jpg",
@@ -5091,6 +5274,7 @@
       "standard"
     ],
     "amazonQuery": "Mochi Cat",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "mochi-cat",
     "image": "/squishies/mochi-cat.jpg",
@@ -5119,6 +5303,7 @@
       "standard"
     ],
     "amazonQuery": "Mochi Puppy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "mochi-puppy",
     "image": "/squishies/mochi-puppy.jpg",
@@ -5147,6 +5332,7 @@
       "standard"
     ],
     "amazonQuery": "Mochi Bunny",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "mochi-bunny",
     "image": "/squishies/mochi-bunny.jpg",
@@ -5175,6 +5361,7 @@
       "standard"
     ],
     "amazonQuery": "Mochi Bear",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "mochi-bear",
     "image": "/squishies/mochi-bear.jpg",
@@ -5203,6 +5390,7 @@
       "standard"
     ],
     "amazonQuery": "Mochi Pig",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "mochi-pig",
     "image": "/squishies/mochi-pig.jpg",
@@ -5230,6 +5418,7 @@
       "standard"
     ],
     "amazonQuery": "Frog Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "frog",
     "image": "/squishies/frog.jpg",
@@ -5257,6 +5446,7 @@
       "mini"
     ],
     "amazonQuery": "Chick Squishy",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "chick",
     "image": "/squishies/chick.jpg",
@@ -5284,6 +5474,7 @@
       "standard"
     ],
     "amazonQuery": "Whale Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "whale",
     "image": "/squishies/whale.jpg",
@@ -5311,6 +5502,7 @@
       "standard"
     ],
     "amazonQuery": "Panda Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "panda-squishy",
     "image": "/squishies/panda-squishy.jpg",
@@ -5338,6 +5530,7 @@
       "standard"
     ],
     "amazonQuery": "Penguin Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "penguin-squishy",
     "image": "/squishies/penguin-squishy.jpg",
@@ -5365,6 +5558,7 @@
       "standard"
     ],
     "amazonQuery": "Bunny Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "bunny-squishy",
     "image": "/squishies/bunny-squishy.jpg",
@@ -5392,6 +5586,7 @@
       "standard"
     ],
     "amazonQuery": "Dino Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "dino-squishy",
     "image": "/squishies/dino-squishy.jpg",
@@ -5419,6 +5614,7 @@
       "standard"
     ],
     "amazonQuery": "Unicorn Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "unicorn-squishy",
     "image": "/squishies/unicorn-squishy.jpg",
@@ -5446,6 +5642,7 @@
       "standard"
     ],
     "amazonQuery": "Octopus Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "octopus-squishy",
     "image": "/squishies/octopus-squishy.jpg",
@@ -5473,6 +5670,7 @@
       "standard"
     ],
     "amazonQuery": "Turtle Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "turtle-squishy",
     "image": "/squishies/turtle-squishy.jpg",
@@ -5500,6 +5698,7 @@
       "standard"
     ],
     "amazonQuery": "Shark Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "shark-squishy",
     "image": "/squishies/shark-squishy.jpg",
@@ -5527,6 +5726,7 @@
       "standard"
     ],
     "amazonQuery": "Bee Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "bee-squishy",
     "image": "/squishies/bee-squishy.jpg",
@@ -5554,6 +5754,7 @@
       "standard"
     ],
     "amazonQuery": "Ladybug Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "ladybug-squishy",
     "image": "/squishies/ladybug-squishy.jpg",
@@ -5581,6 +5782,7 @@
       "standard"
     ],
     "amazonQuery": "Fox Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "fox-squishy",
     "image": "/squishies/fox-squishy.jpg",
@@ -5608,6 +5810,7 @@
       "standard"
     ],
     "amazonQuery": "Pig Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "pig-squishy",
     "image": "/squishies/pig-squishy.jpg",
@@ -5635,6 +5838,7 @@
       "standard"
     ],
     "amazonQuery": "Cow Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "cow-squishy",
     "image": "/squishies/cow-squishy.jpg",
@@ -5662,6 +5866,7 @@
       "standard"
     ],
     "amazonQuery": "Duck Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "duck-squishy",
     "image": "/squishies/duck-squishy.jpg",
@@ -5689,6 +5894,7 @@
       "standard"
     ],
     "amazonQuery": "Lion Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "lion-squishy",
     "image": "/squishies/lion-squishy.jpg",
@@ -5716,6 +5922,7 @@
       "standard"
     ],
     "amazonQuery": "Koala Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "koala-squishy",
     "image": "/squishies/koala-squishy.jpg",
@@ -5743,6 +5950,7 @@
       "standard"
     ],
     "amazonQuery": "Sloth Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "sloth-squishy",
     "image": "/squishies/sloth-squishy.jpg",
@@ -5770,6 +5978,7 @@
       "standard"
     ],
     "amazonQuery": "Narwhal Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "narwhal-squishy",
     "image": "/squishies/narwhal-squishy.jpg",
@@ -5797,6 +6006,7 @@
       "standard"
     ],
     "amazonQuery": "Crab Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "crab-squishy",
     "image": "/squishies/crab-squishy.jpg",
@@ -5824,6 +6034,7 @@
       "standard"
     ],
     "amazonQuery": "Butterfly Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "butterfly-squishy",
     "image": "/squishies/butterfly-squishy.jpg",
@@ -5851,6 +6062,7 @@
       "standard"
     ],
     "amazonQuery": "Hedgehog Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "hedgehog-squishy",
     "image": "/squishies/hedgehog-squishy.jpg",
@@ -5878,6 +6090,7 @@
       "standard"
     ],
     "amazonQuery": "Seal Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "seal-squishy",
     "image": "/squishies/seal-squishy.jpg",
@@ -5905,6 +6118,7 @@
       "standard"
     ],
     "amazonQuery": "Dolphin Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "dolphin-squishy",
     "image": "/squishies/dolphin-squishy.jpg",
@@ -5932,6 +6146,7 @@
       "standard"
     ],
     "amazonQuery": "Capybara Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "capybara-squishy",
     "image": "/squishies/capybara-squishy.jpg",
@@ -5959,6 +6174,7 @@
       "standard"
     ],
     "amazonQuery": "Axolotl Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "axolotl-squishy",
     "image": "/squishies/axolotl-squishy.jpg",
@@ -5986,6 +6202,7 @@
       "standard"
     ],
     "amazonQuery": "Tiger Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "tiger-squishy",
     "image": "/squishies/tiger-squishy.jpg",
@@ -6013,6 +6230,7 @@
       "standard"
     ],
     "amazonQuery": "Zebra Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "zebra-squishy",
     "image": "/squishies/zebra-squishy.jpg",
@@ -6040,6 +6258,7 @@
       "standard"
     ],
     "amazonQuery": "Giraffe Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "giraffe-squishy",
     "image": "/squishies/giraffe-squishy.jpg",
@@ -6067,6 +6286,7 @@
       "standard"
     ],
     "amazonQuery": "Elephant Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "elephant-squishy",
     "image": "/squishies/elephant-squishy.jpg",
@@ -6094,6 +6314,7 @@
       "standard"
     ],
     "amazonQuery": "Owl Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "owl-squishy",
     "image": "/squishies/owl-squishy.jpg",
@@ -6121,6 +6342,7 @@
       "standard"
     ],
     "amazonQuery": "Hamster Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "hamster-squishy",
     "image": "/squishies/hamster-squishy.jpg",
@@ -6148,6 +6370,7 @@
       "standard"
     ],
     "amazonQuery": "Jellyfish Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "jellyfish-squishy",
     "image": "/squishies/jellyfish-squishy.jpg",
@@ -6175,6 +6398,7 @@
       "standard"
     ],
     "amazonQuery": "Starfish Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "starfish-squishy",
     "image": "/squishies/starfish-squishy.jpg",
@@ -6202,6 +6426,7 @@
       "standard"
     ],
     "amazonQuery": "Flamingo Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "flamingo-squishy",
     "image": "/squishies/flamingo-squishy.jpg",
@@ -6229,6 +6454,7 @@
       "standard"
     ],
     "amazonQuery": "Squirrel Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "squirrel-squishy",
     "image": "/squishies/squirrel-squishy.jpg",
@@ -6256,6 +6482,7 @@
       "standard"
     ],
     "amazonQuery": "Raccoon Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "raccoon-squishy",
     "image": "/squishies/raccoon-squishy.jpg",
@@ -6283,6 +6510,7 @@
       "standard"
     ],
     "amazonQuery": "Hippo Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "hippo-squishy",
     "image": "/squishies/hippo-squishy.jpg",
@@ -6310,6 +6538,7 @@
       "standard"
     ],
     "amazonQuery": "Polar Bear Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "polar-bear-squishy",
     "image": "/squishies/polar-bear-squishy.jpg",
@@ -6337,6 +6566,7 @@
       "standard"
     ],
     "amazonQuery": "Red Panda Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "red-panda-squishy",
     "image": "/squishies/red-panda-squishy.jpg",
@@ -6365,6 +6595,7 @@
       "jumbo"
     ],
     "amazonQuery": "Sunny Days Entertainment Toymendous Panda",
+    "amazonAsin": null,
     "priceNote": "jumbos often around $10–20",
     "imageKey": "toymendous-panda",
     "image": "/squishies/toymendous-panda.jpg",
@@ -6392,6 +6623,7 @@
       "standard"
     ],
     "amazonQuery": "Sugar Squeeze Cube",
+    "amazonAsin": null,
     "priceNote": "often around $8–16",
     "imageKey": "sugar-squeeze-cube",
     "image": "/squishies/sugar-squeeze-cube.jpg",
@@ -6419,6 +6651,7 @@
       "mini"
     ],
     "amazonQuery": "Mini Maltose Cube",
+    "amazonAsin": null,
     "priceNote": "minis often around $5–10",
     "imageKey": "mini-maltose-cube",
     "image": "/squishies/mini-maltose-cube.jpg",
@@ -6446,6 +6679,7 @@
       "standard"
     ],
     "amazonQuery": "Clear Maltose Cube",
+    "amazonAsin": null,
     "priceNote": "often around $8–16",
     "imageKey": "clear-maltose-cube",
     "image": "/squishies/clear-maltose-cube.jpg",
@@ -6474,6 +6708,7 @@
       "standard"
     ],
     "amazonQuery": "Jelly Cube",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "jelly-cube",
     "image": "/squishies/jelly-cube.jpg",
@@ -6502,6 +6737,7 @@
       "standard"
     ],
     "amazonQuery": "Jelly Cube Berry",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "jelly-cube-berry",
     "image": "/squishies/jelly-cube-berry.jpg",
@@ -6530,6 +6766,7 @@
       "standard"
     ],
     "amazonQuery": "Jelly Cube Lemon",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "jelly-cube-lemon",
     "image": "/squishies/jelly-cube-lemon.jpg",
@@ -6558,6 +6795,7 @@
       "standard"
     ],
     "amazonQuery": "Jelly Cube Grape",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "jelly-cube-grape",
     "image": "/squishies/jelly-cube-grape.jpg",
@@ -6586,6 +6824,7 @@
       "standard"
     ],
     "amazonQuery": "Jelly Cube Mint",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "jelly-cube-mint",
     "image": "/squishies/jelly-cube-mint.jpg",
@@ -6614,6 +6853,7 @@
       "cube"
     ],
     "amazonQuery": "Classic Stress Ball",
+    "amazonAsin": null,
     "priceNote": "often around $5–10",
     "imageKey": "stress-ball",
     "image": "/squishies/stress-ball.jpg",
@@ -6642,6 +6882,7 @@
       "cube"
     ],
     "amazonQuery": "Water Bead Squeeze Ball",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "water-bead-ball",
     "image": "/squishies/water-bead-ball.jpg",
@@ -6670,6 +6911,7 @@
       "cube"
     ],
     "amazonQuery": "Water Bead Ball Pink",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "water-bead-ball-pink",
     "image": "/squishies/water-bead-ball-pink.jpg",
@@ -6698,6 +6940,7 @@
       "cube"
     ],
     "amazonQuery": "Water Bead Ball Galaxy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "water-bead-ball-galaxy",
     "image": "/squishies/water-bead-ball-galaxy.jpg",
@@ -6726,6 +6969,7 @@
       "cube"
     ],
     "amazonQuery": "Mesh Bead Stress Ball",
+    "amazonAsin": null,
     "priceNote": "often around $5–12",
     "imageKey": "mesh-bead-ball",
     "image": "/squishies/mesh-bead-ball.jpg",
@@ -6754,6 +6998,7 @@
       "cube"
     ],
     "amazonQuery": "Mesh Ball Rainbow",
+    "amazonAsin": null,
     "priceNote": "often around $5–12",
     "imageKey": "mesh-ball-rainbow",
     "image": "/squishies/mesh-ball-rainbow.jpg",
@@ -6781,6 +7026,7 @@
       "standard"
     ],
     "amazonQuery": "Cherry Foam Cube",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "cherry-foam-cube",
     "image": "/squishies/cherry-foam-cube.jpg",
@@ -6808,6 +7054,7 @@
       "standard"
     ],
     "amazonQuery": "Ocean Foam Cube",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "ocean-foam-cube",
     "image": "/squishies/ocean-foam-cube.jpg",
@@ -6835,6 +7082,7 @@
       "standard"
     ],
     "amazonQuery": "Grape Foam Cube",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "grape-foam-cube",
     "image": "/squishies/grape-foam-cube.jpg",
@@ -6862,6 +7110,7 @@
       "standard"
     ],
     "amazonQuery": "Lemon Foam Cube",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "lemon-foam-cube",
     "image": "/squishies/lemon-foam-cube.jpg",
@@ -6889,6 +7138,7 @@
       "standard"
     ],
     "amazonQuery": "Mint Foam Cube",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "mint-foam-cube",
     "image": "/squishies/mint-foam-cube.jpg",
@@ -6916,6 +7166,7 @@
       "standard"
     ],
     "amazonQuery": "Blush Foam Cube",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "blush-foam-cube",
     "image": "/squishies/blush-foam-cube.jpg",
@@ -6943,6 +7194,7 @@
       "standard"
     ],
     "amazonQuery": "Orange Foam Cube",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "orange-foam-cube",
     "image": "/squishies/orange-foam-cube.jpg",
@@ -6970,6 +7222,7 @@
       "standard"
     ],
     "amazonQuery": "Galaxy Foam Cube",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "galaxy-foam-cube",
     "image": "/squishies/galaxy-foam-cube.jpg",
@@ -6997,6 +7250,7 @@
       "standard"
     ],
     "amazonQuery": "Marble Foam Cube",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "marble-foam-cube",
     "image": "/squishies/marble-foam-cube.jpg",
@@ -7024,6 +7278,7 @@
       "standard"
     ],
     "amazonQuery": "Heart Stress Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "heart-stress-squishy",
     "image": "/squishies/heart-stress-squishy.jpg",
@@ -7051,6 +7306,7 @@
       "standard"
     ],
     "amazonQuery": "Star Stress Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "star-stress-squishy",
     "image": "/squishies/star-stress-squishy.jpg",
@@ -7078,6 +7334,7 @@
       "standard"
     ],
     "amazonQuery": "Soft Die Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "soft-die-squishy",
     "image": "/squishies/soft-die-squishy.jpg",
@@ -7105,6 +7362,7 @@
       "standard"
     ],
     "amazonQuery": "Rainbow Arch Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "rainbow-arch-squishy",
     "image": "/squishies/rainbow-arch-squishy.jpg",
@@ -7132,6 +7390,7 @@
       "standard"
     ],
     "amazonQuery": "Smiley Ball Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "smiley-ball-squishy",
     "image": "/squishies/smiley-ball-squishy.jpg",
@@ -7159,6 +7418,7 @@
       "standard"
     ],
     "amazonQuery": "Flower Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "flower-squishy",
     "image": "/squishies/flower-squishy.jpg",
@@ -7186,6 +7446,7 @@
       "standard"
     ],
     "amazonQuery": "Planet Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "planet-squishy",
     "image": "/squishies/planet-squishy.jpg",
@@ -7213,6 +7474,7 @@
       "standard"
     ],
     "amazonQuery": "Moon Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "moon-squishy",
     "image": "/squishies/moon-squishy.jpg",
@@ -7240,6 +7502,7 @@
       "standard"
     ],
     "amazonQuery": "Sun Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "sun-squishy",
     "image": "/squishies/sun-squishy.jpg",
@@ -7267,6 +7530,7 @@
       "standard"
     ],
     "amazonQuery": "Gem Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "gem-squishy",
     "image": "/squishies/gem-squishy.jpg",
@@ -7294,6 +7558,7 @@
       "standard"
     ],
     "amazonQuery": "Friendly Alien Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "friendly-alien-squishy",
     "image": "/squishies/friendly-alien-squishy.jpg",
@@ -7321,6 +7586,7 @@
       "standard"
     ],
     "amazonQuery": "Marshmallow Ghost",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "marshmallow-ghost",
     "image": "/squishies/marshmallow-ghost.jpg",
@@ -7348,6 +7614,7 @@
       "standard"
     ],
     "amazonQuery": "Pumpkin Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "pumpkin-squishy",
     "image": "/squishies/pumpkin-squishy.jpg",
@@ -7375,6 +7642,7 @@
       "standard"
     ],
     "amazonQuery": "Snowman Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "snowman-squishy",
     "image": "/squishies/snowman-squishy.jpg",
@@ -7402,6 +7670,7 @@
       "standard"
     ],
     "amazonQuery": "Cactus Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "cactus-squishy",
     "image": "/squishies/cactus-squishy.jpg",
@@ -7429,6 +7698,7 @@
       "standard"
     ],
     "amazonQuery": "Robot Cube Squishy",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "robot-cube-squishy",
     "image": "/squishies/robot-cube-squishy.jpg",
@@ -7457,6 +7727,7 @@
       "mini"
     ],
     "amazonQuery": "Mystery Dumpling Box",
+    "amazonAsin": null,
     "priceNote": "varies; check Amazon",
     "imageKey": "mystery-dumpling-box",
     "image": "/squishies/mystery-dumpling-box.jpg",
@@ -7485,6 +7756,7 @@
       "mini"
     ],
     "amazonQuery": "Mystery Mochi Box",
+    "amazonAsin": null,
     "priceNote": "varies; check Amazon",
     "imageKey": "mystery-mochi-box",
     "image": "/squishies/mystery-mochi-box.jpg",
@@ -7513,6 +7785,7 @@
       "mini"
     ],
     "amazonQuery": "Mystery Fruit Box",
+    "amazonAsin": null,
     "priceNote": "varies; check Amazon",
     "imageKey": "mystery-fruit-box",
     "image": "/squishies/mystery-fruit-box.jpg",
@@ -7541,6 +7814,7 @@
       "mini"
     ],
     "amazonQuery": "Mystery Animal Box",
+    "amazonAsin": null,
     "priceNote": "varies; check Amazon",
     "imageKey": "mystery-animal-box",
     "image": "/squishies/mystery-animal-box.jpg",
@@ -7569,6 +7843,7 @@
       "mini"
     ],
     "amazonQuery": "Mystery Candy Box",
+    "amazonAsin": null,
     "priceNote": "varies; check Amazon",
     "imageKey": "mystery-candy-box",
     "image": "/squishies/mystery-candy-box.jpg",
@@ -7597,6 +7872,7 @@
       "mini"
     ],
     "amazonQuery": "Mystery Bakery Box",
+    "amazonAsin": null,
     "priceNote": "varies; check Amazon",
     "imageKey": "mystery-bakery-box",
     "image": "/squishies/mystery-bakery-box.jpg",
@@ -7625,6 +7901,7 @@
       "mini"
     ],
     "amazonQuery": "Mystery Sea Box",
+    "amazonAsin": null,
     "priceNote": "varies; check Amazon",
     "imageKey": "mystery-sea-box",
     "image": "/squishies/mystery-sea-box.jpg",
@@ -7653,6 +7930,7 @@
       "standard"
     ],
     "amazonQuery": "Dino Egg Mystery",
+    "amazonAsin": null,
     "priceNote": "often around $6–14",
     "imageKey": "dino-egg-mystery",
     "image": "/squishies/dino-egg-mystery.jpg",
@@ -7681,6 +7959,7 @@
       "mini"
     ],
     "amazonQuery": "Galaxy Mystery Box",
+    "amazonAsin": null,
     "priceNote": "varies; check Amazon",
     "imageKey": "galaxy-mystery-box",
     "image": "/squishies/galaxy-mystery-box.jpg",
@@ -7709,6 +7988,7 @@
       "mini"
     ],
     "amazonQuery": "Farm Mystery Box",
+    "amazonAsin": null,
     "priceNote": "varies; check Amazon",
     "imageKey": "farm-mystery-box",
     "image": "/squishies/farm-mystery-box.jpg",
@@ -7737,6 +8017,7 @@
       "mini"
     ],
     "amazonQuery": "Mini Cube Mystery",
+    "amazonAsin": null,
     "priceNote": "varies; check Amazon",
     "imageKey": "mini-cube-mystery",
     "image": "/squishies/mini-cube-mystery.jpg",
@@ -7765,6 +8046,7 @@
       "mini"
     ],
     "amazonQuery": "Toast Surprise Box",
+    "amazonAsin": null,
     "priceNote": "varies; check Amazon",
     "imageKey": "toast-surprise-box",
     "image": "/squishies/toast-surprise-box.jpg",

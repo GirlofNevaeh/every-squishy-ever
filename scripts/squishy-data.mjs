@@ -694,6 +694,17 @@ add(
   ],
 );
 
+const AMAZON_ASIN = {
+  "nice-cube": "B0BQZFVJTB",
+  "nice-cube-glow": "B0DV4BFJBY",
+  "groovy-glob": "B076FGVCRH",
+  gumdrop: "B0C6XBP4CW",
+  "panic-pete": "B001R57O88",
+  "nice-berg": "B0D9ZP62TR",
+  "cheese-block": "B0CNTWGK1F",
+  "toymendous-butter": "B0GZR1J7K1",
+};
+
 const rankById = {};
 const built = items.map((item, index) => {
   const id = item.id || slug(item.name);
@@ -724,6 +735,7 @@ const built = items.map((item, index) => {
     tags,
     amazonQuery:
       item.brand === "Generic" ? `${item.name}` : `${item.brand} ${item.name}`,
+    amazonAsin: AMAZON_ASIN[id] ?? null,
     priceNote: item.priceNote,
     imageKey: item.imageKey || id,
     image: `/squishies/${id}.jpg`,

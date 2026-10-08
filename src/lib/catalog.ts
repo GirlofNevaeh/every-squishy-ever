@@ -48,6 +48,7 @@ export type Squishy = {
   description: string;
   tags: string[];
   amazonQuery: string;
+  amazonAsin: string | null;
   priceNote: string;
   imageKey: string;
   image: string;
@@ -145,10 +146,15 @@ export function toggleToken(value: string, token: string): string {
   return next.join(",");
 }
 
-export function amazonUrl(query: string): string {
-  const url = new URL("https://www.amazon.com/s");
-  url.searchParams.set("k", query);
+export function amazonUrl(item: Pick<Squishy, "amazonQuery" | "amazonAsin">): string {
   const tag = AFFILIATE_TAG.trim();
+  if (item.amazonAsin) {
+    const url = new URL(`https://www.amazon.com/dp/${item.amazonAsin}`);
+    if (tag) url.searchParams.set("tag", tag);
+    return url.toString();
+  }
+  const url = new URL("https://www.amazon.com/s");
+  url.searchParams.set("k", item.amazonQuery);
   if (tag) url.searchParams.set("tag", tag);
   return url.toString();
 }

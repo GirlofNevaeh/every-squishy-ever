@@ -75,8 +75,8 @@ function ComparePage() {
                 {picks.map((item) => (
                   <td key={item.id} className="align-top">
                     <div className="flex flex-col gap-2">
-                      <a className={buttonClass("butter")} href={amazonUrl(item.amazonQuery)} target="_blank" rel="noreferrer">
-                        Amazon
+                      <a className={buttonClass("butter")} href={amazonUrl(item)} target="_blank" rel="noreferrer">
+                        Buy
                         <ExternalLink className="size-4" aria-hidden="true" />
                       </a>
                       <a className={buttonClass("surface")} href={youtubeUrl(item.youtubeQuery)} target="_blank" rel="noreferrer">

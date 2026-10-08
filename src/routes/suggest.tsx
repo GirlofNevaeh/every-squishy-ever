@@ -215,6 +215,7 @@ function buildDraft(fields: Fields) {
     description: fields.description.trim(),
     tags: [] as string[],
     amazonQuery: fields.amazonQuery.trim(),
+    amazonAsin: null,
     priceNote: "varies; check Amazon",
     imageKey: slugify(fields.name),
     image: `/squishies/${slugify(fields.name)}.jpg`,

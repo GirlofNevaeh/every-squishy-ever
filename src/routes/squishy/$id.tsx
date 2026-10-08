@@ -98,12 +98,12 @@ function Detail() {
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
             <a
-              href={amazonUrl(item.amazonQuery)}
+              href={amazonUrl(item)}
               target="_blank"
               rel="noreferrer"
               className={buttonClass("butter")}
             >
-              Find on Amazon
+              Buy on Amazon
               <ExternalLink className="size-4" aria-hidden="true" />
             </a>
             <a
@@ -125,7 +125,11 @@ function Detail() {
             </button>
           </div>
           <p className="mt-2 text-sm text-muted">
-            Amazon and YouTube open a search for “{item.amazonQuery}”. Other toys and videos can show up too.
+            {item.amazonAsin
+              ? "Buy opens the Amazon product page. The price there can change."
+              : `Buy opens an Amazon search for “${item.amazonQuery}”. You can buy it there, and other toys can show up too.`}
+            {" "}
+            YouTube opens a search for “{item.youtubeQuery}”.
           </p>
         </div>
       </article>

@@ -26,10 +26,10 @@ export function SiteFooter() {
           </Link>
         </nav>
         <p>
-          Pictures are original catalog photos, not brand photos. The words are ours. Amazon and YouTube links are
-          searches, so other toys and videos can show up. Prices change. The top 20 is a hall of fame, not an official
-          sales chart. This site is not part of Schylling, NeeDoh, Amazon, YouTube, or other brands unless an affiliate
-          tag is added later.
+          Pictures are original catalog photos, not brand photos. The words are ours. Buy opens an Amazon product page
+          when we know the listing, and an Amazon search otherwise, so other toys can show up. YouTube links are
+          searches too. Prices change. The top 20 is a hall of fame, not an official sales chart. This site is not part
+          of Schylling, NeeDoh, Amazon, YouTube, or other brands unless an affiliate tag is added later.
         </p>
       </div>
     </footer>

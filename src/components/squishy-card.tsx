@@ -55,13 +55,13 @@ export function SquishyCard({ item }: { item: Squishy }) {
         </div>
         <div className="flex flex-wrap gap-2">
           <a
-            href={amazonUrl(item.amazonQuery)}
+            href={amazonUrl(item)}
             target="_blank"
             rel="noreferrer"
             className={buttonClass("butter", "flex-1")}
-            aria-label={`Search Amazon for ${item.name} (opens in a new tab)`}
+            aria-label={`Buy ${item.name} on Amazon (opens in a new tab)`}
           >
-            Amazon
+            Buy
             <ExternalLink className="size-4" aria-hidden="true" />
           </a>
           <a
