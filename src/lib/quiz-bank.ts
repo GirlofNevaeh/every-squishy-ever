@@ -43,11 +43,15 @@ function withChoices(answer: string, decoys: string[], rand: () => number): stri
 }
 
 function buildBank(): QuizQuestion[] {
-  const rand = mulberry32(0x51e551e5);
-  const pool = seededShuffle(
-    squishies.filter((item) => item.image),
+  const rand = mulberry32(0xa11f00d1);
+  const hall = squishies
+    .filter((item) => item.bestsellerRank != null && item.image)
+    .sort((a, b) => (a.bestsellerRank ?? 0) - (b.bestsellerRank ?? 0));
+  const extras = seededShuffle(
+    squishies.filter((item) => item.image && item.bestsellerRank == null),
     rand,
   );
+  const pool = seededShuffle([...hall, ...extras].slice(0, QUESTION_BANK_SIZE), rand);
   const names = squishies.map((item) => item.name);
   const textures = [...new Set(squishies.map((item) => item.texture))];
   const categories = [...new Set(squishies.map((item) => item.category))];
@@ -56,42 +60,45 @@ function buildBank(): QuizQuestion[] {
 
   function add(item: Squishy, kind: string, prompt: string, answer: string, decoys: string[]) {
     const choices = withChoices(answer, decoys, rand);
-    if (!choices) return;
+    if (!choices) return false;
     questions.push({ id: `${kind}:${item.id}`, prompt, imageId: item.id, choices, answer });
+    return true;
   }
 
-  pool.slice(0, 40).forEach((item) => {
-    add(item, "name", "What is this squishy called?", item.name, names.filter((name) => name !== item.name));
-  });
-  pool.slice(40, 65).forEach((item) => {
-    add(
-      item,
-      "feel",
-      `How does the ${item.name} feel?`,
-      item.texture,
-      textures.filter((texture) => texture !== item.texture),
-    );
-  });
-  pool.slice(65, 85).forEach((item) => {
-    add(
-      item,
-      "shelf",
-      `Which shelf is the ${item.name} on?`,
-      item.category,
-      categories.filter((category) => category !== item.category),
-    );
-  });
-  pool.slice(85, 100).forEach((item) => {
-    const answer = item.colors[0];
-    if (!answer) return;
-    add(
-      item,
-      "color",
-      `Which color is on the ${item.name}?`,
-      answer,
-      colors.filter((color) => !item.colors.includes(color)),
-    );
-  });
+  for (const [index, item] of pool.entries()) {
+    const otherNames = names.filter((name) => name !== item.name);
+    const slot = index % 4;
+    let added = false;
+    if (slot === 1) {
+      added = add(
+        item,
+        "feel",
+        `How does the ${item.name} feel?`,
+        item.texture,
+        textures.filter((texture) => texture !== item.texture),
+      );
+    } else if (slot === 2) {
+      added = add(
+        item,
+        "shelf",
+        `Which shelf is the ${item.name} on?`,
+        item.category,
+        categories.filter((category) => category !== item.category),
+      );
+    } else if (slot === 3) {
+      const answer = item.colors[0];
+      added =
+        answer != null &&
+        add(
+          item,
+          "color",
+          `Which color is on the ${item.name}?`,
+          answer,
+          colors.filter((color) => !item.colors.includes(color)),
+        );
+    }
+    if (!added) add(item, "name", "What is this squishy called?", item.name, otherNames);
+  }
 
   return questions;
 }

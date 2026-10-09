@@ -90,17 +90,16 @@ function validateRoster(source: Draft[], asSolo: boolean) {
   if (source.some((team) => !team.iconId)) return "Every team picks a squishy.";
   const icons = source.map((team) => team.iconId);
   if (new Set(icons).size !== icons.length) return "Each team needs its own squishy.";
-  const allPlayers: string[] = [];
+  let playerCount = 0;
   for (const team of source) {
     if (team.players.length < 1 || team.players.length > MAX_PLAYERS) {
       return "Each team needs 1 to 4 player names.";
     }
     const local = team.players.map((player) => player.toLowerCase());
     if (new Set(local).size !== local.length) return `${team.name} has two players with the same name.`;
-    allPlayers.push(...local);
+    playerCount += local.length;
   }
-  if (new Set(allPlayers).size !== allPlayers.length) return "Every player name has to be different, even on other teams.";
-  if (allPlayers.length > MAX_TEAMS * MAX_PLAYERS) return "That's more than 40 players.";
+  if (playerCount > MAX_TEAMS * MAX_PLAYERS) return "That's more than 40 players.";
   return "";
 }
 
@@ -363,6 +362,7 @@ function PlayPage() {
     if (!question || picked || !turn || phase !== "quiz") return;
     setPicked(choice);
     const correct = choice === question.answer;
+    warmAudio();
     if (correct) playCheer();
     else playFart();
     setRoster((current) =>
@@ -376,6 +376,7 @@ function PlayPage() {
     if (!playoffQuestion || picked || !playoffTeam || phase !== "playoff") return;
     setPicked(choice);
     const correct = choice === playoffQuestion.answer;
+    warmAudio();
     if (correct) playCheer();
     else playFart();
     const teamKey = playoffTeam.key;
@@ -935,7 +936,7 @@ function Setup({
   return (
     <div className="mt-4">
       <p className="text-lg">
-        Ten questions, picked from a bank of 100, so the next game is different. Play by yourself, or with teams of up
+        Ten questions from a bank of 100, including the new hall of fame squishies. The next game uses different ones. Play by yourself, or with teams of up
         to 4. Your team can play against as many as 9 other teams, 40 players in all. A team gives one answer together.
       </p>
       <div className="mt-4 grid grid-cols-2 gap-2 rounded-full bg-cream-deep p-1" role="group" aria-label="Who is playing">
