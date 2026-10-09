@@ -8,7 +8,8 @@ import {
   dealPlayoff,
   dealQuiz,
   questionImage,
-  QUIZ_LENGTH,
+  QUIZ_MEGA,
+  QUIZ_QUICK,
   shuffleList,
   type QuizQuestion,
 } from "@/lib/quiz-bank";
@@ -20,7 +21,7 @@ export const Route = createFileRoute("/play")({
       { title: "Squish quiz · Every Squishy Ever" },
       {
         name: "description",
-        content: "A 10-question squishy quiz from a bank of 100, for one player or up to 10 teams of 4.",
+        content: "A quick 10-question quiz or a 25-question mega quiz, for one player or up to 10 teams of 4.",
       },
     ],
   }),
@@ -105,8 +106,8 @@ function validateRoster(source: Draft[], asSolo: boolean) {
 
 function cheer(score: number, asked: number) {
   if (asked > 0 && score === asked) return "You got every one. Squish legend!";
-  if (score >= 8) return "Wow, you really know your squishies.";
-  if (score >= 5) return "Nice squeezes. Play again if you want to beat that score.";
+  if (asked > 0 && score / asked >= 0.7) return "Wow, you really know your squishies.";
+  if (asked > 0 && score / asked >= 0.5) return "Nice squeezes. Play again if you want to beat that score.";
   return "That was a tricky round. The shelf is still there if you want another look.";
 }
 
@@ -142,6 +143,7 @@ function PlayPage() {
     { key: 2, name: "", iconId: "", players: [""] },
   ]);
   const [error, setError] = useState("");
+  const [quizSize, setQuizSize] = useState<typeof QUIZ_QUICK | typeof QUIZ_MEGA>(QUIZ_QUICK);
   const [phase, setPhase] = useState<Phase>("setup");
   const [solo, setSolo] = useState(true);
   const [roster, setRoster] = useState<RosterTeam[]>([]);
@@ -343,7 +345,7 @@ function PlayPage() {
       setError(problem);
       return;
     }
-    const nextQuiz = dealQuiz(lastQuizIds.current);
+    const nextQuiz = dealQuiz(lastQuizIds.current, quizSize);
     lastQuizIds.current = nextQuiz.map((item) => item.id);
     warmAudio();
     setError("");
@@ -461,6 +463,11 @@ function PlayPage() {
           soloIcon={soloIcon}
           drafts={drafts}
           error={error}
+          quizSize={quizSize}
+          onQuizSize={(size) => {
+            setQuizSize(size);
+            setError("");
+          }}
           onMode={(nextMode) => {
             setMode(nextMode);
             setError("");
@@ -491,7 +498,7 @@ function PlayPage() {
             teamCount={roster.length}
             label={solo || roster.length === 1 ? "Your turn" : "Your team's turn"}
             detail={solo ? null : `${turn.players.join(", ")}. One answer for the team.`}
-            progress={`${round + 1} / ${quiz?.length ?? QUIZ_LENGTH}`}
+            progress={`${round + 1} / ${quiz?.length ?? quizSize}`}
           />
           <AnswerBoard question={question} picked={picked} onChoose={choose} />
         </section>
@@ -725,7 +732,7 @@ function League({
       ) : (
         <div className="rounded-3xl bg-butter p-6">
           <h2 className="font-display text-4xl">{leader.name} wins!</h2>
-          <p className="mt-2 text-lg">Ten questions. One answer counted for each team.</p>
+          <p className="mt-2 text-lg">{leader.asked} questions. One answer counted for each team.</p>
         </div>
       )}
       {solo ? null : <ScoreList teams={ranked} />}
@@ -904,6 +911,8 @@ function Setup({
   soloIcon,
   drafts,
   error,
+  quizSize,
+  onQuizSize,
   onMode,
   onSoloName,
   onSoloIcon,
@@ -920,6 +929,8 @@ function Setup({
   soloIcon: string;
   drafts: Draft[];
   error: string;
+  quizSize: typeof QUIZ_QUICK | typeof QUIZ_MEGA;
+  onQuizSize: (size: typeof QUIZ_QUICK | typeof QUIZ_MEGA) => void;
   onMode: (mode: PlayMode) => void;
   onSoloName: (value: string) => void;
   onSoloIcon: (id: string) => void;
@@ -936,8 +947,30 @@ function Setup({
   return (
     <div className="mt-4">
       <p className="text-lg">
-        Ten questions from a bank of 100, including the new hall of fame squishies. The next game uses different ones. Play by yourself, or with teams of up
-        to 4. Your team can play against as many as 9 other teams, 40 players in all. A team gives one answer together.
+        Pick a quick quiz or a mega quiz. Both use the bank of 100 hall of fame squishies, and the next game asks
+        different ones. Play by yourself, or with teams of up to 4. Your team can play against as many as 9 other
+        teams, 40 players in all. A team gives one answer together.
+      </p>
+      <div className="mt-4 grid grid-cols-2 gap-2 rounded-full bg-cream-deep p-1" role="group" aria-label="Quiz length">
+        <button
+          type="button"
+          aria-pressed={quizSize === QUIZ_QUICK}
+          className={cn("min-h-11 rounded-full font-bold", quizSize === QUIZ_QUICK ? "bg-ink text-cream" : "text-ink")}
+          onClick={() => onQuizSize(QUIZ_QUICK)}
+        >
+          Quick quiz
+        </button>
+        <button
+          type="button"
+          aria-pressed={quizSize === QUIZ_MEGA}
+          className={cn("min-h-11 rounded-full font-bold", quizSize === QUIZ_MEGA ? "bg-ink text-cream" : "text-ink")}
+          onClick={() => onQuizSize(QUIZ_MEGA)}
+        >
+          Mega quiz
+        </button>
+      </div>
+      <p className="mt-2 text-sm font-bold text-muted">
+        {quizSize === QUIZ_MEGA ? "Mega quiz is 25 questions." : "Quick quiz is 10 questions."}
       </p>
       <div className="mt-4 grid grid-cols-2 gap-2 rounded-full bg-cream-deep p-1" role="group" aria-label="Who is playing">
         <button
@@ -1055,7 +1088,7 @@ function Setup({
           </Button>
         ) : null}
         <Button variant="ink" onClick={onStart}>
-          Start quiz
+          {quizSize === QUIZ_MEGA ? "Start mega quiz" : "Start quick quiz"}
         </Button>
       </div>
     </div>

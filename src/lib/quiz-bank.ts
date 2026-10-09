@@ -9,7 +9,9 @@ export type QuizQuestion = {
 };
 
 export const QUESTION_BANK_SIZE = 100;
-export const QUIZ_LENGTH = 10;
+export const QUIZ_QUICK = 10;
+export const QUIZ_MEGA = 25;
+export const QUIZ_LENGTH = QUIZ_QUICK;
 
 function mulberry32(seed: number) {
   let state = seed >>> 0;
@@ -128,11 +130,12 @@ function freshen(question: QuizQuestion): QuizQuestion {
   return { ...question, choices: shuffleList(question.choices) };
 }
 
-export function dealQuiz(avoidIds: string[] = []): QuizQuestion[] {
+export function dealQuiz(avoidIds: string[] = [], length = QUIZ_QUICK): QuizQuestion[] {
+  const size = length === QUIZ_MEGA ? QUIZ_MEGA : QUIZ_QUICK;
   const avoid = new Set(avoidIds);
   const fresh = questionBank.filter((question) => !avoid.has(question.id));
-  const pool = fresh.length >= QUIZ_LENGTH ? fresh : questionBank;
-  return shuffleList(pool).slice(0, QUIZ_LENGTH).map(freshen);
+  const pool = fresh.length >= size ? fresh : questionBank;
+  return shuffleList(pool).slice(0, size).map(freshen);
 }
 
 export function dealPlayoff(usedIds: string[], count: number): QuizQuestion[] {
