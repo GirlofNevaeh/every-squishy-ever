@@ -69,7 +69,7 @@ export function SiteHeader() {
           <span className="truncate font-display text-lg leading-none sm:text-xl">Every Squishy Ever</span>
         </Link>
         <nav
-          className="order-3 flex w-full gap-1 overflow-x-auto lg:order-none lg:w-auto"
+          className="order-3 flex w-full flex-wrap gap-x-1 gap-y-1 lg:order-none lg:w-auto"
           aria-label="Primary"
         >
           {NAV.map((item) => {
@@ -81,7 +81,7 @@ export function SiteHeader() {
                 search={item.to === "/" ? EMPTY_SEARCH : undefined}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "inline-flex min-h-11 shrink-0 items-center rounded-full px-3 text-sm font-bold",
+                  "inline-flex min-h-11 shrink-0 items-center justify-center rounded-full px-2.5 text-sm font-bold whitespace-nowrap lg:px-3",
                   active ? "bg-butter text-ink" : "text-ink",
                 )}
               >
