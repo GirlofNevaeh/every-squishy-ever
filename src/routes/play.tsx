@@ -992,8 +992,10 @@ function Setup({
         </button>
       </div>
       {mode === "solo" ? (
-        <fieldset className="mt-4 rounded-3xl bg-surface p-4 shadow-card">
-          <legend className="px-1 font-display text-2xl">Your name</legend>
+        <section className="mt-4 rounded-3xl bg-surface p-4 shadow-card" aria-labelledby="solo-name-label">
+          <h2 id="solo-name-label" className="font-display text-2xl">
+            Your name
+          </h2>
           <label className="mt-2 block text-sm font-bold" htmlFor="solo-name">
             What should we call you?
           </label>
@@ -1009,15 +1011,17 @@ function Setup({
             Your squishy
           </p>
           <IconPicker selectedId={soloIcon} taken={new Set()} labelId="solo-icon" onPick={onSoloIcon} />
-        </fieldset>
+        </section>
       ) : (
         <div className="mt-4 grid gap-4">
           <p className="text-sm font-bold">
             {drafts.length} of {MAX_TEAMS} teams · {named} of {MAX_TEAMS * MAX_PLAYERS} players named
           </p>
           {drafts.map((team, index) => (
-            <fieldset key={team.key} className="rounded-3xl bg-surface p-4 shadow-card">
-              <legend className="px-1 font-display text-2xl">Team {index + 1}</legend>
+            <section key={team.key} className="rounded-3xl bg-surface p-4 shadow-card" aria-labelledby={`team-name-label-${team.key}`}>
+              <h2 id={`team-name-label-${team.key}`} className="font-display text-2xl">
+                Team {index + 1}
+              </h2>
               <label className="mt-2 block text-sm font-bold" htmlFor={`team-name-${team.key}`}>
                 Team name
               </label>
@@ -1073,7 +1077,7 @@ function Setup({
                   Remove team
                 </button>
               ) : null}
-            </fieldset>
+            </section>
           ))}
         </div>
       )}
@@ -1107,29 +1111,43 @@ function IconPicker({
   labelId: string;
   onPick: (id: string) => void;
 }) {
+  const picked = ICONS.find((icon) => icon.id === selectedId);
   return (
-    <div className="mt-2 grid grid-cols-4 gap-2 sm:grid-cols-8" role="group" aria-labelledby={labelId}>
-      {ICONS.map((icon) => {
-        const selected = selectedId === icon.id;
-        const used = taken.has(icon.id) && !selected;
-        return (
-          <button
-            key={icon.id}
-            type="button"
-            aria-pressed={selected}
-            aria-label={used ? `${icon.name} is already picked` : icon.name}
-            disabled={used}
-            onClick={() => onPick(icon.id)}
-            className={cn(
-              "aspect-square overflow-hidden rounded-2xl",
-              selected ? "ring-2 ring-ink ring-offset-2" : "shadow-card",
-              used && "opacity-35",
-            )}
-          >
-            <SquishyPhoto item={icon} alt="" />
-          </button>
-        );
-      })}
+    <div>
+      <div className="mt-2 grid grid-cols-4 gap-2 sm:grid-cols-8" role="group" aria-labelledby={labelId}>
+        {ICONS.map((icon) => {
+          const selected = selectedId === icon.id;
+          const used = taken.has(icon.id) && !selected;
+          return (
+            <button
+              key={icon.id}
+              type="button"
+              aria-pressed={selected}
+              aria-label={used ? `${icon.name} is already picked` : icon.name}
+              disabled={used}
+              onClick={() => {
+                if (!used) onPick(icon.id);
+              }}
+              onPointerDown={(event) => {
+                if (used || event.button !== 0) return;
+                onPick(icon.id);
+              }}
+              className={cn(
+                "relative aspect-square touch-manipulation overflow-hidden rounded-2xl border-4",
+                selected ? "border-ink" : "border-transparent shadow-card",
+                used && "opacity-35",
+              )}
+            >
+              <span className="pointer-events-none absolute inset-0">
+                <SquishyPhoto item={icon} alt="" />
+              </span>
+            </button>
+          );
+        })}
+      </div>
+      <p className="mt-2 text-sm font-bold" aria-live="polite">
+        {picked ? `Picked ${picked.name}` : "Tap a squishy to choose it."}
+      </p>
     </div>
   );
 }
