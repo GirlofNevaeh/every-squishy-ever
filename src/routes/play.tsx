@@ -1114,34 +1114,42 @@ function IconPicker({
   const picked = ICONS.find((icon) => icon.id === selectedId);
   return (
     <div>
-      <div className="mt-2 grid grid-cols-4 gap-2 sm:grid-cols-8" role="group" aria-labelledby={labelId}>
+      <div className="mt-2 grid grid-cols-4 gap-2 sm:grid-cols-8" role="radiogroup" aria-labelledby={labelId}>
         {ICONS.map((icon) => {
           const selected = selectedId === icon.id;
           const used = taken.has(icon.id) && !selected;
           return (
-            <button
+            <label
               key={icon.id}
-              type="button"
-              aria-pressed={selected}
-              aria-label={used ? `${icon.name} is already picked` : icon.name}
-              disabled={used}
+              className={cn("relative block", used && "opacity-35")}
               onClick={() => {
                 if (!used) onPick(icon.id);
               }}
-              onPointerDown={(event) => {
-                if (used || event.button !== 0) return;
-                onPick(icon.id);
-              }}
-              className={cn(
-                "relative aspect-square touch-manipulation overflow-hidden rounded-2xl border-4",
-                selected ? "border-ink" : "border-transparent shadow-card",
-                used && "opacity-35",
-              )}
             >
-              <span className="pointer-events-none absolute inset-0">
-                <SquishyPhoto item={icon} alt="" />
+              <input
+                type="radio"
+                name={labelId}
+                value={icon.id}
+                checked={selected}
+                disabled={used}
+                aria-label={used ? `${icon.name} is already picked` : icon.name}
+                onChange={() => {
+                  if (!used) onPick(icon.id);
+                }}
+                className="absolute inset-0 z-20 m-0 h-full w-full cursor-pointer appearance-none opacity-[0.02]"
+              />
+              <span
+                className={cn(
+                  "relative block aspect-square min-h-16 overflow-hidden rounded-2xl border-4",
+                  selected ? "border-ink bg-butter" : "border-transparent bg-cream-deep shadow-card",
+                )}
+              >
+                <span className="pointer-events-none absolute inset-0">
+                  <SquishyPhoto item={icon} alt="" />
+                </span>
               </span>
-            </button>
+              <span className="mt-1 block text-center text-xs leading-tight font-bold">{icon.name}</span>
+            </label>
           );
         })}
       </div>
