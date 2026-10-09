@@ -5,10 +5,10 @@ import { topSellers } from "@/lib/catalog";
 export const Route = createFileRoute("/top")({
   head: () => ({
     meta: [
-      { title: "Top 20 squishies · Every Squishy Ever" },
+      { title: "Hall of Fame · Every Squishy Ever" },
       {
         name: "description",
-        content: "A hall of fame of the squishies people have loved and bought the most.",
+        content: "The hall of fame of squishies people have loved and bought the most.",
       },
     ],
   }),
@@ -19,8 +19,7 @@ function TopPage() {
   const items = topSellers();
   return (
     <main id="main" className="mx-auto max-w-6xl px-4 py-8">
-      <p className="text-sm font-extrabold tracking-wide text-muted uppercase">Hall of fame</p>
-      <h1 className="mt-2 font-display text-5xl">Top 20 best sellers</h1>
+      <h1 className="font-display text-5xl">Hall of Fame</h1>
       <p className="mt-3 max-w-2xl text-lg">
         These are the squishies kids and collectors talk about the most, from the Nice Cube to cheese, butter, and
         mochi. It is a friendly hall of fame, not an official sales chart.

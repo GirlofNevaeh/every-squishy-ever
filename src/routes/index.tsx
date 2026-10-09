@@ -15,7 +15,6 @@ import {
   squishies,
   toggleToken,
   tokens,
-  topSellers,
   type CatalogSearch,
   type Category,
 } from "@/lib/catalog";
@@ -50,9 +49,7 @@ function Home() {
   const heroes = ["nice-cube", "cheese-wedge", "butter-stick"]
     .map((id) => getSquishy(id))
     .filter((item) => item != null);
-  const hall = topSellers();
   const visible = results.slice(0, shown);
-  const showHall = !filtersOn && !search.q;
 
   useEffect(() => {
     setShown(PAGE);
@@ -91,34 +88,8 @@ function Home() {
         </div>
       </section>
 
-      {showHall ? (
-        <section className="mt-8" aria-label="Top 20 best sellers">
-          <div className="flex items-end justify-between gap-3">
-            <h2 className="font-display text-2xl">Top 20 best sellers</h2>
-            <Link to="/top" className="inline-flex min-h-11 items-center font-bold">
-              See the hall of fame
-            </Link>
-          </div>
-          <ul className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-2">
-            {hall.map((item) => (
-              <li key={item.id} className="w-36 shrink-0">
-                <Link to="/squishy/$id" params={{ id: item.id }} className="block">
-                  <div className="aspect-square overflow-hidden rounded-2xl shadow-card">
-                    <SquishyPhoto item={item} />
-                  </div>
-                  <p className="mt-2 line-clamp-2 text-sm leading-tight font-bold">
-                    #{item.bestsellerRank} {item.name}
-                  </p>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-
       <section className="mt-6" aria-label="Filters">
         <div className="mb-3">
-          <h2 className="mb-1 font-display text-base">Hall of fame</h2>
           <button
             type="button"
             aria-pressed={search.best === "1"}
@@ -128,7 +99,7 @@ function Home() {
               search.best === "1" ? "bg-ink text-cream" : "bg-butter text-ink",
             )}
           >
-            Top 20 of all time
+            Hall of Fame
           </button>
         </div>
         <div className="space-y-3 lg:hidden">
@@ -162,7 +133,7 @@ function Home() {
         <p className="text-sm font-bold text-muted tabular-nums" aria-live="polite">
           {countLabel(results.length)}
           {search.q ? ` for “${search.q.trim()}”` : ""}
-          {search.best === "1" ? " in the top 20" : ""}
+          {search.best === "1" ? " in the hall of fame" : ""}
         </p>
         {filtersOn || search.q ? (
           <Button variant="surface" onClick={() => update(EMPTY_SEARCH)}>

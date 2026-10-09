@@ -8,7 +8,7 @@ import { cn } from "@/lib/cn";
 
 const NAV = [
   { to: "/", label: "Squishies" },
-  { to: "/top", label: "Top 20" },
+  { to: "/top", label: "Hall of Fame" },
   { to: "/play", label: "Quiz" },
   { to: "/about", label: "About" },
 ] as const;

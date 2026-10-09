@@ -3,6 +3,7 @@ import { useState } from "react";
 import { SquishyPhoto } from "@/components/squishy-photo";
 import { Button } from "@/components/ui/button";
 import { getSquishy, squishies, type Squishy } from "@/lib/catalog";
+import { playCheer, playFart } from "@/lib/quiz-sounds";
 import { cn } from "@/lib/cn";
 
 export const Route = createFileRoute("/play")({
@@ -246,6 +247,8 @@ function PlayPage() {
     if (!question || picked || !turn) return;
     setPicked(choice);
     const correct = choice === question.answer;
+    if (correct) playCheer();
+    else playFart();
     setRoster((current) =>
       current.map((team) =>
         team.key === turn.key ? { ...team, asked: team.asked + 1, score: team.score + (correct ? 1 : 0) } : team,

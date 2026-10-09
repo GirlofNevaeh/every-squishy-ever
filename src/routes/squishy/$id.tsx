@@ -65,7 +65,7 @@ function Detail() {
             </span>
             {item.bestsellerRank ? (
               <Link to="/top" className="inline-flex rounded-full bg-butter px-3 py-1 text-sm font-bold">
-                Top 20 #{item.bestsellerRank}
+                Hall of Fame #{item.bestsellerRank}
               </Link>
             ) : null}
           </div>

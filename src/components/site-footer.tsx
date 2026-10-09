@@ -15,7 +15,7 @@ export function SiteFooter() {
             Squishies
           </Link>
           <Link to="/top" className="inline-flex min-h-11 items-center">
-            Top 20
+            Hall of Fame
           </Link>
           <Link to="/play" className="inline-flex min-h-11 items-center">
             Quiz
@@ -30,7 +30,7 @@ export function SiteFooter() {
         <p>
           Pictures are original catalog photos, not brand photos. The words are ours. Buy opens an Amazon product page
           when we know the listing, and an Amazon search otherwise, so other toys can show up. YouTube links are
-          searches too. Prices change. The top 20 is a hall of fame, not an official sales chart. This site is not part
+          searches too. Prices change. The hall of fame is not an official sales chart. This site is not part
           of Schylling, NeeDoh, Amazon, YouTube, or other brands unless an affiliate tag is added later.
         </p>
       </div>

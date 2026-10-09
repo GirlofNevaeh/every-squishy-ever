@@ -33,8 +33,8 @@ function About() {
         </p>
         <p>
           The pictures were made for this catalog. They are not copied from a shop. Amazon and YouTube buttons open a
-          search, so you might see other toys too. The price note is a hint, never today’s price. The top 20 is a hall
-          of fame of famous squishies, not an official best-seller list.
+          search, so you might see other toys too. The price note is a hint, never today’s price. The hall of fame is a
+          list of famous squishies, not an official best-seller list.
         </p>
         <p>
           Try the quiz by yourself, or with teams of up to 4 players. You can play against as many as 9 other teams.
