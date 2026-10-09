@@ -754,10 +754,39 @@ if (dupIds.length || dupDesc.length) {
   process.exit(1);
 }
 
+const HALL = 100;
+const usedRanks = new Set(built.map((item) => item.bestsellerRank).filter((rank) => rank != null));
+const pools = new Map();
+for (const item of built) {
+  if (item.bestsellerRank != null) continue;
+  const bucket = pools.get(item.category) ?? [];
+  bucket.push(item);
+  pools.set(item.category, bucket);
+}
+for (const bucket of pools.values()) bucket.sort((a, b) => a.name.localeCompare(b.name));
+const keys = [...pools.keys()].sort();
+let nextRank = 1;
+while (usedRanks.size < HALL) {
+  let placed = false;
+  for (const key of keys) {
+    const bucket = pools.get(key);
+    if (!bucket?.length) continue;
+    while (usedRanks.has(nextRank)) nextRank += 1;
+    if (nextRank > HALL) break;
+    const item = bucket.shift();
+    item.bestsellerRank = nextRank;
+    usedRanks.add(nextRank);
+    nextRank += 1;
+    placed = true;
+    if (usedRanks.size >= HALL) break;
+  }
+  if (!placed) break;
+}
+
 const ranks = built.filter((item) => item.bestsellerRank).map((item) => item.bestsellerRank);
 const rankSet = new Set(ranks);
-if (rankSet.size !== 20 || ranks.length !== 20) {
-  console.error("expected 20 unique ranks", ranks.sort((a, b) => a - b));
+if (rankSet.size !== HALL || ranks.length !== HALL || Math.min(...ranks) !== 1 || Math.max(...ranks) !== HALL) {
+  console.error("expected 100 unique ranks", [...rankSet].sort((a, b) => a - b));
   process.exit(1);
 }
 

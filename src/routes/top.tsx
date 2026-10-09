@@ -21,8 +21,8 @@ function TopPage() {
     <main id="main" className="mx-auto max-w-6xl px-4 py-8">
       <h1 className="font-display text-5xl">Hall of Fame</h1>
       <p className="mt-3 max-w-2xl text-lg">
-        These are the squishies kids and collectors talk about the most, from the Nice Cube to cheese, butter, and
-        mochi. It is a friendly hall of fame, not an official sales chart.
+        One hundred original squishies, from the Nice Cube to the toys kids keep asking for. One list, not an
+        official sales chart.
       </p>
       <ol className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => (

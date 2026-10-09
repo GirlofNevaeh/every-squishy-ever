@@ -8,7 +8,7 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-sm text-muted">
         <div className="flex flex-wrap items-center gap-3">
           <AddToHome />
-          <p>Save the shelf, then add the icon to your home screen.</p>
+          <p>Add the icon in Safari, then open it once so the shelf can save.</p>
         </div>
         <nav className="flex flex-wrap gap-4 font-bold" aria-label="Footer">
           <Link to="/" search={EMPTY_SEARCH} className="inline-flex min-h-11 items-center">

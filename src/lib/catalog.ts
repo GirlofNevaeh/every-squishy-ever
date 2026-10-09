@@ -184,7 +184,7 @@ export function feelLine(item: Squishy): string {
 export function topSellers(): Squishy[] {
   return squishies
     .filter((item) => item.bestsellerRank)
-    .sort((a, b) => (a.bestsellerRank ?? 99) - (b.bestsellerRank ?? 99));
+    .sort((a, b) => (a.bestsellerRank ?? 1000) - (b.bestsellerRank ?? 1000));
 }
 
 export function filterSquishies(items: Squishy[], search: CatalogSearch): Squishy[] {
@@ -207,7 +207,7 @@ export function filterSquishies(items: Squishy[], search: CatalogSearch): Squish
     return haystack.includes(q);
   });
   if (search.best === "1") {
-    return list.sort((a, b) => (a.bestsellerRank ?? 99) - (b.bestsellerRank ?? 99));
+    return list.sort((a, b) => (a.bestsellerRank ?? 1000) - (b.bestsellerRank ?? 1000));
   }
   return list;
 }

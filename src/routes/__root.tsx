@@ -16,6 +16,8 @@ export const Route = createRootRoute({
         content: "A kid-friendly catalog of squishy toys, with pictures, how they feel, and where to look them up.",
       },
       { name: "theme-color", content: "#FBF6EC" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "mobile-web-app-capable", content: "yes" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
