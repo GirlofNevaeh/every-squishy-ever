@@ -145,6 +145,88 @@
   }
 }
 
+@keyframes squish-dance {
+  0% {
+    transform: translateY(0) rotate(-7deg) scale(1, 1);
+  }
+  20% {
+    transform: translateY(-14%) rotate(8deg) scale(1.08, 0.9);
+  }
+  40% {
+    transform: translateY(0) rotate(-4deg) scale(0.92, 1.1);
+  }
+  60% {
+    transform: translateY(-10%) rotate(10deg) scale(1.06, 0.92);
+  }
+  80% {
+    transform: translateY(2%) rotate(-8deg) scale(0.96, 1.06);
+  }
+  100% {
+    transform: translateY(0) rotate(-7deg) scale(1, 1);
+  }
+}
+
+.squish-dance {
+  animation: squish-dance 0.7s ease-in-out infinite;
+  transform-origin: 50% 85%;
+}
+
+@keyframes congrats-flash {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  95% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.congrats-flash {
+  animation: congrats-flash 0.7s linear infinite;
+}
+
+@keyframes draw-flash {
+  0%,
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50%,
+  90% {
+    opacity: 0.08;
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.draw-flash {
+  animation: draw-flash 0.45s linear infinite;
+}
+
+.dance-count {
+  font-size: min(46vw, 46dvh);
+  line-height: 0.85;
+  color: var(--color-ink);
+  -webkit-text-stroke: 0.045em var(--color-butter);
+  paint-order: stroke fill;
+}
+
+.dance-count-band {
+  font-size: min(42vw, 16dvh);
+}
+
+.draw-word {
+  font-size: 22vw;
+  line-height: 0.9;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .squish-card,
   .toy-squish,
@@ -161,6 +243,19 @@
   .squish-card:active .toy-squish {
     transform: none;
   }
+
+  .squish-dance {
+    animation-duration: 2.8s;
+  }
+
+  .congrats-flash,
+  .draw-flash {
+    animation: none;
+  }
+}
+
+body.quiz-tight footer {
+  display: none;
 }
 
 @media print {

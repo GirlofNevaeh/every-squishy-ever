@@ -38,8 +38,8 @@ function About() {
         </p>
         <p>
           Try the quiz by yourself, or with teams of up to 4 players. You can play against as many as 9 other teams.
-          Each team gives one answer. The Add to iPhone or Add to iPad button at the bottom saves the shelf so you can
-          open it offline.
+          Each game asks 10 questions from a bank of 100, so the next game is different. Each team gives one answer.
+          The Add to iPhone or Add to iPad button at the bottom saves the shelf so you can open it offline.
         </p>
       </div>
       <p className="mt-8 flex flex-wrap gap-4 font-bold">

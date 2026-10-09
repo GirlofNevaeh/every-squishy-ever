@@ -25,7 +25,7 @@ The suggest page can draft this object for you. It does not save anything by its
 - `/` search and filters, with a Hall of Fame chip and a show-more shelf.
 - `/top` hall of fame. Not an official sales chart.
 - `/squishy/$id` picture, feel, Amazon link, and YouTube search.
-- `/play` a 20-question quiz. Play solo, or with up to 10 teams of 4 players (40 people). Each person gets a name, each team gets a name and a squishy icon, and the team shares one answer. A league table shows at the end.
+- `/play` a 10-question quiz drawn from a bank of 100, so the next game uses different questions. Play solo, or with up to 10 teams of 4 players (40 people). Each person gets a name, each team gets a name and a squishy icon, and the team shares one answer. A league table shows at the end. If teams tie, they choose a playoff or a dance off.
 
 The footer button **Add to iPhone** or **Add to iPad** explains how to put the site on a home screen. **Save for offline** stores the pages and pictures on the device so the shelf still opens without wifi. Open the site in Safari first.
 

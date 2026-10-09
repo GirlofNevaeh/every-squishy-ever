@@ -1,10 +1,18 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
 import { SquishyPhoto } from "@/components/squishy-photo";
 import { Button } from "@/components/ui/button";
-import { getSquishy, squishies, type Squishy } from "@/lib/catalog";
-import { playCheer, playFart } from "@/lib/quiz-sounds";
+import { EMPTY_SEARCH, getSquishy, squishies, type Squishy } from "@/lib/catalog";
 import { cn } from "@/lib/cn";
+import {
+  dealPlayoff,
+  dealQuiz,
+  questionImage,
+  QUIZ_LENGTH,
+  shuffleList,
+  type QuizQuestion,
+} from "@/lib/quiz-bank";
+import { holdAudio, playAirHorn, playCheer, playFart, warmAudio } from "@/lib/quiz-sounds";
 
 export const Route = createFileRoute("/play")({
   head: () => ({
@@ -12,16 +20,20 @@ export const Route = createFileRoute("/play")({
       { title: "Squish quiz · Every Squishy Ever" },
       {
         name: "description",
-        content: "A 20-question squishy quiz for one player, or up to 10 teams of 4.",
+        content: "A 10-question squishy quiz from a bank of 100, for one player or up to 10 teams of 4.",
       },
     ],
   }),
   component: PlayPage,
 });
 
-const QUESTION_COUNT = 20;
 const MAX_TEAMS = 10;
 const MAX_PLAYERS = 4;
+const ANSWER_PAUSE_MS = 1000;
+const DECIDE_SECONDS = 10;
+const PLAYOFF_ROUNDS = 3;
+const DANCE_SECONDS = 30;
+const DRAW_FLASH_MS = 3000;
 
 const ICON_IDS = [
   "nice-cube",
@@ -44,81 +56,25 @@ const ICON_IDS = [
 
 const ICONS = ICON_IDS.map((id) => getSquishy(id)).filter((item): item is Squishy => item != null);
 
-type Question = {
-  prompt: string;
-  image?: Squishy;
-  choices: string[];
-  answer: string;
-};
-
 type Draft = { key: number; name: string; iconId: string; players: string[] };
 type RosterTeam = Draft & { score: number; asked: number };
 type PlayMode = "solo" | "teams";
-
-function shuffle<T>(list: T[]): T[] {
-  const next = [...list];
-  for (let i = next.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [next[i], next[j]] = [next[j], next[i]];
-  }
-  return next;
-}
-
-function uniqueChoices(answer: string, extras: string[], count: number) {
-  const choices = [answer];
-  for (const extra of extras) {
-    if (!choices.includes(extra)) choices.push(extra);
-    if (choices.length === count) break;
-  }
-  return shuffle(choices);
-}
-
-function buildQuiz(): Question[] {
-  const pool = shuffle(squishies.filter((item) => item.image));
-  const questions: Question[] = [];
-
-  function take() {
-    return pool.pop();
-  }
-
-  for (let i = 0; i < 10; i++) {
-    const item = take();
-    if (!item) break;
-    const decoys = shuffle(squishies.filter((other) => other.name !== item.name)).map((other) => other.name);
-    questions.push({
-      prompt: "What is this squishy called?",
-      image: item,
-      choices: uniqueChoices(item.name, decoys, 4),
-      answer: item.name,
-    });
-  }
-
-  for (let i = 0; i < 6; i++) {
-    const item = take();
-    if (!item) break;
-    const decoys = shuffle(squishies.filter((other) => other.texture !== item.texture)).map((other) => other.texture);
-    questions.push({
-      prompt: `How does the ${item.name} feel?`,
-      image: item,
-      choices: uniqueChoices(item.texture, decoys, 4),
-      answer: item.texture,
-    });
-  }
-
-  for (let i = 0; i < 4; i++) {
-    const item = take();
-    if (!item) break;
-    const decoys = shuffle(squishies.filter((other) => other.category !== item.category)).map((other) => other.category);
-    questions.push({
-      prompt: `Which shelf is the ${item.name} on?`,
-      image: item,
-      choices: uniqueChoices(item.category, decoys, 4),
-      answer: item.category,
-    });
-  }
-
-  return shuffle(questions).slice(0, QUESTION_COUNT);
-}
+type Phase =
+  | "setup"
+  | "quiz"
+  | "league"
+  | "decide"
+  | "playoff"
+  | "draw-flash"
+  | "dance-pick"
+  | "dance"
+  | "dance-judge"
+  | "celebrate";
+type Dancer = { teamKey: number; name: string; squishyId: string };
+type Celebrate =
+  | { kind: "playoff"; teamName: string }
+  | { kind: "draw"; teams: RosterTeam[] }
+  | { kind: "dance"; dancer: string; teamName: string };
 
 function validateRoster(source: Draft[], asSolo: boolean) {
   if (asSolo) {
@@ -150,9 +106,31 @@ function validateRoster(source: Draft[], asSolo: boolean) {
 
 function cheer(score: number, asked: number) {
   if (asked > 0 && score === asked) return "You got every one. Squish legend!";
-  if (score >= 15) return "Wow, you really know your squishies.";
-  if (score >= 8) return "Nice squeezes. Play again if you want to beat that score.";
+  if (score >= 8) return "Wow, you really know your squishies.";
+  if (score >= 5) return "Nice squeezes. Play again if you want to beat that score.";
   return "That was a tricky round. The shelf is still there if you want another look.";
+}
+
+function joinTeams(names: string[]) {
+  if (names.length <= 1) return names[0] ?? "";
+  if (names.length === 2) return `${names[0]} and ${names[1]}`;
+  return `${names.slice(0, -1).join(", ")} and ${names.at(-1)}`;
+}
+
+function leadersOf(teams: RosterTeam[]) {
+  if (teams.length === 0) return [];
+  const top = Math.max(...teams.map((team) => team.score));
+  return teams.filter((team) => team.score === top).sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function danceGridClass(count: number) {
+  if (count <= 2) return "grid-cols-2 grid-rows-1";
+  if (count === 3) return "grid-cols-3 grid-rows-1";
+  if (count === 4) return "grid-cols-2 grid-rows-2";
+  if (count <= 6) return "grid-cols-2 grid-rows-3 sm:grid-cols-3 sm:grid-rows-2";
+  if (count <= 8) return "grid-cols-2 grid-rows-4 sm:grid-cols-4 sm:grid-rows-2";
+  if (count === 9) return "grid-cols-3 grid-rows-3";
+  return "grid-cols-2 grid-rows-5 sm:grid-cols-5 sm:grid-rows-2";
 }
 
 function PlayPage() {
@@ -165,15 +143,147 @@ function PlayPage() {
     { key: 2, name: "", iconId: "", players: [""] },
   ]);
   const [error, setError] = useState("");
-  const [phase, setPhase] = useState<"setup" | "quiz" | "league">("setup");
+  const [phase, setPhase] = useState<Phase>("setup");
   const [solo, setSolo] = useState(true);
   const [roster, setRoster] = useState<RosterTeam[]>([]);
-  const [quiz, setQuiz] = useState<Question[] | null>(null);
+  const [quiz, setQuiz] = useState<QuizQuestion[] | null>(null);
   const [round, setRound] = useState(0);
   const [picked, setPicked] = useState<string | null>(null);
+  const [tiedTeams, setTiedTeams] = useState<RosterTeam[]>([]);
+  const [decideLeft, setDecideLeft] = useState(DECIDE_SECONDS);
+  const [playoffQuestions, setPlayoffQuestions] = useState<QuizQuestion[]>([]);
+  const [playoffRound, setPlayoffRound] = useState(0);
+  const [aliveKeys, setAliveKeys] = useState<number[]>([]);
+  const [playoffTurn, setPlayoffTurn] = useState(0);
+  const [roundMarks, setRoundMarks] = useState<Record<number, boolean>>({});
+  const [dancers, setDancers] = useState<Dancer[]>([]);
+  const [danceLeft, setDanceLeft] = useState(DANCE_SECONDS);
+  const [celebrate, setCelebrate] = useState<Celebrate | null>(null);
+  const lastQuizIds = useRef<string[]>([]);
+  const rosterRef = useRef(roster);
+  const soloRef = useRef(solo);
+  const roundMarksRef = useRef(roundMarks);
+  const hornRef = useRef(false);
+  const dancersRef = useRef<Dancer[]>([]);
+  rosterRef.current = roster;
+  soloRef.current = solo;
+  roundMarksRef.current = roundMarks;
+  dancersRef.current = dancers;
 
   const question = quiz?.[round];
   const turn = roster[round % Math.max(roster.length, 1)];
+  const playoffQuestion = playoffQuestions[playoffRound];
+  const aliveTeams = aliveKeys
+    .map((key) => roster.find((team) => team.key === key))
+    .filter((team): team is RosterTeam => team != null);
+  const playoffTeam = aliveTeams[playoffTurn];
+  const playingQuestion = phase === "quiz" || phase === "playoff";
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [phase, round, playoffRound, playoffTurn]);
+
+  useEffect(() => {
+    document.body.classList.toggle("quiz-tight", playingQuestion);
+    return () => document.body.classList.remove("quiz-tight");
+  }, [playingQuestion]);
+
+  useEffect(() => {
+    if (phase !== "quiz" || !picked || !quiz) return;
+    const timer = window.setTimeout(() => {
+      const teams = rosterRef.current;
+      const isLast = round + 1 >= quiz.length;
+      setPicked(null);
+      if (!isLast) {
+        setRound(round + 1);
+        return;
+      }
+      const tiedGroup = leadersOf(teams);
+      if (!soloRef.current && teams.length > 1 && tiedGroup.length > 1) {
+        setTiedTeams(tiedGroup);
+        setDecideLeft(DECIDE_SECONDS);
+        setPhase("decide");
+        return;
+      }
+      setPhase("league");
+    }, ANSWER_PAUSE_MS);
+    return () => window.clearTimeout(timer);
+  }, [phase, picked, quiz, round]);
+
+  useEffect(() => {
+    if (phase !== "playoff" || !picked) return;
+    const timer = window.setTimeout(() => {
+      const alive = aliveKeys;
+      const marks = roundMarksRef.current;
+      const unanswered = alive.findIndex((key) => typeof marks[key] !== "boolean");
+      setPicked(null);
+      if (unanswered >= 0) {
+        setPlayoffTurn(unanswered);
+        return;
+      }
+      const right = alive.filter((key) => marks[key]);
+      const wrong = alive.filter((key) => marks[key] === false);
+      const next = right.length > 0 && wrong.length > 0 ? right : alive;
+      if (next.length === 1) {
+        const winner = rosterRef.current.find((team) => team.key === next[0]);
+        setCelebrate({ kind: "playoff", teamName: winner?.name ?? "The team" });
+        setPhase("celebrate");
+        return;
+      }
+      if (playoffRound >= PLAYOFF_ROUNDS - 1) {
+        setCelebrate({
+          kind: "draw",
+          teams: rosterRef.current.filter((team) => next.includes(team.key)),
+        });
+        setPhase("draw-flash");
+        return;
+      }
+      roundMarksRef.current = {};
+      setAliveKeys(next);
+      setPlayoffRound(playoffRound + 1);
+      setPlayoffTurn(0);
+      setRoundMarks({});
+    }, ANSWER_PAUSE_MS);
+    return () => window.clearTimeout(timer);
+  }, [phase, picked, aliveKeys, playoffTurn, playoffRound]);
+
+  useEffect(() => {
+    if (phase !== "decide") return;
+    setDecideLeft(DECIDE_SECONDS);
+    const timer = window.setInterval(() => {
+      setDecideLeft((value) => (value <= 1 ? 0 : value - 1));
+    }, 1000);
+    return () => window.clearInterval(timer);
+  }, [phase]);
+
+  useEffect(() => {
+    if (phase !== "draw-flash") return;
+    const timer = window.setTimeout(() => setPhase("celebrate"), DRAW_FLASH_MS);
+    return () => window.clearTimeout(timer);
+  }, [phase]);
+
+  useEffect(() => {
+    if (phase !== "dance") return;
+    if (danceLeft > 0) {
+      const timer = window.setTimeout(() => setDanceLeft((value) => value - 1), 1000);
+      return () => window.clearTimeout(timer);
+    }
+    if (!hornRef.current) {
+      hornRef.current = true;
+      playAirHorn();
+    }
+    const timer = window.setTimeout(() => setPhase("dance-judge"), 1000);
+    return () => window.clearTimeout(timer);
+  }, [phase, danceLeft]);
+
+  useEffect(() => {
+    if (phase !== "dance" && phase !== "draw-flash") return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [phase]);
 
   function updateDraft(key: number, patch: Partial<Draft>) {
     setDrafts((current) => current.map((team) => (team.key === key ? { ...team, ...patch } : team)));
@@ -234,17 +344,23 @@ function PlayPage() {
       setError(problem);
       return;
     }
+    const nextQuiz = dealQuiz(lastQuizIds.current);
+    lastQuizIds.current = nextQuiz.map((item) => item.id);
+    warmAudio();
     setError("");
     setSolo(asSolo);
     setRoster(source.map((team) => ({ ...team, score: 0, asked: 0 })));
-    setQuiz(buildQuiz());
+    setQuiz(nextQuiz);
     setRound(0);
     setPicked(null);
+    setCelebrate(null);
+    setTiedTeams([]);
+    setDancers([]);
     setPhase("quiz");
   }
 
   function choose(choice: string) {
-    if (!question || picked || !turn) return;
+    if (!question || picked || !turn || phase !== "quiz") return;
     setPicked(choice);
     const correct = choice === question.answer;
     if (correct) playCheer();
@@ -256,24 +372,87 @@ function PlayPage() {
     );
   }
 
-  function next() {
-    if (!quiz) return;
-    if (round + 1 >= quiz.length) {
-      setPhase("league");
+  function choosePlayoff(choice: string) {
+    if (!playoffQuestion || picked || !playoffTeam || phase !== "playoff") return;
+    setPicked(choice);
+    const correct = choice === playoffQuestion.answer;
+    if (correct) playCheer();
+    else playFart();
+    const teamKey = playoffTeam.key;
+    const marks = { ...roundMarksRef.current, [teamKey]: correct };
+    roundMarksRef.current = marks;
+    setRoundMarks(marks);
+  }
+
+  function beginPlayoff() {
+    warmAudio();
+    const used = quiz?.map((item) => item.id) ?? [];
+    roundMarksRef.current = {};
+    setPlayoffQuestions(dealPlayoff(used, PLAYOFF_ROUNDS));
+    setPlayoffRound(0);
+    setAliveKeys(tiedTeams.map((team) => team.key));
+    setPlayoffTurn(0);
+    setRoundMarks({});
+    setPicked(null);
+    setPhase("playoff");
+  }
+
+  function beginDancePick() {
+    warmAudio();
+    dancersRef.current = [];
+    setDancers([]);
+    setPhase("dance-pick");
+  }
+
+  function selectDancer(teamKey: number, name: string) {
+    const next = [
+      ...dancersRef.current.filter((dancer) => dancer.teamKey !== teamKey),
+      { teamKey, name, squishyId: "" },
+    ];
+    const ready = tiedTeams.every((team) => next.some((dancer) => dancer.teamKey === team.key));
+    if (!ready) {
+      dancersRef.current = next;
+      setDancers(next);
       return;
     }
-    setRound((value) => value + 1);
-    setPicked(null);
+    const pool = shuffleList(squishies.filter((item) => item.image));
+    const cast = tiedTeams.map((team, index) => ({
+      teamKey: team.key,
+      name: next.find((dancer) => dancer.teamKey === team.key)?.name ?? team.players[0] ?? team.name,
+      squishyId: pool[index]?.id ?? pool[0]?.id ?? "",
+    }));
+    dancersRef.current = cast;
+    hornRef.current = false;
+    holdAudio((DANCE_SECONDS + 2) * 1000);
+    setDancers(cast);
+    setDanceLeft(DANCE_SECONDS);
+    setPhase("dance");
+  }
+
+  function crownDancer(dancer: Dancer) {
+    const team = roster.find((item) => item.key === dancer.teamKey);
+    setCelebrate({ kind: "dance", dancer: dancer.name, teamName: team?.name ?? "their team" });
+    setPhase("celebrate");
   }
 
   const ranked = [...roster].sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
   const leader = ranked[0];
-  const tied = ranked.filter((team) => team.score === leader?.score).length > 1;
 
   return (
-    <main id="main" className="mx-auto max-w-3xl px-4 py-8">
-      <p className="text-sm font-extrabold tracking-wide text-muted uppercase">Play</p>
-      <h1 className="mt-2 font-display text-5xl">Squish quiz</h1>
+    <main
+      id="main"
+      className={cn(
+        "mx-auto max-w-3xl px-4",
+        playingQuestion ? "py-3" : "py-8",
+        phase === "celebrate" && "pb-28",
+      )}
+    >
+      {playingQuestion ? null : (
+        <>
+          <p className="text-sm font-extrabold tracking-wide text-muted uppercase">Play</p>
+          <h1 className="mt-2 font-display text-5xl">Squish quiz</h1>
+        </>
+      )}
       {phase === "setup" ? (
         <Setup
           mode={mode}
@@ -303,123 +482,418 @@ function PlayPage() {
         />
       ) : null}
       {phase === "quiz" && question && turn ? (
-        <section className="mt-6" aria-live="polite">
+        <section className="mt-1" aria-live="polite">
           <ScoreStrip teams={roster} activeKey={turn.key} />
-          <div className="mt-4 flex items-center gap-3 rounded-3xl bg-butter px-4 py-3">
-            <TeamFace iconId={turn.iconId} />
-            <div className="min-w-0">
-              <p className="text-sm font-bold">{solo || roster.length === 1 ? "Your turn" : "Your team's turn"}</p>
-              <p className="font-display text-2xl leading-tight break-words">{turn.name}</p>
-              {solo ? null : (
-                <p className="text-sm font-bold break-words">{turn.players.join(", ")}. One answer for the team.</p>
-              )}
-            </div>
-            <p className="ml-auto shrink-0 text-sm font-bold tabular-nums">
-              {round + 1} / {quiz?.length}
-            </p>
-          </div>
-          <div className="mt-4 rounded-3xl bg-surface p-4 shadow-card">
-            <h2 className="font-display text-3xl">{question.prompt}</h2>
-            {question.image ? (
-              <div className="mx-auto mt-4 aspect-square w-full max-w-xs overflow-hidden rounded-2xl">
-                <SquishyPhoto item={question.image} alt={question.prompt} eager />
-              </div>
-            ) : null}
-            <div className="mt-4 grid gap-2">
-              {question.choices.map((choice) => {
-                const correct = picked && choice === question.answer;
-                const wrong = picked === choice && choice !== question.answer;
-                return (
-                  <button
-                    key={choice}
-                    type="button"
-                    className={cn(
-                      "min-h-11 rounded-2xl px-4 text-left font-bold break-words shadow-card",
-                      correct ? "bg-mint text-ink" : wrong ? "bg-blush text-ink" : "bg-cream text-ink",
-                    )}
-                    onClick={() => choose(choice)}
-                    disabled={picked != null}
-                  >
-                    {choice}
-                  </button>
-                );
-              })}
-            </div>
-            {picked ? (
-              <Button variant="ink" className="mt-4" onClick={next}>
-                {quiz && round + 1 === quiz.length
-                  ? solo
-                    ? "See your score"
-                    : "See the league"
-                  : roster.length === 1
-                    ? "Next"
-                    : "Next team"}
-              </Button>
-            ) : null}
-          </div>
+          <TurnBanner
+            turn={turn}
+            solo={solo}
+            teamCount={roster.length}
+            label={solo || roster.length === 1 ? "Your turn" : "Your team's turn"}
+            detail={solo ? null : `${turn.players.join(", ")}. One answer for the team.`}
+            progress={`${round + 1} / ${quiz?.length ?? QUIZ_LENGTH}`}
+          />
+          <AnswerBoard question={question} picked={picked} onChoose={choose} />
         </section>
       ) : null}
       {phase === "league" && leader ? (
+        <League
+          solo={solo}
+          leader={leader}
+          ranked={ranked}
+          onAgain={() =>
+            start(
+              roster.map((team) => ({
+                key: team.key,
+                name: team.name,
+                iconId: team.iconId,
+                players: [...team.players],
+              })),
+              solo,
+            )
+          }
+          onSetup={() => setPhase("setup")}
+        />
+      ) : null}
+      {phase === "decide" ? (
         <section className="mt-6">
-          {solo ? (
-            <div className="rounded-3xl bg-butter p-6">
-              <h2 className="font-display text-4xl">
-                {leader.score} out of {leader.asked}
-              </h2>
-              <p className="mt-2 text-lg">
-                Nice work, {leader.name}. {cheer(leader.score, leader.asked)}
-              </p>
-            </div>
-          ) : (
-            <div className="rounded-3xl bg-butter p-6">
-              <h2 className="font-display text-4xl">{tied ? "It's a tie at the top!" : `${leader.name} wins!`}</h2>
-              <p className="mt-2 text-lg">Twenty questions. One answer counted for each team.</p>
-            </div>
-          )}
-          {solo ? null : (
-            <ol className="mt-4 grid gap-3">
-              {ranked.map((team, index) => (
-                <li key={team.key} className="flex items-center gap-3 rounded-3xl bg-surface p-3 shadow-card">
-                  <span className="grid size-11 shrink-0 place-items-center rounded-full bg-cream font-display text-2xl">
-                    {index + 1}
-                  </span>
-                  <TeamFace iconId={team.iconId} />
-                  <div className="min-w-0 flex-1">
-                    <p className="font-display text-2xl leading-tight break-words">{team.name}</p>
-                    <p className="text-sm font-bold break-words">{team.players.join(", ")}</p>
-                    <p className="text-sm text-muted tabular-nums">
-                      {team.score} right out of {team.asked}
-                    </p>
+          <div className="rounded-3xl bg-butter p-5">
+            <p className="font-display text-5xl tabular-nums" aria-hidden="true">
+              {decideLeft}
+            </p>
+            <h2 className="mt-1 font-display text-4xl">
+              {leader && leader.score === 0 ? "It's a tie at 0!" : "It's a tie at the top!"}
+            </h2>
+            <p className="mt-2 text-lg" aria-live="polite">
+              {decideLeft > 0
+                ? `${joinTeams(tiedTeams.map((team) => team.name))} are tied${leader?.score === 0 ? " on zero" : ""}. You have ${decideLeft} seconds to choose a Squishy Quiz Playoff or a Dance Off.`
+                : "Time is up. Choose a Squishy Quiz Playoff or a Dance Off."}
+            </p>
+          </div>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            <Button variant="ink" className="min-h-14 text-base" onClick={beginPlayoff}>
+              Squishy Quiz Playoff
+            </Button>
+            <Button variant="butter" className="min-h-14 text-base" onClick={beginDancePick}>
+              Dance Off
+            </Button>
+          </div>
+          <ScoreList teams={ranked} />
+        </section>
+      ) : null}
+      {phase === "playoff" && playoffQuestion && playoffTeam ? (
+        <section className="mt-1" aria-live="polite">
+          <ScoreStrip teams={aliveTeams} activeKey={playoffTeam.key} />
+          <TurnBanner
+            turn={playoffTeam}
+            solo={false}
+            teamCount={aliveTeams.length}
+            label="Playoff"
+            detail={`${playoffTeam.players.join(", ")}. One answer for the team.`}
+            progress={`Round ${playoffRound + 1} of ${PLAYOFF_ROUNDS}`}
+          />
+          <AnswerBoard question={playoffQuestion} picked={picked} onChoose={choosePlayoff} />
+        </section>
+      ) : null}
+      {phase === "dance-pick" ? (
+        <section className="mt-6">
+          <h2 className="font-display text-4xl">There will now be a dance off.</h2>
+          <p className="mt-2 text-lg">Each team picks one dancer. Their names and a squishy show up together, then the dance begins.</p>
+          <div className="mt-4 grid gap-4">
+            {tiedTeams.map((team) => {
+              const chosen = dancers.find((dancer) => dancer.teamKey === team.key)?.name;
+              return (
+                <fieldset key={team.key} className="rounded-3xl bg-surface p-4 shadow-card">
+                  <legend className="px-1 font-display text-2xl">{team.name}</legend>
+                  <div className="mt-2 grid gap-2">
+                    {team.players.map((player) => (
+                      <button
+                        key={player}
+                        type="button"
+                        aria-pressed={chosen === player}
+                        className={cn(
+                          "min-h-11 rounded-full px-4 text-left font-bold",
+                          chosen === player ? "bg-ink text-cream" : "bg-cream text-ink",
+                        )}
+                        onClick={() => selectDancer(team.key, player)}
+                      >
+                        {player}
+                      </button>
+                    ))}
                   </div>
-                  <p className="font-display text-4xl tabular-nums">{team.score}</p>
-                </li>
-              ))}
-            </ol>
-          )}
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Button
-              variant="ink"
-              onClick={() =>
-                start(
-                  roster.map((team) => ({
-                    key: team.key,
-                    name: team.name,
-                    iconId: team.iconId,
-                    players: [...team.players],
-                  })),
-                  solo,
-                )
-              }
-            >
-              Play again
-            </Button>
-            <Button variant="surface" onClick={() => setPhase("setup")}>
-              {solo ? "Change name" : "Change teams"}
-            </Button>
+                </fieldset>
+              );
+            })}
           </div>
         </section>
       ) : null}
+      {phase === "dance" ? (
+        <DanceStage dancers={dancers} teams={roster} seconds={danceLeft} />
+      ) : null}
+      {phase === "dance-judge" ? (
+        <section className="mt-6">
+          <h2 className="font-display text-4xl">Who won the dance off?</h2>
+          <p className="mt-2 text-lg">Pick the winning dancer.</p>
+          <div className="mt-4 grid gap-2">
+            {dancers.map((dancer) => {
+              const team = roster.find((item) => item.key === dancer.teamKey);
+              return (
+                <Button key={dancer.teamKey} variant="surface" className="justify-start" onClick={() => crownDancer(dancer)}>
+                  {dancer.name}
+                  {team ? ` · ${team.name}` : ""}
+                </Button>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
+      {phase === "draw-flash" ? (
+        <div className="fixed inset-0 z-50 grid place-items-center bg-ink" role="status" aria-label="Draw">
+          <p className="draw-flash draw-word font-display text-butter">DRAW</p>
+        </div>
+      ) : null}
+      {phase === "celebrate" && celebrate ? (
+        <CelebrateScreen celebrate={celebrate} />
+      ) : null}
     </main>
+  );
+}
+
+function AnswerBoard({
+  question,
+  picked,
+  onChoose,
+}: {
+  question: QuizQuestion;
+  picked: string | null;
+  onChoose: (choice: string) => void;
+}) {
+  const image = questionImage(question);
+  return (
+    <div className="mt-3 rounded-3xl bg-surface p-3 shadow-card">
+      <h2 className="font-display text-2xl leading-tight">{question.prompt}</h2>
+      <div className={cn("mt-3 grid items-stretch gap-2", image ? "grid-cols-[minmax(7.5rem,42%)_minmax(0,1fr)]" : "grid-cols-1")}>
+        {image ? (
+          <div className="relative min-h-32 overflow-hidden rounded-2xl">
+            <div className="absolute inset-0">
+              <SquishyPhoto item={image} alt={question.prompt} eager />
+            </div>
+          </div>
+        ) : null}
+        <div className="grid content-start gap-2">
+          {question.choices.map((choice) => {
+            const correct = picked != null && choice === question.answer;
+            const wrong = picked === choice && choice !== question.answer;
+            return (
+              <button
+                key={choice}
+                type="button"
+                className={cn(
+                  "min-h-11 rounded-2xl px-3 py-2 text-left text-sm font-bold break-words shadow-card sm:text-base",
+                  correct ? "bg-mint text-ink" : wrong ? "bg-blush text-ink" : "bg-cream text-ink",
+                )}
+                onClick={() => onChoose(choice)}
+                disabled={picked != null}
+              >
+                {choice}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      {picked ? (
+        <p className="mt-2 font-display text-xl" role="status">
+          {picked === question.answer ? "Yes!" : `It was ${question.answer}.`}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
+function TurnBanner({
+  turn,
+  solo,
+  teamCount,
+  label,
+  detail,
+  progress,
+}: {
+  turn: RosterTeam;
+  solo: boolean;
+  teamCount: number;
+  label: string;
+  detail: string | null;
+  progress: string;
+}) {
+  return (
+    <div className="mt-3 flex items-center gap-3 rounded-3xl bg-butter px-3 py-2">
+      <TeamFace iconId={turn.iconId} />
+      <div className="min-w-0">
+        <p className="text-sm font-bold">{label}</p>
+        <p className="truncate font-display text-xl leading-tight">{turn.name}</p>
+        {solo || teamCount === 1 || !detail ? null : <p className="truncate text-sm font-bold">{detail}</p>}
+      </div>
+      <p className="ml-auto shrink-0 text-sm font-bold tabular-nums">{progress}</p>
+    </div>
+  );
+}
+
+function League({
+  solo,
+  leader,
+  ranked,
+  onAgain,
+  onSetup,
+}: {
+  solo: boolean;
+  leader: RosterTeam;
+  ranked: RosterTeam[];
+  onAgain: () => void;
+  onSetup: () => void;
+}) {
+  return (
+    <section className="mt-6">
+      {solo ? (
+        <div className="rounded-3xl bg-butter p-6">
+          <h2 className="font-display text-4xl">
+            {leader.score} out of {leader.asked}
+          </h2>
+          <p className="mt-2 text-lg">
+            Nice work, {leader.name}. {cheer(leader.score, leader.asked)}
+          </p>
+        </div>
+      ) : (
+        <div className="rounded-3xl bg-butter p-6">
+          <h2 className="font-display text-4xl">{leader.name} wins!</h2>
+          <p className="mt-2 text-lg">Ten questions. One answer counted for each team.</p>
+        </div>
+      )}
+      {solo ? null : <ScoreList teams={ranked} />}
+      <div className="mt-4 flex flex-wrap gap-2">
+        <Button variant="ink" onClick={onAgain}>
+          Play again
+        </Button>
+        <Button variant="surface" onClick={onSetup}>
+          {solo ? "Change name" : "Change teams"}
+        </Button>
+      </div>
+    </section>
+  );
+}
+
+function ScoreList({ teams }: { teams: RosterTeam[] }) {
+  return (
+    <ol className="mt-4 grid gap-3">
+      {teams.map((team, index) => (
+        <li key={team.key} className="flex items-center gap-3 rounded-3xl bg-surface p-3 shadow-card">
+          <span className="grid size-11 shrink-0 place-items-center rounded-full bg-cream font-display text-2xl">
+            {index + 1}
+          </span>
+          <TeamFace iconId={team.iconId} />
+          <div className="min-w-0 flex-1">
+            <p className="font-display text-2xl leading-tight break-words">{team.name}</p>
+            <p className="text-sm font-bold break-words">{team.players.join(", ")}</p>
+            <p className="text-sm text-muted tabular-nums">
+              {team.score} right out of {team.asked}
+            </p>
+          </div>
+          <p className="font-display text-4xl tabular-nums">{team.score}</p>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+function CelebrateScreen({ celebrate }: { celebrate: Celebrate }) {
+  return (
+    <section className="mt-6">
+      {celebrate.kind === "playoff" ? (
+        <h2 className="font-display text-5xl">{celebrate.teamName} has won!</h2>
+      ) : null}
+      {celebrate.kind === "dance" ? (
+        <h2 className="font-display text-4xl break-words">
+          {celebrate.dancer}'s incredible dancing won it for {celebrate.teamName}
+        </h2>
+      ) : null}
+      {celebrate.kind === "draw" ? (
+        <div>
+          <h2 className="font-display text-4xl break-words">{joinTeams(celebrate.teams.map((team) => team.name))} WIN!</h2>
+          <ul className="mt-4 grid gap-3">
+            {celebrate.teams.map((team) => (
+              <li key={team.key} className="rounded-3xl bg-surface p-4 shadow-card">
+                <p className="font-display text-3xl break-words">{team.name}</p>
+                <ul className="mt-1">
+                  {team.players.map((player) => (
+                    <li key={player} className="text-lg font-bold break-words">
+                      {player}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+      <p className="mt-6">
+        <Link to="/" search={EMPTY_SEARCH} className="font-bold underline">
+          Leave the quiz
+        </Link>
+      </p>
+      <p
+        className="congrats-flash fixed inset-x-0 bottom-0 z-30 bg-ink px-4 py-4 text-center font-display text-3xl tracking-wide text-butter sm:text-5xl"
+        role="status"
+      >
+        CONGRATULATIONS!
+      </p>
+    </section>
+  );
+}
+
+function rowClass(count: number) {
+  if (count <= 1) return "grid-cols-1";
+  if (count === 2) return "grid-cols-2";
+  if (count === 3) return "grid-cols-3";
+  if (count === 4) return "grid-cols-4";
+  return "grid-cols-5";
+}
+
+function DanceStage({ dancers, teams, seconds }: { dancers: Dancer[]; teams: RosterTeam[]; seconds: number }) {
+  const big = seconds <= 10;
+
+  function card(dancer: Dancer, index: number) {
+    const team = teams.find((item) => item.key === dancer.teamKey);
+    const squishy = getSquishy(dancer.squishyId);
+    return (
+      <div
+        key={dancer.teamKey}
+        className="flex h-full min-h-0 w-full min-w-0 flex-col items-center justify-center overflow-hidden rounded-2xl bg-surface px-2 py-2 shadow-card"
+      >
+        <p className="max-w-full text-center font-display text-sm leading-tight break-words sm:text-2xl">{dancer.name}</p>
+        {team ? <p className="max-w-full truncate text-center text-sm font-bold text-muted">{team.name}</p> : null}
+        {squishy ? (
+          <div className="mt-1 flex w-full min-h-0 flex-1 items-center justify-center">
+            <div
+              className="squish-dance aspect-square w-full max-h-full max-w-full overflow-hidden rounded-2xl"
+              style={{ animationDelay: `${index * 0.12}s` }}
+            >
+              <SquishyPhoto item={squishy} alt="" eager />
+            </div>
+          </div>
+        ) : null}
+      </div>
+    );
+  }
+
+  let body;
+  if (big && dancers.length === 2) {
+    body = (
+      <div className="grid h-full min-h-0 min-w-0 grid-cols-3 items-stretch gap-2 px-3 pt-16 pb-3">
+        {card(dancers[0] as Dancer, 0)}
+        <div className="flex items-center justify-center overflow-hidden">
+          <p className="dance-count font-display tabular-nums" aria-hidden="true">
+            {seconds}
+          </p>
+        </div>
+        {card(dancers[1] as Dancer, 1)}
+      </div>
+    );
+  } else if (big) {
+    const mid = Math.ceil(dancers.length / 2);
+    const top = dancers.slice(0, mid);
+    const bottom = dancers.slice(mid);
+    body = (
+      <div className="flex h-full flex-col">
+        <div className={cn("grid min-h-0 flex-1 gap-2 px-3 pt-16", rowClass(top.length))}>
+          {top.map((dancer, index) => card(dancer, index))}
+        </div>
+        <div className="grid h-2/5 shrink-0 place-items-center overflow-hidden">
+          <p className="dance-count dance-count-band font-display tabular-nums" aria-hidden="true">
+            {seconds}
+          </p>
+        </div>
+        <div className={cn("grid min-h-0 flex-1 gap-2 px-3 pb-3", rowClass(bottom.length))}>
+          {bottom.map((dancer, index) => card(dancer, index + mid))}
+        </div>
+      </div>
+    );
+  } else {
+    body = (
+      <div className={cn("grid h-full min-h-0 min-w-0 gap-2 px-3 pt-16 pb-3", danceGridClass(dancers.length))}>
+        {dancers.map((dancer, index) => card(dancer, index))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 overflow-hidden bg-cream text-ink">
+      <p className="absolute top-3 left-3 z-20 rounded-full bg-butter px-3 py-2 text-sm font-bold">Dance off</p>
+      <p
+        className="absolute top-3 right-3 z-20 grid size-16 place-items-center rounded-2xl bg-ink font-display text-3xl text-cream tabular-nums"
+        aria-label={`${seconds} seconds left`}
+      >
+        {seconds}
+      </p>
+      {body}
+    </div>
   );
 }
 
@@ -461,8 +935,8 @@ function Setup({
   return (
     <div className="mt-4">
       <p className="text-lg">
-        Twenty questions. Play by yourself, or with teams of up to 4. Your team can play against as many as 9 other
-        teams, 40 players in all. A team gives one answer together.
+        Ten questions, picked from a bank of 100, so the next game is different. Play by yourself, or with teams of up
+        to 4. Your team can play against as many as 9 other teams, 40 players in all. A team gives one answer together.
       </p>
       <div className="mt-4 grid grid-cols-2 gap-2 rounded-full bg-cream-deep p-1" role="group" aria-label="Who is playing">
         <button

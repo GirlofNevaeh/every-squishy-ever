@@ -1,4 +1,6 @@
 let audio: AudioContext | null = null;
+let keepalive: OscillatorNode | null = null;
+let keepaliveTimer: number | null = null;
 
 function context() {
   const Ctx = window.AudioContext || (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
@@ -20,6 +22,31 @@ function tone(ctx: AudioContext, frequency: number, start: number, duration: num
   gain.connect(ctx.destination);
   osc.start(start);
   osc.stop(start + duration + 0.02);
+}
+
+export function warmAudio() {
+  context();
+}
+
+export function holdAudio(ms: number) {
+  const ctx = context();
+  if (!ctx) return;
+  if (!keepalive) {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.frequency.value = 1;
+    gain.gain.value = 0.0001;
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    keepalive = osc;
+  }
+  if (keepaliveTimer) window.clearTimeout(keepaliveTimer);
+  keepaliveTimer = window.setTimeout(() => {
+    keepalive?.stop();
+    keepalive = null;
+    keepaliveTimer = null;
+  }, ms);
 }
 
 export function playCheer() {
@@ -88,4 +115,44 @@ export function playFart() {
   blatGain.connect(ctx.destination);
   blat.start(now);
   blat.stop(now + 0.56);
+}
+
+export function playAirHorn() {
+  const ctx = context();
+  if (!ctx) return;
+  const now = ctx.currentTime;
+  const stop = now + 1;
+  const master = ctx.createGain();
+  master.gain.setValueAtTime(0.0001, now);
+  master.gain.exponentialRampToValueAtTime(0.55, now + 0.02);
+  master.gain.setValueAtTime(0.55, stop - 0.06);
+  master.gain.exponentialRampToValueAtTime(0.0001, stop);
+  master.connect(ctx.destination);
+
+  for (const frequency of [415, 523, 622]) {
+    const osc = ctx.createOscillator();
+    osc.type = "sawtooth";
+    osc.frequency.setValueAtTime(frequency, now);
+    osc.connect(master);
+    osc.start(now);
+    osc.stop(stop + 0.02);
+  }
+
+  const length = Math.floor(ctx.sampleRate);
+  const noise = ctx.createBuffer(1, length, ctx.sampleRate);
+  const data = noise.getChannelData(0);
+  for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+  const source = ctx.createBufferSource();
+  const filter = ctx.createBiquadFilter();
+  const noiseGain = ctx.createGain();
+  source.buffer = noise;
+  filter.type = "bandpass";
+  filter.frequency.value = 1400;
+  filter.Q.value = 0.7;
+  noiseGain.gain.value = 0.35;
+  source.connect(filter);
+  filter.connect(noiseGain);
+  noiseGain.connect(master);
+  source.start(now);
+  source.stop(stop);
 }
