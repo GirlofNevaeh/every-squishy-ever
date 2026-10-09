@@ -66,7 +66,9 @@ function Home() {
     <main id="main" className="mx-auto max-w-6xl px-4 py-8">
       <section className="grid items-center gap-8 lg:grid-cols-[1.3fr_0.7fr]">
         <div>
-          <p className="hero-rise font-display text-2xl text-ink sm:text-3xl">A Squishy Encyclopaedia For Nancy</p>
+          <p className="hero-rise max-w-full font-display leading-none whitespace-nowrap text-ink [font-size:clamp(0.72rem,3.55vw,1.7rem)]">
+            A Squishy Encyclopaedia For <span className="text-swatch-melon">N</span>ancy
+          </p>
           <h1 className="hero-rise-2 mt-2 font-display text-4xl text-ink sm:text-5xl">Every Squishy Ever</h1>
           <p className="hero-rise-3 mt-3 max-w-xl text-lg text-ink">See the toy, learn the squish, then find it.</p>
           <div className="mt-6 max-w-xl">

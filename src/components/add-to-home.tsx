@@ -69,7 +69,6 @@ async function saveShelfOffline(onProgress?: (done: number, total: number) => vo
     "/",
     "/play",
     "/top",
-    "/color",
     "/about",
     "/suggest",
     "/favicon.svg",

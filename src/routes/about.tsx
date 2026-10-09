@@ -38,8 +38,8 @@ function About() {
         </p>
         <p>
           Try the quiz by yourself, or with teams of up to 4 players. You can play against as many as 9 other teams.
-          Each team gives one answer. Coloring sheets are there if you would rather color a cube, a cheese wedge, or a
-          bear. The Add to iPhone or Add to iPad button at the bottom saves the shelf so you can open it offline.
+          Each team gives one answer. The Add to iPhone or Add to iPad button at the bottom saves the shelf so you can
+          open it offline.
         </p>
       </div>
       <p className="mt-8 flex flex-wrap gap-4 font-bold">
@@ -48,9 +48,6 @@ function About() {
         </Link>
         <Link to="/play" className="underline">
           Take the quiz
-        </Link>
-        <Link to="/color" className="underline">
-          Color a sheet
         </Link>
       </p>
     </main>

@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as ColorRouteImport } from './routes/color'
 import { Route as PlayRouteImport } from './routes/play'
 import { Route as SuggestRouteImport } from './routes/suggest'
 import { Route as TopRouteImport } from './routes/top'
@@ -25,11 +24,6 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ColorRoute = ColorRouteImport.update({
-  id: '/color',
-  path: '/color',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlayRoute = PlayRouteImport.update({
@@ -56,7 +50,6 @@ const SquishyIdRoute = SquishyIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/color': typeof ColorRoute
   '/play': typeof PlayRoute
   '/suggest': typeof SuggestRoute
   '/top': typeof TopRoute
@@ -65,7 +58,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/color': typeof ColorRoute
   '/play': typeof PlayRoute
   '/suggest': typeof SuggestRoute
   '/top': typeof TopRoute
@@ -75,7 +67,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/color': typeof ColorRoute
   '/play': typeof PlayRoute
   '/suggest': typeof SuggestRoute
   '/top': typeof TopRoute
@@ -83,25 +74,16 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    '/' | '/about' | '/color' | '/play' | '/suggest' | '/top' | '/squishy/$id'
+  fullPaths: '/' | '/about' | '/play' | '/suggest' | '/top' | '/squishy/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/color' | '/play' | '/suggest' | '/top' | '/squishy/$id'
+  to: '/' | '/about' | '/play' | '/suggest' | '/top' | '/squishy/$id'
   id:
-    | '__root__'
-    | '/'
-    | '/about'
-    | '/color'
-    | '/play'
-    | '/suggest'
-    | '/top'
-    | '/squishy/$id'
+    '__root__' | '/' | '/about' | '/play' | '/suggest' | '/top' | '/squishy/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  ColorRoute: typeof ColorRoute
   PlayRoute: typeof PlayRoute
   SuggestRoute: typeof SuggestRoute
   TopRoute: typeof TopRoute
@@ -122,13 +104,6 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/color': {
-      id: '/color'
-      path: '/color'
-      fullPath: '/color'
-      preLoaderRoute: typeof ColorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/play': {
@@ -165,7 +140,6 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  ColorRoute: ColorRoute,
   PlayRoute: PlayRoute,
   SuggestRoute: SuggestRoute,
   TopRoute: TopRoute,
