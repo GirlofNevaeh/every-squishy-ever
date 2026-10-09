@@ -18,7 +18,7 @@ import { holdAudio, playAirHorn, playCheer, playFart, warmAudio } from "@/lib/qu
 export const Route = createFileRoute("/play")({
   head: () => ({
     meta: [
-      { title: "Squish quiz · Every Squishy Ever" },
+      { title: "Play Squishy Quiz · Every Squishy Ever" },
       {
         name: "description",
         content: "A quick 10-question quiz or a 25-question mega quiz, for one player or up to 10 teams of 4.",
@@ -452,8 +452,7 @@ function PlayPage() {
     >
       {playingQuestion ? null : (
         <>
-          <p className="text-sm font-extrabold tracking-wide text-muted uppercase">Play</p>
-          <h1 className="mt-2 font-display text-5xl">Squish quiz</h1>
+          <h1 className="mt-2 font-display text-5xl">Play Squishy Quiz</h1>
         </>
       )}
       {phase === "setup" ? (
