@@ -82,8 +82,8 @@ function buildBank(): QuizQuestion[] {
     } else if (slot === 2) {
       added = add(
         item,
-        "shelf",
-        `Which shelf is the ${item.name} on?`,
+        "category",
+        `In which category is the ${item.name}?`,
         item.category,
         categories.filter((category) => category !== item.category),
       );
