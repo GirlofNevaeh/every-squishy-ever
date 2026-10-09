@@ -27,14 +27,12 @@ function tone(ctx: AudioContext, frequency: number, start: number, duration: num
 function withSound(run: (ctx: AudioContext, now: number) => void) {
   const ctx = context();
   if (!ctx) return;
-  const play = () => run(ctx, ctx.currentTime + 0.02);
-  if (ctx.state === "running") {
-    play();
-    return;
+  if (ctx.state === "suspended") void ctx.resume();
+  try {
+    run(ctx, ctx.currentTime + 0.03);
+  } catch {
+    // A failed ramp should not stop the next sound.
   }
-  void ctx.resume().then(() => {
-    if (ctx.state === "running") play();
-  });
 }
 
 export function warmAudio() {
@@ -89,85 +87,56 @@ export function playCheer() {
 
 export function playFart() {
   withSound((ctx, now) => {
-    const duration = 0.9;
+    const duration = 0.7;
     const length = Math.floor(ctx.sampleRate * duration);
     const noise = ctx.createBuffer(1, length, ctx.sampleRate);
     const data = noise.getChannelData(0);
     let brown = 0;
-    let lip = 0;
+    let phase = 0;
     for (let i = 0; i < data.length; i++) {
       const t = i / ctx.sampleRate;
-      const flutter = 34 * Math.exp(-t * 1.7);
-      lip += flutter / ctx.sampleRate;
-      const mouth = Math.sin(2 * Math.PI * lip);
-      const rasp = mouth > 0.2 ? 1 : mouth > -0.05 ? 0.22 : 0.04;
-      brown = (brown + (Math.random() * 2 - 1) * 0.12) * 0.96;
-      const bubble = Math.random() < 0.012 ? (Math.random() * 2 - 1) * (1 - t) : 0;
-      data[i] = Math.max(-1, Math.min(1, brown * 2.8 * rasp + bubble * 0.7));
+      phase += ((46 - t * 24) / ctx.sampleRate) * Math.PI * 2;
+      const lip = Math.sin(phase);
+      const gate = lip > 0.05 ? 1 : 0.12;
+      const white = Math.random() * 2 - 1;
+      brown = brown * 0.8 + white * 0.2;
+      data[i] = (brown * 1.4 + white * 0.45) * gate;
     }
 
     const source = ctx.createBufferSource();
     const filter = ctx.createBiquadFilter();
     const gain = ctx.createGain();
     source.buffer = noise;
-    filter.type = "lowpass";
-    filter.Q.value = 6;
-    filter.frequency.setValueAtTime(160, now);
-    filter.frequency.exponentialRampToValueAtTime(48, now + 0.72);
-    gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(0.8, now + 0.025);
-    gain.gain.exponentialRampToValueAtTime(0.35, now + 0.45);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+    filter.type = "bandpass";
+    filter.Q.value = 0.7;
+    filter.frequency.setValueAtTime(720, now);
+    filter.frequency.exponentialRampToValueAtTime(180, now + 0.55);
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.exponentialRampToValueAtTime(0.9, now + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
     source.connect(filter);
     filter.connect(gain);
     gain.connect(ctx.destination);
     source.start(now);
-    source.stop(now + duration);
+    source.stop(now + duration + 0.02);
 
-    const body = ctx.createOscillator();
-    const bodyFilter = ctx.createBiquadFilter();
-    const bodyGain = ctx.createGain();
-    body.type = "square";
-    body.frequency.setValueAtTime(78, now);
-    body.frequency.exponentialRampToValueAtTime(32, now + 0.62);
-    bodyFilter.type = "lowpass";
-    bodyFilter.frequency.setValueAtTime(180, now);
-    bodyFilter.frequency.exponentialRampToValueAtTime(60, now + 0.62);
-    bodyGain.gain.setValueAtTime(0.0001, now);
-    bodyGain.gain.exponentialRampToValueAtTime(0.18, now + 0.03);
-    bodyGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.66);
-    body.connect(bodyFilter);
-    bodyFilter.connect(bodyGain);
-    bodyGain.connect(ctx.destination);
-    body.start(now);
-    body.stop(now + 0.68);
-
-    const puffAt = now + 0.62;
-    const puffLength = Math.floor(ctx.sampleRate * 0.22);
-    const puffBuffer = ctx.createBuffer(1, puffLength, ctx.sampleRate);
-    const puffData = puffBuffer.getChannelData(0);
-    let puff = 0;
-    for (let i = 0; i < puffData.length; i++) {
-      const t = i / ctx.sampleRate;
-      puff = (puff + (Math.random() * 2 - 1) * 0.2) * 0.9;
-      const flap = Math.sin(2 * Math.PI * 16 * t) > 0 ? 1 : 0.15;
-      puffData[i] = puff * flap;
+    for (const [startHz, endHz, volume] of [
+      [150, 62, 0.28],
+      [300, 124, 0.16],
+    ] as const) {
+      const osc = ctx.createOscillator();
+      const oscGain = ctx.createGain();
+      osc.type = "square";
+      osc.frequency.setValueAtTime(startHz, now);
+      osc.frequency.exponentialRampToValueAtTime(endHz, now + 0.55);
+      oscGain.gain.setValueAtTime(0.001, now);
+      oscGain.gain.exponentialRampToValueAtTime(volume, now + 0.025);
+      oscGain.gain.exponentialRampToValueAtTime(0.001, now + 0.58);
+      osc.connect(oscGain);
+      oscGain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.6);
     }
-    const puffSource = ctx.createBufferSource();
-    const puffFilter = ctx.createBiquadFilter();
-    const puffGain = ctx.createGain();
-    puffSource.buffer = puffBuffer;
-    puffFilter.type = "lowpass";
-    puffFilter.frequency.setValueAtTime(140, puffAt);
-    puffFilter.frequency.exponentialRampToValueAtTime(50, puffAt + 0.2);
-    puffGain.gain.setValueAtTime(0.0001, puffAt);
-    puffGain.gain.exponentialRampToValueAtTime(0.55, puffAt + 0.02);
-    puffGain.gain.exponentialRampToValueAtTime(0.0001, puffAt + 0.2);
-    puffSource.connect(puffFilter);
-    puffFilter.connect(puffGain);
-    puffGain.connect(ctx.destination);
-    puffSource.start(puffAt);
-    puffSource.stop(puffAt + 0.22);
   });
 }
 
