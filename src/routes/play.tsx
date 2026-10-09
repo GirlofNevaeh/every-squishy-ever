@@ -452,7 +452,9 @@ function PlayPage() {
     >
       {playingQuestion ? null : (
         <>
-          <h1 className="mt-2 font-display text-5xl">Play Squishy Quiz</h1>
+          <h1 className="mt-2 max-w-full font-display leading-none whitespace-nowrap text-ink [font-size:clamp(1.35rem,7.4vw,3rem)]">
+            Play Squishy Quiz
+          </h1>
         </>
       )}
       {phase === "setup" ? (
