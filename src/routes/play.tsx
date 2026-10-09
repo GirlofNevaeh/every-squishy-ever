@@ -1004,7 +1004,7 @@ function Setup({
             value={soloName}
             maxLength={24}
             onChange={(event) => onSoloName(event.target.value)}
-            placeholder="Sam"
+            placeholder="Nancy"
             className="mt-1 min-h-11 w-full rounded-full bg-cream px-4 text-ink shadow-card"
           />
           <p className="mt-3 text-sm font-bold" id="solo-icon">
@@ -1043,7 +1043,7 @@ function Setup({
                       maxLength={24}
                       aria-label={`Player ${playerIndex + 1} on team ${index + 1}`}
                       onChange={(event) => onPlayer(team.key, playerIndex, event.target.value)}
-                      placeholder={playerIndex === 0 ? "Sam" : "Another player"}
+                      placeholder={playerIndex === 0 ? "Nancy" : "Another player"}
                       className="min-h-11 min-w-0 flex-1 rounded-full bg-cream px-4 text-ink shadow-card"
                     />
                     {team.players.length > 1 ? (
