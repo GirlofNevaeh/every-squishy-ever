@@ -76,7 +76,7 @@ function Home() {
               value={search.q}
               onChange={(q) => update({ ...search, q })}
             />
-            <p className="mt-2 hidden text-sm text-muted sm:block">Type a name for suggestions. Press / to jump here.</p>
+            <p className="mt-2 hidden text-sm text-muted sm:block">Type a name, then press Search.</p>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-3" aria-hidden="true">

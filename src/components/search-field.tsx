@@ -17,13 +17,20 @@ export function SearchField({ id, value, onChange, label, large = false }: Searc
   const boxRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
-  const matches = useMemo(() => suggestSquishies(value), [value]);
-  const shown = open && value.trim().length > 0;
+  const [moved, setMoved] = useState(false);
+  const [draft, setDraft] = useState(value);
+  const matches = useMemo(() => suggestSquishies(draft), [draft]);
+  const shown = open && draft.trim().length > 0;
   const current = matches[active];
 
   useEffect(() => {
-    setActive(0);
+    setDraft(value);
   }, [value]);
+
+  useEffect(() => {
+    setActive(0);
+    setMoved(false);
+  }, [draft]);
 
   useEffect(() => {
     if (!shown) return;
@@ -34,14 +41,16 @@ export function SearchField({ id, value, onChange, label, large = false }: Searc
     return () => document.removeEventListener("pointerdown", onPointer);
   }, [shown]);
 
-  function choose(name: string) {
-    onChange(name);
+  function send(next = draft) {
+    setDraft(next);
+    onChange(next);
     setOpen(false);
   }
 
   function onKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key === "ArrowDown") {
       event.preventDefault();
+      setMoved(true);
       if (!shown) {
         setOpen(true);
         setActive(0);
@@ -52,6 +61,7 @@ export function SearchField({ id, value, onChange, label, large = false }: Searc
     }
     if (event.key === "ArrowUp") {
       event.preventDefault();
+      setMoved(true);
       if (!shown) {
         setOpen(true);
         setActive(0);
@@ -64,15 +74,22 @@ export function SearchField({ id, value, onChange, label, large = false }: Searc
       setOpen(false);
       return;
     }
-    if (event.key === "Enter" && shown && current) {
+    if (event.key === "Enter" && shown && moved && current) {
       event.preventDefault();
-      choose(current.name);
+      send(current.name);
     }
   }
 
   return (
     <div ref={boxRef} className="relative min-w-0">
-      <form role="search" className="relative" onSubmit={(event) => event.preventDefault()}>
+      <form
+        role="search"
+        className="relative"
+        onSubmit={(event) => {
+          event.preventDefault();
+          send();
+        }}
+      >
         <label htmlFor={id} className="sr-only">
           {label}
         </label>
@@ -84,13 +101,14 @@ export function SearchField({ id, value, onChange, label, large = false }: Searc
           id={id}
           type="search"
           role="combobox"
-          value={value}
+          value={draft}
           aria-expanded={shown}
           aria-controls={listId}
           aria-autocomplete="list"
-          aria-activedescendant={shown && current ? `${listId}-${current.id}` : undefined}
+          aria-activedescendant={shown && moved && current ? `${listId}-${current.id}` : undefined}
+          enterKeyHint="search"
           onChange={(event) => {
-            onChange(event.target.value);
+            setDraft(event.target.value);
             setOpen(true);
           }}
           onFocus={() => setOpen(true)}
@@ -100,10 +118,20 @@ export function SearchField({ id, value, onChange, label, large = false }: Searc
           suppressHydrationWarning
           className={
             large
-              ? "min-h-14 w-full rounded-full bg-surface pr-4 pl-11 text-base text-ink shadow-card placeholder:text-muted"
-              : "min-h-11 w-full rounded-full bg-surface pr-4 pl-11 text-sm text-ink shadow-card placeholder:text-muted"
+              ? "min-h-14 w-full rounded-full bg-surface pr-28 pl-11 text-base text-ink shadow-card placeholder:text-muted"
+              : "min-h-12 w-full rounded-full bg-surface pr-24 pl-11 text-sm text-ink shadow-card placeholder:text-muted"
           }
         />
+        <button
+          type="submit"
+          className={
+            large
+              ? "absolute top-1/2 right-1.5 z-10 min-h-11 -translate-y-1/2 rounded-full bg-ink px-4 text-sm font-bold text-cream"
+              : "absolute top-1/2 right-1 z-10 min-h-11 -translate-y-1/2 rounded-full bg-ink px-3 text-sm font-bold text-cream"
+          }
+        >
+          Search
+        </button>
       </form>
       {shown ? (
         <ul
@@ -125,13 +153,13 @@ export function SearchField({ id, value, onChange, label, large = false }: Searc
                   )}
                   onMouseEnter={() => setActive(index)}
                   onMouseDown={(event) => event.preventDefault()}
-                  onClick={() => choose(item.name)}
+                  onClick={() => send(item.name)}
                 >
                   <span className="size-10 shrink-0 overflow-hidden rounded-xl">
                     <SquishyPhoto item={item} />
                   </span>
                   <span className="min-w-0">
-                    <span className="block truncate font-bold">{highlightName(item.name, value)}</span>
+                    <span className="block truncate font-bold">{highlightName(item.name, draft)}</span>
                     <span className="block truncate text-xs text-muted">{item.category}</span>
                   </span>
                 </button>
