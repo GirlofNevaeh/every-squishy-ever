@@ -20,6 +20,9 @@ export function SiteFooter() {
           <Link to="/play" className="inline-flex min-h-11 items-center">
             Quiz
           </Link>
+          <Link to="/projects" className="inline-flex min-h-11 items-center">
+            Projects
+          </Link>
           <Link to="/about" className="inline-flex min-h-11 items-center">
             About
           </Link>

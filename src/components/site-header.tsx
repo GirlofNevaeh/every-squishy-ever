@@ -10,6 +10,7 @@ const NAV = [
   { to: "/", label: "Squishies" },
   { to: "/top", label: "Hall of Fame" },
   { to: "/play", label: "Quiz" },
+  { to: "/projects", label: "Projects" },
   { to: "/about", label: "About" },
 ] as const;
 
@@ -80,7 +81,7 @@ export function SiteHeader() {
                 search={item.to === "/" ? EMPTY_SEARCH : undefined}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "inline-flex min-h-11 shrink-0 items-center justify-center rounded-full px-2.5 text-sm font-bold whitespace-nowrap lg:px-3",
+                  "inline-flex min-h-11 shrink-0 items-center justify-center rounded-full px-2 text-sm font-bold whitespace-nowrap lg:px-3",
                   active ? "bg-butter text-ink" : "text-ink",
                 )}
               >

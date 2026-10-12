@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as PlayRouteImport } from './routes/play'
+import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as SuggestRouteImport } from './routes/suggest'
 import { Route as TopRouteImport } from './routes/top'
 import { Route as SquishyIdRouteImport } from './routes/squishy/$id'
@@ -29,6 +30,11 @@ const AboutRoute = AboutRouteImport.update({
 const PlayRoute = PlayRouteImport.update({
   id: '/play',
   path: '/play',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SuggestRoute = SuggestRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/play': typeof PlayRoute
+  '/projects': typeof ProjectsRoute
   '/suggest': typeof SuggestRoute
   '/top': typeof TopRoute
   '/squishy/$id': typeof SquishyIdRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/play': typeof PlayRoute
+  '/projects': typeof ProjectsRoute
   '/suggest': typeof SuggestRoute
   '/top': typeof TopRoute
   '/squishy/$id': typeof SquishyIdRoute
@@ -68,23 +76,46 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/play': typeof PlayRoute
+  '/projects': typeof ProjectsRoute
   '/suggest': typeof SuggestRoute
   '/top': typeof TopRoute
   '/squishy/$id': typeof SquishyIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/play' | '/suggest' | '/top' | '/squishy/$id'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/play'
+    | '/projects'
+    | '/suggest'
+    | '/top'
+    | '/squishy/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/play' | '/suggest' | '/top' | '/squishy/$id'
+  to:
+    | '/'
+    | '/about'
+    | '/play'
+    | '/projects'
+    | '/suggest'
+    | '/top'
+    | '/squishy/$id'
   id:
-    '__root__' | '/' | '/about' | '/play' | '/suggest' | '/top' | '/squishy/$id'
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/play'
+    | '/projects'
+    | '/suggest'
+    | '/top'
+    | '/squishy/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   PlayRoute: typeof PlayRoute
+  ProjectsRoute: typeof ProjectsRoute
   SuggestRoute: typeof SuggestRoute
   TopRoute: typeof TopRoute
   SquishyIdRoute: typeof SquishyIdRoute
@@ -111,6 +142,13 @@ declare module '@tanstack/react-router' {
       path: '/play'
       fullPath: '/play'
       preLoaderRoute: typeof PlayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/suggest': {
@@ -141,6 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   PlayRoute: PlayRoute,
+  ProjectsRoute: ProjectsRoute,
   SuggestRoute: SuggestRoute,
   TopRoute: TopRoute,
   SquishyIdRoute: SquishyIdRoute,
