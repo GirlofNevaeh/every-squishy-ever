@@ -23,7 +23,7 @@ The suggest page can draft this object for you. It does not save anything by its
 ## Pages
 
 - `/` search and filters, with a Hall of Fame chip and a show-more shelf.
-- `/top` hall of fame. Not an official sales chart.
+- `/top` hall of fame.
 - `/squishy/$id` picture, feel, Amazon link, and YouTube search.
 - `/play` a quick quiz of 10 questions or a mega quiz of 25, drawn from a bank of 100 hall of fame squishies, so the next game uses different questions. Play solo, or with up to 10 teams of 4 players (40 people). Players on different teams can share a name. Each team gets a name and a squishy icon, and the team shares one answer. A right answer cheers and a wrong answer makes a fart noise. A league table shows at the end. If teams tie, they choose a playoff or a dance off.
 - `/projects` individual and team squishy projects for Primary 1 through Primary 7.

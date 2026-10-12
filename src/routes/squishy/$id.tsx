@@ -90,7 +90,6 @@ function Detail() {
           <div className="mt-6 rounded-2xl bg-cream-deep px-4 py-3">
             <h2 className="font-display text-xl">About the price</h2>
             <p className="mt-1">{item.priceNote}</p>
-            <p className="mt-1 text-sm text-muted">Shops change the price. This is only a hint, not today’s price.</p>
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
             <a
@@ -112,13 +111,6 @@ function Detail() {
               <CirclePlay className="size-4" aria-hidden="true" />
             </a>
           </div>
-          <p className="mt-2 text-sm text-muted">
-            {item.amazonAsin
-              ? "Buy opens the Amazon product page. The price there can change."
-              : `Buy opens an Amazon search for “${item.amazonQuery}”. You can buy it there, and other toys can show up too.`}
-            {" "}
-            YouTube opens a search for “{item.youtubeQuery}”.
-          </p>
         </div>
       </article>
       {related.length > 0 ? (

@@ -28,13 +28,8 @@ function About() {
           Soft pillows and Squishmallows stay off this shelf. They are cuddly, but they are a different kind of toy.
         </p>
         <p>
-          This is a big starter shelf, not every squishy ever made. New colors and sizes show up all the time. If your
-          favorite is missing, the suggest page writes a note you can send.
-        </p>
-        <p>
-          The pictures were made for this catalog. They are not copied from a shop. Amazon and YouTube buttons open a
-          search, so you might see other toys too. The price note is a hint, never today’s price. The hall of fame is a
-          list of famous squishies, not an official best-seller list.
+          New colors and sizes show up all the time. If your favorite is missing, the suggest page writes a note you can
+          send.
         </p>
         <p>
           Try the quiz by yourself, or with teams of up to 4 players. You can play against as many as 9 other teams.
