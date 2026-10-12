@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SquishyArt } from "@/components/squishy-art";
-import type { Squishy } from "@/lib/catalog";
+import type { ImageCredit, Squishy } from "@/lib/catalog";
 
 export function SquishyPhoto({
   item,
@@ -26,5 +26,23 @@ export function SquishyPhoto({
       className="h-full w-full bg-cream-deep object-cover"
       onError={() => setFailed(true)}
     />
+  );
+}
+
+export function PhotoCredit({ credit }: { credit?: ImageCredit }) {
+  if (!credit) return null;
+  return (
+    <p className="text-xs leading-snug text-muted">
+      Photo by {credit.author}
+      {credit.changes ? `, ${credit.changes}` : ""}.{" "}
+      <a className="underline" href={credit.licenseUrl} target="_blank" rel="noreferrer">
+        {credit.license}
+      </a>
+      .{" "}
+      <a className="underline" href={credit.sourceUrl} target="_blank" rel="noreferrer">
+        Source
+      </a>
+      .
+    </p>
   );
 }

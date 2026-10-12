@@ -55,6 +55,15 @@ export type Squishy = {
   youtubeQuery: string;
   bestsellerRank: number | null;
   imageHint?: string;
+  imageCredit?: ImageCredit;
+};
+
+export type ImageCredit = {
+  author: string;
+  license: string;
+  licenseUrl: string;
+  sourceUrl: string;
+  changes?: string;
 };
 
 export type CatalogSearch = {

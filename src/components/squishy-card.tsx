@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { CirclePlay, ExternalLink } from "lucide-react";
-import { SquishyPhoto } from "@/components/squishy-photo";
+import { SquishyPhoto, PhotoCredit } from "@/components/squishy-photo";
 import { buttonClass } from "@/components/ui/button";
 import { amazonUrl, CATEGORY_CHIP, feelLine, youtubeUrl, type Squishy } from "@/lib/catalog";
 
@@ -35,6 +35,7 @@ export function SquishyCard({ item }: { item: Squishy }) {
           </span>
         </p>
         <p className="line-clamp-3 text-sm leading-relaxed text-muted">{feelLine(item)}</p>
+        {item.imageCredit ? <PhotoCredit credit={item.imageCredit} /> : null}
         <div className="mt-auto flex flex-wrap gap-2 pt-3">
           <Link to="/squishy/$id" params={{ id: item.id }} className={buttonClass("ink", "flex-1")}>
             See it

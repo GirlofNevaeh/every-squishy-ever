@@ -2,7 +2,7 @@ import { useEffect, useId, useRef, useState, type MouseEvent } from "react";
 import { squishies } from "@/lib/catalog";
 import { Button } from "@/components/ui/button";
 
-const SHELF_CACHE = "every-squishy-ever-v2";
+const SHELF_CACHE = "every-squishy-ever-v3";
 
 type Device = "iphone" | "ipad" | "other";
 type SaveStatus = "idle" | "saving" | "saved" | "partial" | "error";

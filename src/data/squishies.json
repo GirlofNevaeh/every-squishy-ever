@@ -6616,7 +6616,7 @@
       "clear"
     ],
     "yearIntroduced": null,
-    "description": "Hands love Sugar Squeeze Cube, a palm-sized toy shaped like a thick amber sugar cube. A generic cube that moves slow and thick. It is not a Schylling NeeDoh. It is quiet, kid-friendly fun, and it moves slow and thick, then creeps back into shape.",
+    "description": "Hands love Sugar Squeeze Cube, a palm-sized toy shaped like a thick amber sugar cube. It is quiet, kid-friendly fun, and it moves slow and thick, then creeps back into shape.",
     "tags": [
       "cube",
       "maltose",
@@ -6888,7 +6888,14 @@
     "image": "/squishies/water-bead-ball.jpg",
     "youtubeQuery": "Water Bead Squeeze Ball squishy",
     "bestsellerRank": null,
-    "imageHint": "a clear ball full of water beads"
+    "imageHint": "a clear ball full of water beads",
+    "imageCredit": {
+      "author": ".Anja.",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Balles_sensorielles_anti-stress.jpg",
+      "changes": "cropped"
+    }
   },
   {
     "id": "water-bead-ball-pink",
@@ -7396,7 +7403,13 @@
     "image": "/squishies/smiley-ball-squishy.jpg",
     "youtubeQuery": "Smiley Ball Squishy",
     "bestsellerRank": null,
-    "imageHint": "a smiley face ball"
+    "imageHint": "a smiley face ball",
+    "imageCredit": {
+      "author": "Ramesh NG",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Smileyes.jpg"
+    }
   },
   {
     "id": "flower-squishy",
@@ -7452,7 +7465,13 @@
     "image": "/squishies/planet-squishy.jpg",
     "youtubeQuery": "Planet Squishy",
     "bestsellerRank": null,
-    "imageHint": "a cute planet"
+    "imageHint": "a cute planet",
+    "imageCredit": {
+      "author": "WineBallTeam",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anti-Stress-Ball.jpg"
+    }
   },
   {
     "id": "moon-squishy",

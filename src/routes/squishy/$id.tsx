@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CirclePlay, ExternalLink } from "lucide-react";
 import { SquishyCard } from "@/components/squishy-card";
-import { SquishyPhoto } from "@/components/squishy-photo";
+import { SquishyPhoto, PhotoCredit } from "@/components/squishy-photo";
 import { buttonClass } from "@/components/ui/button";
 import { amazonUrl, CATEGORY_CHIP, EMPTY_SEARCH, getSquishy, relatedSquishies, youtubeUrl } from "@/lib/catalog";
 import { swatch } from "@/lib/swatches";
@@ -55,6 +55,11 @@ function Detail() {
           <div className="aspect-square overflow-hidden rounded-2xl">
             <SquishyPhoto item={item} alt={item.name} />
           </div>
+          {item.imageCredit ? (
+            <div className="px-2 pt-3 pb-1">
+              <PhotoCredit credit={item.imageCredit} />
+            </div>
+          ) : null}
         </div>
         <div>
           <p className="text-sm font-extrabold tracking-wide text-muted uppercase">{item.brand}</p>
