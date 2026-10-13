@@ -3,7 +3,7 @@ import { squishies } from "@/lib/catalog";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n/context";
 
-const SHELF_CACHE = "every-squishy-ever-v5";
+const SHELF_CACHE = "every-squishy-ever-v6";
 
 type Device = "iphone" | "ipad" | "other";
 type SaveStatus = "idle" | "saving" | "saved" | "partial" | "error";

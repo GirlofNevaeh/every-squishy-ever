@@ -1,4 +1,4 @@
-import { createFileRoute, Link, stripSearchParams, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, stripSearchParams, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SearchField } from "@/components/search-field";
 import { SquishyCard } from "@/components/squishy-card";
