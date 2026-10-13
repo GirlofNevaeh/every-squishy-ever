@@ -10,7 +10,7 @@ export const Route = createFileRoute("/projects")({
       { title: "Projects · Every Squishy Ever" },
       {
         name: "description",
-        content: "Individual and team squishy projects for Primary 1 through Primary 7.",
+        content: "Individual and team squishy projects for Age 5-6 through Age 11-12.",
       },
     ],
   }),
@@ -38,7 +38,7 @@ function ProjectsPage() {
         </FilterButton>
         {YEARS.map((item) => (
           <FilterButton key={item} pressed={year === item} onClick={() => setYear(item)}>
-            {t("projects.primary", { n: item })}
+            {t("projects.primary", { range: PROJECT_META.find((meta) => meta.year === item)?.range ?? "" })}
           </FilterButton>
         ))}
       </div>
@@ -63,11 +63,7 @@ function ProjectsPage() {
               )}
             >
               <p className="text-sm font-extrabold tracking-wide uppercase">
-                {t("projects.primary", { n: project.year })}
-                <span className="font-bold tracking-normal normal-case text-ink/70">
-                  {" "}
-                  · {t("projects.ages", { range: project.range })}
-                </span>
+                {t("projects.primary", { range: project.range })}
               </p>
               <p className="mt-1 text-sm font-bold">
                 {project.kind === "individual" ? t("projects.individual") : t("projects.team")}

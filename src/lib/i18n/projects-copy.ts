@@ -5,20 +5,20 @@ export type ProjectKind = "individual" | "team";
 export type ProjectMeta = { year: number; range: string; kind: ProjectKind };
 
 export const PROJECT_META: ProjectMeta[] = [
-  { year: 1, range: "5–6", kind: "individual" },
-  { year: 1, range: "5–6", kind: "team" },
-  { year: 2, range: "6–7", kind: "individual" },
-  { year: 2, range: "6–7", kind: "team" },
-  { year: 3, range: "7–8", kind: "individual" },
-  { year: 3, range: "7–8", kind: "team" },
-  { year: 4, range: "8–9", kind: "individual" },
-  { year: 4, range: "8–9", kind: "team" },
-  { year: 5, range: "9–10", kind: "individual" },
-  { year: 5, range: "9–10", kind: "team" },
-  { year: 6, range: "10–11", kind: "individual" },
-  { year: 6, range: "10–11", kind: "team" },
-  { year: 7, range: "11–12", kind: "individual" },
-  { year: 7, range: "11–12", kind: "team" },
+  { year: 1, range: "5-6", kind: "individual" },
+  { year: 1, range: "5-6", kind: "team" },
+  { year: 2, range: "6-7", kind: "individual" },
+  { year: 2, range: "6-7", kind: "team" },
+  { year: 3, range: "7-8", kind: "individual" },
+  { year: 3, range: "7-8", kind: "team" },
+  { year: 4, range: "8-9", kind: "individual" },
+  { year: 4, range: "8-9", kind: "team" },
+  { year: 5, range: "9-10", kind: "individual" },
+  { year: 5, range: "9-10", kind: "team" },
+  { year: 6, range: "10-11", kind: "individual" },
+  { year: 6, range: "10-11", kind: "team" },
+  { year: 7, range: "11-12", kind: "individual" },
+  { year: 7, range: "11-12", kind: "team" },
 ];
 
 type Copy = { title: string; summary: string; need: string; steps: string[]; learn: string };
