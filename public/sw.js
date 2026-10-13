@@ -1,5 +1,5 @@
 /* Offline shelf for Every Squishy Ever. Registered only after Add to iPhone / iPad. */
-const CACHE = "every-squishy-ever-v5";
+const CACHE = "every-squishy-ever-v6";
 
 function ignored(url) {
   const path = url.pathname;
@@ -34,15 +34,7 @@ self.addEventListener("fetch", (event) => {
   if (url.origin !== self.location.origin || ignored(url)) return;
 
   if (request.mode === "navigate") {
-    event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const copy = response.clone();
-          caches.open(CACHE).then((cache) => cache.put(request, copy));
-          return response;
-        })
-        .catch(async () => (await caches.match(request)) || (await caches.match("/")) || Response.error()),
-    );
+    event.respondWith(fetch(request).catch(() => Response.error()));
     return;
   }
 
