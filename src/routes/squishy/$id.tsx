@@ -1,9 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CirclePlay } from "lucide-react";
 import { SquishyCard } from "@/components/squishy-card";
 import { SquishyPhoto, PhotoCredit } from "@/components/squishy-photo";
 import { buttonClass } from "@/components/ui/button";
-import { CATEGORY_CHIP, EMPTY_SEARCH, getSquishy, relatedSquishies, youtubeUrl } from "@/lib/catalog";
+import { CATEGORY_CHIP, EMPTY_SEARCH, getSquishy, relatedSquishies } from "@/lib/catalog";
 import { useI18n } from "@/lib/i18n/context";
 import { labelBrand, labelCategory, labelColor, labelPrice, labelSize, labelTexture, localizedDescription } from "@/lib/i18n/text";
 import { swatch } from "@/lib/swatches";
@@ -97,17 +96,6 @@ function Detail() {
           <div className="mt-6 rounded-2xl bg-cream-deep px-4 py-3">
             <h2 className="font-display text-xl">{t("detail.price")}</h2>
             <p className="mt-1">{labelPrice(item.priceNote, lang)}</p>
-          </div>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <a
-              href={youtubeUrl(item.youtubeQuery)}
-              target="_blank"
-              rel="noreferrer"
-              className={buttonClass("surface")}
-            >
-              {t("detail.watch")}
-              <CirclePlay className="size-4" aria-hidden="true" />
-            </a>
           </div>
         </div>
       </article>

@@ -154,10 +154,6 @@ export function toggleToken(value: string, token: string): string {
   return next.join(",");
 }
 
-export function youtubeUrl(query: string): string {
-  return `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
-}
-
 export function suggestSquishies(query: string, limit = 8): Squishy[] {
   const q = query.trim().toLowerCase();
   if (!q) return [];

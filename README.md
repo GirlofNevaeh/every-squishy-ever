@@ -24,7 +24,7 @@ The suggest page can draft this object for you. It does not save anything by its
 
 - `/` search and filters, with a Hall of Fame chip and a show-more shelf.
 - `/top` hall of fame.
-- `/squishy/$id` picture, feel, and YouTube search.
+- `/squishy/$id` picture and feel.
 - `/play` a quick quiz of 10 questions or a mega quiz of 25, drawn from a bank of 100 hall of fame squishies, so the next game uses different questions. Play solo, or with up to 10 teams of 4 players (40 people). Players on different teams can share a name. Each team gets a name and a squishy icon, and the team shares one answer. A right answer cheers and a wrong answer makes a fart noise. A league table shows at the end. If teams tie, they choose a playoff or a dance off.
 - `/projects` individual and team squishy projects for Age 5-6 through Age 11-12.
 
@@ -47,7 +47,7 @@ The production build uses Nitro’s Vercel preset and writes the [Build Output A
 1. Import this GitHub repo in Vercel.
 2. Leave the framework as **Other** (already set in `vercel.json`).
 3. Build command: `npm run build`. Do not set an Output Directory — Vercel picks up `.vercel/output`.
-4. Deploy. YouTube links stay search URLs. Photos ship with the app.
+4. Deploy. Photos ship with the app.
 
 `npm run build` also runs the database migrator. With no `DATABASE_URL`, that step skips. This catalog does not need a database.
 
