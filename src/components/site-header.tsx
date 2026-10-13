@@ -1,6 +1,6 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { Dices } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { LanguageSwitch } from "@/components/language-switch";
 import { SearchField } from "@/components/search-field";
 import { buttonClass } from "@/components/ui/button";
@@ -24,16 +24,6 @@ export function SiteHeader() {
   const rawSearch = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
   const onHome = pathname === "/";
   const current = onHome ? parseSearch(rawSearch) : EMPTY_SEARCH;
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 220);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const showMini = !onHome || scrolled;
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -41,11 +31,11 @@ export function SiteHeader() {
       const target = event.target;
       if (target instanceof HTMLElement && target.closest("input, textarea, select")) return;
       event.preventDefault();
-      document.getElementById(showMini ? "search-sticky" : "search-hero")?.focus();
+      document.getElementById(onHome ? "search-hero" : "search-sticky")?.focus();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [showMini]);
+  }, [onHome]);
 
   function goSearch(next: CatalogSearch) {
     void navigate({ to: "/", search: next, replace: true });
@@ -58,7 +48,7 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-cream/90 backdrop-blur-md">
+    <header className="border-b border-line bg-cream">
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-cream"
@@ -97,7 +87,7 @@ export function SiteHeader() {
             );
           })}
         </nav>
-        <div className={cn("order-4 min-w-0 flex-1 basis-full lg:order-none lg:basis-56", showMini ? "block" : "hidden")}>
+        <div className={cn("order-4 min-w-0 flex-1 basis-full lg:order-none lg:basis-56", onHome ? "hidden" : "block")}>
           <SearchField
             id="search-sticky"
             label={t("search.catalog")}
