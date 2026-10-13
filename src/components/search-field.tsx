@@ -3,6 +3,7 @@ import { Search } from "lucide-react";
 import { SquishyPhoto } from "@/components/squishy-photo";
 import { suggestSquishies } from "@/lib/catalog";
 import { cn } from "@/lib/cn";
+import { useI18n } from "@/lib/i18n/context";
 
 type SearchFieldProps = {
   id: string;
@@ -13,6 +14,7 @@ type SearchFieldProps = {
 };
 
 export function SearchField({ id, value, onChange, label, large = false }: SearchFieldProps) {
+  const { t } = useI18n();
   const listId = useId();
   const boxRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
@@ -113,7 +115,7 @@ export function SearchField({ id, value, onChange, label, large = false }: Searc
           }}
           onFocus={() => setOpen(true)}
           onKeyDown={onKeyDown}
-          placeholder="Search name, brand, texture, tag"
+          placeholder={t("search.placeholder")}
           autoComplete="off"
           suppressHydrationWarning
           className={
@@ -130,18 +132,18 @@ export function SearchField({ id, value, onChange, label, large = false }: Searc
               : "absolute top-1/2 right-1 z-10 min-h-11 -translate-y-1/2 rounded-full bg-ink px-3 text-sm font-bold text-cream"
           }
         >
-          Search
+          {t("search.button")}
         </button>
       </form>
       {shown ? (
         <ul
           id={listId}
           role="listbox"
-          aria-label="Matching squishy names"
+          aria-label={t("search.matches")}
           className="absolute top-full right-0 left-0 z-50 mt-2 overflow-hidden rounded-2xl bg-surface shadow-lift"
         >
           {matches.length === 0 ? (
-            <li className="px-4 py-3 text-sm text-muted">No squishy name matches that yet.</li>
+            <li className="px-4 py-3 text-sm text-muted">{t("search.none")}</li>
           ) : (
             matches.map((item, index) => (
               <li key={item.id} id={`${listId}-${item.id}`} role="option" aria-selected={index === active}>

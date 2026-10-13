@@ -6,7 +6,6 @@ import { SquishyPhoto } from "@/components/squishy-photo";
 import { Button } from "@/components/ui/button";
 import {
   CATEGORY_DOT,
-  countLabel,
   EMPTY_SEARCH,
   facetOptions,
   filterSquishies,
@@ -19,6 +18,8 @@ import {
   type Category,
 } from "@/lib/catalog";
 import { cn } from "@/lib/cn";
+import { useI18n } from "@/lib/i18n/context";
+import { labelBrand, labelCategory, labelSize, labelTexture, searchBlob } from "@/lib/i18n/text";
 
 const PAGE = 36;
 
@@ -40,10 +41,11 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const { t, lang } = useI18n();
   const search = Route.useSearch();
   const navigate = useNavigate();
   const facets = facetOptions();
-  const results = filterSquishies(squishies, search);
+  const results = filterSquishies(squishies, search, (item) => searchBlob(item, lang));
   const filtersOn = Boolean(search.category || search.brand || search.texture || search.size || search.best);
   const [shown, setShown] = useState(PAGE);
   const heroes = ["nice-cube", "cheese-wedge", "butter-stick"]
@@ -63,20 +65,22 @@ function Home() {
     <main id="main" className="mx-auto max-w-6xl px-4 py-8">
       <section className="grid items-center gap-8 lg:grid-cols-[1.3fr_0.7fr]">
         <div>
-          <p className="hero-rise max-w-full font-display leading-none whitespace-nowrap text-ink [font-size:clamp(0.72rem,3.55vw,1.7rem)]">
-            A Squishy Encyclopaedia For <span className="text-swatch-melon">k</span>ids
+          <p className="hero-rise max-w-full font-display leading-none text-ink [font-size:clamp(0.72rem,3.55vw,1.7rem)] sm:whitespace-nowrap">
+            {t("hero.before")}
+            <span className="text-swatch-melon">{t("hero.kids").slice(0, 1)}</span>
+            {t("hero.kids").slice(1)}
           </p>
-          <h1 className="hero-rise-2 mt-2 font-display text-4xl text-ink sm:text-5xl">Every Squishy Ever</h1>
-          <p className="hero-rise-3 mt-3 max-w-xl text-lg text-ink">See the toy, learn the squish, then find it.</p>
+          <h1 className="hero-rise-2 mt-2 font-display text-4xl text-ink sm:text-5xl">{t("brand")}</h1>
+          <p className="hero-rise-3 mt-3 max-w-xl text-lg text-ink">{t("hero.lead")}</p>
           <div className="mt-6 max-w-xl">
             <SearchField
               id="search-hero"
-              label="Search squishies"
+              label={t("search.squishies")}
               large
               value={search.q}
               onChange={(q) => update({ ...search, q })}
             />
-            <p className="mt-2 hidden text-sm text-muted sm:block">Type a name, then press Search.</p>
+            <p className="mt-2 hidden text-sm text-muted sm:block">{t("search.hint")}</p>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-3" aria-hidden="true">
@@ -88,7 +92,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="mt-6" aria-label="Filters">
+      <section className="mt-6" aria-label={t("filter.filters")}>
         <div className="mb-3">
           <button
             type="button"
@@ -99,19 +103,20 @@ function Home() {
               search.best === "1" ? "bg-ink text-cream" : "bg-butter text-ink",
             )}
           >
-            Hall of Fame
+            {t("filter.hall")}
           </button>
         </div>
         <div className="space-y-3 lg:hidden">
           <ChipRow
-            label="Category"
+            label={t("filter.category")}
             options={facets.categories}
             selected={search.category}
             onToggle={(token) => update({ ...search, category: toggleToken(search.category, token) })}
             dotFor={(option) => CATEGORY_DOT[option as Category]}
+            format={(option) => labelCategory(option, lang)}
           />
           <details className="rounded-2xl bg-surface px-3 shadow-card">
-            <summary className="flex min-h-11 cursor-pointer items-center font-bold">Brand, texture, and size</summary>
+            <summary className="flex min-h-11 cursor-pointer items-center font-bold">{t("filter.more")}</summary>
             <div className="space-y-3 pb-3">
               <FilterGroups facets={facets} search={search} update={update} />
             </div>
@@ -119,11 +124,12 @@ function Home() {
         </div>
         <div className="hidden gap-x-8 gap-y-3 lg:grid lg:grid-cols-2">
           <ChipRow
-            label="Category"
+            label={t("filter.category")}
             options={facets.categories}
             selected={search.category}
             onToggle={(token) => update({ ...search, category: toggleToken(search.category, token) })}
             dotFor={(option) => CATEGORY_DOT[option as Category]}
+            format={(option) => labelCategory(option, lang)}
           />
           <FilterGroups facets={facets} search={search} update={update} />
         </div>
@@ -131,21 +137,21 @@ function Home() {
 
       <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
         <p className="text-sm font-bold text-muted tabular-nums" aria-live="polite">
-          {countLabel(results.length)}
-          {search.q ? ` for “${search.q.trim()}”` : ""}
-          {search.best === "1" ? " in the hall of fame" : ""}
+          {results.length === 1 ? t("count.one") : t("count.many", { n: results.length })}
+          {search.q ? t("count.for", { q: search.q.trim() }) : ""}
+          {search.best === "1" ? t("count.hall") : ""}
         </p>
         {filtersOn || search.q ? (
           <Button variant="surface" onClick={() => update(EMPTY_SEARCH)}>
-            Clear
+            {t("filter.clear")}
           </Button>
         ) : null}
       </div>
 
       {results.length === 0 ? (
         <div className="mt-8 rounded-3xl bg-surface px-6 py-12 text-center shadow-card">
-          <h2 className="font-display text-3xl">That squish hasn’t been squished into the catalog yet</h2>
-          <p className="mx-auto mt-2 max-w-md text-muted">Try another word, or clear the filters. New toys get added all the time.</p>
+          <h2 className="font-display text-3xl">{t("empty.title")}</h2>
+          <p className="mx-auto mt-2 max-w-md text-muted">{t("empty.body")}</p>
         </div>
       ) : (
         <>
@@ -159,7 +165,7 @@ function Home() {
           {shown < results.length ? (
             <div className="mt-6 text-center">
               <Button variant="ink" onClick={() => setShown((count) => count + PAGE)}>
-                Show more squishies
+                {t("show.more")}
               </Button>
             </div>
           ) : null}
@@ -180,35 +186,39 @@ function FilterGroups({
   update: (next: CatalogSearch) => void;
   includeCategory?: boolean;
 }) {
+  const { t, lang } = useI18n();
   return (
     <>
       {includeCategory ? (
         <ChipRow
-          label="Category"
+          label={t("filter.category")}
           options={facets.categories}
           selected={search.category}
           onToggle={(token) => update({ ...search, category: toggleToken(search.category, token) })}
           dotFor={(option) => CATEGORY_DOT[option as Category]}
+          format={(option) => labelCategory(option, lang)}
         />
       ) : null}
       <ChipRow
-        label="Brand"
+        label={t("filter.brand")}
         options={facets.brands}
         selected={search.brand}
         onToggle={(token) => update({ ...search, brand: toggleToken(search.brand, token) })}
+        format={(option) => labelBrand(option, lang)}
       />
       <ChipRow
-        label="Texture"
+        label={t("filter.texture")}
         options={facets.textures}
         selected={search.texture}
         onToggle={(token) => update({ ...search, texture: toggleToken(search.texture, token) })}
+        format={(option) => labelTexture(option, lang)}
       />
       <ChipRow
-        label="Size"
+        label={t("filter.size")}
         options={facets.sizes}
         selected={search.size}
         onToggle={(token) => update({ ...search, size: toggleToken(search.size, token) })}
-        format={(option) => option[0]?.toUpperCase() + option.slice(1)}
+        format={(option) => labelSize(option, lang)}
       />
     </>
   );

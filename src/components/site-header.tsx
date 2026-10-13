@@ -1,20 +1,24 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { Dices } from "lucide-react";
 import { useEffect, useState } from "react";
+import { LanguageSwitch } from "@/components/language-switch";
 import { SearchField } from "@/components/search-field";
 import { buttonClass } from "@/components/ui/button";
 import { EMPTY_SEARCH, parseSearch, squishies, type CatalogSearch } from "@/lib/catalog";
 import { cn } from "@/lib/cn";
+import { useI18n } from "@/lib/i18n/context";
+import type { MessageKey } from "@/lib/i18n/messages";
 
-const NAV = [
-  { to: "/", label: "Squishies" },
-  { to: "/top", label: "Hall of Fame" },
-  { to: "/play", label: "Quiz" },
-  { to: "/projects", label: "Projects" },
-  { to: "/about", label: "About" },
-] as const;
+const NAV: { to: "/" | "/top" | "/play" | "/projects" | "/about"; key: MessageKey }[] = [
+  { to: "/", key: "nav.squishies" },
+  { to: "/top", key: "nav.hall" },
+  { to: "/play", key: "nav.quiz" },
+  { to: "/projects", key: "nav.projects" },
+  { to: "/about", key: "nav.about" },
+];
 
 export function SiteHeader() {
+  const { t } = useI18n();
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const rawSearch = useRouterState({ select: (state) => state.location.search as Record<string, unknown> });
@@ -59,18 +63,21 @@ export function SiteHeader() {
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-cream"
       >
-        Skip to content
+        {t("skip")}
       </a>
+      <div className="mx-auto flex max-w-6xl items-center px-4 pt-2">
+        <LanguageSwitch />
+      </div>
       <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-3 gap-y-2 px-4 py-2">
         <Link to="/" search={EMPTY_SEARCH} className="flex min-h-11 min-w-0 items-center gap-2 rounded-full pr-2">
           <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-butter shadow-card" aria-hidden="true">
             <span className="size-4 rounded-md bg-cream" />
           </span>
-          <span className="truncate font-display text-lg leading-none sm:text-xl">Every Squishy Ever</span>
+          <span className="truncate font-display text-lg leading-none sm:text-xl">{t("brand")}</span>
         </Link>
         <nav
           className="order-3 flex w-full flex-wrap gap-x-1 gap-y-1 lg:order-none lg:w-auto"
-          aria-label="Primary"
+          aria-label={t("nav.primary")}
         >
           {NAV.map((item) => {
             const active = item.to === "/" ? pathname === "/" : pathname.startsWith(item.to);
@@ -85,7 +92,7 @@ export function SiteHeader() {
                   active ? "bg-butter text-ink" : "text-ink",
                 )}
               >
-                {item.label}
+                {t(item.key)}
               </Link>
             );
           })}
@@ -93,7 +100,7 @@ export function SiteHeader() {
         <div className={cn("order-4 min-w-0 flex-1 basis-full lg:order-none lg:basis-56", showMini ? "block" : "hidden")}>
           <SearchField
             id="search-sticky"
-            label="Search the catalog"
+            label={t("search.catalog")}
             value={onHome ? current.q : ""}
             onChange={(q) => goSearch({ ...(onHome ? current : EMPTY_SEARCH), q })}
           />
@@ -102,10 +109,10 @@ export function SiteHeader() {
           type="button"
           className={cn(buttonClass("ink"), "ml-auto shrink-0 px-3 lg:ml-0")}
           onClick={surprise}
-          aria-label="Surprise me"
+          aria-label={t("surprise")}
         >
           <Dices className="size-4" aria-hidden="true" />
-          <span className="hidden sm:inline">Surprise me</span>
+          <span className="hidden sm:inline">{t("surprise")}</span>
         </button>
       </div>
     </header>

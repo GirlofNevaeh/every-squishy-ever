@@ -1,5 +1,5 @@
 /* Offline shelf for Every Squishy Ever. Registered only after Add to iPhone / iPad. */
-const CACHE = "every-squishy-ever-v3";
+const CACHE = "every-squishy-ever-v5";
 
 function ignored(url) {
   const path = url.pathname;

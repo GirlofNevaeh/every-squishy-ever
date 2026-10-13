@@ -1,8 +1,9 @@
 import { useEffect, useId, useRef, useState, type MouseEvent } from "react";
 import { squishies } from "@/lib/catalog";
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/lib/i18n/context";
 
-const SHELF_CACHE = "every-squishy-ever-v3";
+const SHELF_CACHE = "every-squishy-ever-v5";
 
 type Device = "iphone" | "ipad" | "other";
 type SaveStatus = "idle" | "saving" | "saved" | "partial" | "error";
@@ -30,18 +31,6 @@ function inSafari(device: Device) {
   if (device === "other") return true;
   const ua = navigator.userAgent || "";
   return /Safari/i.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS|Instagram|FBAN|FBAV/i.test(ua);
-}
-
-function labelFor(device: Device) {
-  if (device === "iphone") return "Add to iPhone";
-  if (device === "ipad") return "Add to iPad";
-  return "Add to iPhone or iPad";
-}
-
-function deviceName(device: Device) {
-  if (device === "ipad") return "iPad";
-  if (device === "iphone") return "iPhone";
-  return "iPhone or iPad";
 }
 
 function isStandalone() {
@@ -141,6 +130,7 @@ async function saveShelfOffline(onProgress?: (done: number, total: number) => vo
 }
 
 export function AddToHome() {
+  const { t } = useI18n();
   const [device, setDevice] = useState<Device>("other");
   const [modernIos, setModernIos] = useState(false);
   const [safari, setSafari] = useState(true);
@@ -194,7 +184,9 @@ export function AddToHome() {
     }
   }
 
-  const label = labelFor(device);
+  const label =
+    device === "iphone" ? t("add.iphone") : device === "ipad" ? t("add.ipad") : t("add.either");
+  const deviceLabel = device === "ipad" ? "iPad" : device === "iphone" ? "iPhone" : "iPhone or iPad";
 
   function openSteps(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
@@ -204,11 +196,11 @@ export function AddToHome() {
   return (
     <>
       <Button variant="butter" onClick={() => setOpen(true)}>
-        {status === "saving" ? `Saving ${progress}` : status === "saved" ? "Saved on this device" : label}
+        {status === "saving" ? t("add.saving", { progress }) : status === "saved" ? t("add.saved") : label}
       </Button>
       {status === "error" ? (
         <p className="font-bold text-ink" role="alert">
-          The shelf did not save. Stay on wifi and try again.
+          {t("add.fail")}
         </p>
       ) : null}
       {open ? (
@@ -227,65 +219,51 @@ export function AddToHome() {
             onClick={(event) => event.stopPropagation()}
           >
             <h2 id={titleId} className="font-display text-3xl">
-              {installed ? "Saved on your icon" : label}
+              {installed ? t("add.savedIcon") : label}
             </h2>
             {installed ? (
-              <p className="mt-2 text-lg">
-                This icon keeps its own copy of the shelf. Leave it open once while wifi is on, and it will work later
-                without wifi.
-              </p>
+              <p className="mt-2 text-lg">{t("add.savedBody")}</p>
             ) : (
               <>
-                <p className="mt-2 text-lg">
-                  Safari is the only app that can put this shelf on an {deviceName(device)} home screen.
-                </p>
+                <p className="mt-2 text-lg">{t("add.safariOnly", { device: deviceLabel })}</p>
                 <ol className="mt-3 list-decimal space-y-2 pl-5">
-                  {safari ? null : <li>Open this page in Safari. Chrome and other apps cannot add the icon.</li>}
+                  {safari ? null : <li>{t("add.openSafari")}</li>}
                   {modernIos ? (
-                    <li>Tap the puzzle icon in the bottom bar, then the Share icon.</li>
+                    <li>{t("add.sharePuzzle")}</li>
                   ) : (
-                    <li>
-                      Tap the Share button (the square with an arrow)
-                      {device === "ipad" ? " in the toolbar" : " in the bottom bar"}.
-                    </li>
+                    <li>{device === "ipad" ? t("add.sharePad") : t("add.sharePhone")}</li>
                   )}
-                  <li>
-                    Tap <strong>Add to Home Screen</strong>, then Add.
-                  </li>
-                  <li>Open the new icon once while you have wifi. The shelf saves onto that icon.</li>
+                  <li>{t("add.addButton")}</li>
+                  <li>{t("add.openOnce")}</li>
                 </ol>
               </>
             )}
             {installed ? null : (
               <p className="mt-3">
                 <a className="font-bold underline" href="/?install=1&platform=ios" onClick={openSteps}>
-                  Show me the picture steps
+                  {t("add.pictureSteps")}
                 </a>
               </p>
             )}
             <div className="mt-4 flex flex-wrap gap-2">
               <Button variant="ink" onClick={() => void runSave()} disabled={status === "saving"}>
-                {status === "saving" ? `Saving ${progress}` : status === "saved" ? "Saved for offline" : "Save for offline"}
+                {status === "saving" ? t("add.saving", { progress }) : status === "saved" ? t("add.savedOffline") : t("add.offline")}
               </Button>
               <Button variant="surface" onClick={() => setOpen(false)}>
-                Close
+                {t("add.close")}
               </Button>
             </div>
             {status === "saved" ? (
-              <p className="mt-3 font-bold">
-                {installed
-                  ? "Pictures and pages are saved on this icon."
-                  : "Saved in this browser. The home screen icon saves its own copy the first time you open it."}
-              </p>
+              <p className="mt-3 font-bold">{installed ? t("add.savedIconPictures") : t("add.savedBrowser")}</p>
             ) : null}
             {status === "partial" ? (
               <p className="mt-3 font-bold" role="status">
-                Most of the shelf is saved. A few pictures did not finish. You can try again.
+                {t("add.partial")}
               </p>
             ) : null}
             {status === "error" ? (
               <p className="mt-3 font-bold" role="alert">
-                This browser could not save the shelf. Open the site in Safari and try again.
+                {t("add.browserFail")}
               </p>
             ) : null}
           </div>

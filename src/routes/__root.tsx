@@ -3,9 +3,16 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { LanguageProvider } from "@/lib/i18n/context";
+import { parseLang } from "@/lib/i18n/languages";
+import { readLangCookie } from "@/lib/i18n/read-lang";
 import appCss from "../styles.css?url";
 
 export const Route = createRootRoute({
+  beforeLoad: async () => {
+    const raw = await readLangCookie();
+    return { lang: parseLang(raw) };
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -32,24 +39,31 @@ export const Route = createRootRoute({
       { rel: "apple-touch-icon", href: "/__grok/icon-180.png" },
     ],
   }),
-  component: () => (
-    <html lang="en" suppressHydrationWarning>
+  component: RootShell,
+});
+
+function RootShell() {
+  const { lang } = Route.useRouteContext();
+  return (
+    <html lang={lang} suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
       <body>
-        <PreviewHostBridge />
-        <AuthProvider>
-          <div className="flex min-h-screen flex-col">
-            <SiteHeader />
-            <div className="flex-1">
-              <Outlet />
+        <LanguageProvider initial={lang}>
+          <PreviewHostBridge />
+          <AuthProvider>
+            <div className="flex min-h-screen flex-col">
+              <SiteHeader />
+              <div className="flex-1">
+                <Outlet />
+              </div>
+              <SiteFooter />
             </div>
-            <SiteFooter />
-          </div>
-        </AuthProvider>
-        <Scripts />
+          </AuthProvider>
+          <Scripts />
+        </LanguageProvider>
       </body>
     </html>
-  ),
-});
+  );
+}

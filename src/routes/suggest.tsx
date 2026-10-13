@@ -3,6 +3,9 @@ import { useMemo, useState, type FormEvent, type ReactNode } from "react";
 import { Button, buttonClass } from "@/components/ui/button";
 import { SUGGEST_EMAIL } from "@/data/config";
 import { CATEGORIES, slugify, type Category } from "@/lib/catalog";
+import { useI18n } from "@/lib/i18n/context";
+import { labelCategory } from "@/lib/i18n/text";
+import type { MessageKey } from "@/lib/i18n/messages";
 
 export const Route = createFileRoute("/suggest")({
   head: () => ({
@@ -34,6 +37,7 @@ const EMPTY: Fields = {
 };
 
 function Suggest() {
+  const { t, lang } = useI18n();
   const [fields, setFields] = useState<Fields>(EMPTY);
   const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>({});
   const [ready, setReady] = useState(false);
@@ -51,7 +55,7 @@ function Suggest() {
 
   function submit(event: FormEvent) {
     event.preventDefault();
-    const next = validate(fields);
+    const next = validate(fields, t);
     setErrors(next);
     setReady(Object.keys(next).length === 0);
   }
@@ -67,15 +71,12 @@ function Suggest() {
 
   return (
     <main id="main" className="mx-auto max-w-3xl px-4 py-10">
-      <p className="text-sm font-extrabold tracking-wide text-muted uppercase">Add to the shelf</p>
-      <h1 className="mt-2 font-display text-5xl">Suggest a squishy</h1>
-      <p className="mt-3 text-lg text-muted">
-        Nothing is sent to a server. Check the fields, then email the draft or copy the JSON into{" "}
-        <code className="font-bold text-ink">src/data/squishies.json</code>.
-      </p>
+      <p className="text-sm font-extrabold tracking-wide text-muted uppercase">{t("suggest.kicker")}</p>
+      <h1 className="mt-2 font-display text-5xl">{t("suggest.title")}</h1>
+      <p className="mt-3 text-lg text-muted">{t("suggest.intro")}</p>
 
       <form className="mt-8 space-y-4" onSubmit={submit} noValidate>
-        <Field label="Name" error={errors.name} id="suggest-name">
+        <Field label={t("suggest.name")} error={errors.name} id="suggest-name">
           <input
             id="suggest-name"
             value={fields.name}
@@ -84,17 +85,17 @@ function Suggest() {
             required
           />
         </Field>
-        <Field label="Brand" error={errors.brand} id="suggest-brand">
+        <Field label={t("suggest.brand")} error={errors.brand} id="suggest-brand">
           <input
             id="suggest-brand"
             value={fields.brand}
             onChange={(event) => update("brand", event.target.value)}
             className={inputClass}
-            placeholder="Schylling, Sunny Days Entertainment, or Generic"
+            placeholder={t("suggest.brandPh")}
             required
           />
         </Field>
-        <Field label="Category" error={errors.category} id="suggest-category">
+        <Field label={t("suggest.category")} error={errors.category} id="suggest-category">
           <select
             id="suggest-category"
             value={fields.category}
@@ -102,53 +103,50 @@ function Suggest() {
             className={inputClass}
             required
           >
-            <option value="">Choose a category</option>
+            <option value="">{t("suggest.chooseCategory")}</option>
             {CATEGORIES.map((category) => (
               <option key={category} value={category}>
-                {category}
+                {labelCategory(category, lang)}
               </option>
             ))}
           </select>
         </Field>
-        <Field label="Description" error={errors.description} id="suggest-description">
+        <Field label={t("suggest.description")} error={errors.description} id="suggest-description">
           <textarea
             id="suggest-description"
             value={fields.description}
             onChange={(event) => update("description", event.target.value)}
             className={`${inputClass} min-h-32 py-3`}
-            placeholder="Two to four sentences on squeeze, rebound, and sound. No medical claims."
+            placeholder={t("suggest.descPh")}
             required
           />
         </Field>
-        <Field label="Amazon search query" error={errors.amazonQuery} id="suggest-query">
+        <Field label={t("suggest.query")} error={errors.amazonQuery} id="suggest-query">
           <input
             id="suggest-query"
             value={fields.amazonQuery}
             onChange={(event) => update("amazonQuery", event.target.value)}
             className={inputClass}
-            placeholder="Brand plus product name"
+            placeholder={t("suggest.queryPh")}
             required
           />
         </Field>
         <Button type="submit" variant="ink">
-          Build suggestion
+          {t("suggest.build")}
         </Button>
       </form>
 
       {ready ? (
         <section className="mt-8 rounded-3xl bg-surface p-4 shadow-card" aria-live="polite">
-          <h2 className="font-display text-3xl">Ready to file</h2>
-          <p className="mt-2 text-muted">
-            Texture, size, colors, and imageKey use placeholders. Change them before pasting if you know a better
-            fit. An unknown imageKey becomes a labeled color shape.
-          </p>
+          <h2 className="font-display text-3xl">{t("suggest.ready")}</h2>
+          <p className="mt-2 text-muted">{t("suggest.readyBody")}</p>
           <a href={mailto} className={buttonClass("butter", "mt-4")}>
-            Email this suggestion
+            {t("suggest.email")}
           </a>
           <div className="mt-4 flex items-center justify-between gap-3">
-            <h3 className="font-display text-xl">JSON to paste</h3>
+            <h3 className="font-display text-xl">{t("suggest.copyTitle")}</h3>
             <Button variant="surface" onClick={() => void copyJson()}>
-              {copied ? "Copied" : "Copy JSON"}
+              {copied ? t("suggest.copied") : t("suggest.copy")}
             </Button>
           </div>
           <pre className="mt-3 overflow-x-auto rounded-2xl bg-cream-deep p-4 text-sm leading-relaxed">
@@ -189,15 +187,15 @@ function Field({
   );
 }
 
-function validate(fields: Fields): Partial<Record<keyof Fields, string>> {
+function validate(fields: Fields, t: (key: MessageKey) => string): Partial<Record<keyof Fields, string>> {
   const errors: Partial<Record<keyof Fields, string>> = {};
-  if (fields.name.trim().length < 2) errors.name = "Add the toy’s name.";
-  if (fields.brand.trim().length < 2) errors.brand = "Add a brand, or Generic.";
-  if (!CATEGORIES.includes(fields.category as Category)) errors.category = "Pick a category.";
+  if (fields.name.trim().length < 2) errors.name = t("err.toyName");
+  if (fields.brand.trim().length < 2) errors.brand = t("err.brand");
+  if (!CATEGORIES.includes(fields.category as Category)) errors.category = t("err.category");
   if (fields.description.trim().length < 40) {
-    errors.description = "Write at least a couple of sentences about the squeeze.";
+    errors.description = t("err.squeeze");
   }
-  if (fields.amazonQuery.trim().length < 3) errors.amazonQuery = "Add a search phrase for Amazon.";
+  if (fields.amazonQuery.trim().length < 3) errors.amazonQuery = t("err.amazon");
   return errors;
 }
 

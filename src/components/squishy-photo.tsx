@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SquishyArt } from "@/components/squishy-art";
 import type { ImageCredit, Squishy } from "@/lib/catalog";
+import { useI18n } from "@/lib/i18n/context";
 
 export function SquishyPhoto({
   item,
@@ -30,17 +31,19 @@ export function SquishyPhoto({
 }
 
 export function PhotoCredit({ credit }: { credit?: ImageCredit }) {
+  const { t } = useI18n();
   if (!credit) return null;
+  const changes = credit.changes === "cropped" ? t("photo.cropped") : credit.changes;
   return (
     <p className="text-xs leading-snug text-muted">
-      Photo by {credit.author}
-      {credit.changes ? `, ${credit.changes}` : ""}.{" "}
+      {t("photo.by", { author: credit.author })}
+      {changes ? t("photo.changes", { changes }) : ""}.{" "}
       <a className="underline" href={credit.licenseUrl} target="_blank" rel="noreferrer">
         {credit.license}
       </a>
       .{" "}
       <a className="underline" href={credit.sourceUrl} target="_blank" rel="noreferrer">
-        Source
+        {t("photo.source")}
       </a>
       .
     </p>

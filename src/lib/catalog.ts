@@ -196,7 +196,11 @@ export function topSellers(): Squishy[] {
     .sort((a, b) => (a.bestsellerRank ?? 1000) - (b.bestsellerRank ?? 1000));
 }
 
-export function filterSquishies(items: Squishy[], search: CatalogSearch): Squishy[] {
+export function filterSquishies(
+  items: Squishy[],
+  search: CatalogSearch,
+  extraHaystack?: (item: Squishy) => string,
+): Squishy[] {
   const q = search.q.trim().toLowerCase();
   const categories = tokens(search.category);
   const brands = tokens(search.brand);
@@ -210,7 +214,16 @@ export function filterSquishies(items: Squishy[], search: CatalogSearch): Squish
     if (sizes.length && !sizes.includes(item.size)) return false;
     if (search.best === "1" && !item.bestsellerRank) return false;
     if (!q) return true;
-    const haystack = [item.name, item.brand, item.line, item.texture, item.category, ...item.tags, ...item.colors]
+    const haystack = [
+      item.name,
+      item.brand,
+      item.line,
+      item.texture,
+      item.category,
+      ...item.tags,
+      ...item.colors,
+      extraHaystack?.(item) ?? "",
+    ]
       .join(" ")
       .toLowerCase();
     return haystack.includes(q);

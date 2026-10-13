@@ -1,33 +1,35 @@
 import { Link } from "@tanstack/react-router";
 import { AddToHome } from "@/components/add-to-home";
 import { EMPTY_SEARCH } from "@/lib/catalog";
+import { useI18n } from "@/lib/i18n/context";
 
 export function SiteFooter() {
+  const { t } = useI18n();
   return (
     <footer className="mt-16 border-t border-line">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-sm text-muted">
         <div className="flex flex-wrap items-center gap-3">
           <AddToHome />
-          <p>Add the icon in Safari, then open it once so the shelf can save.</p>
+          <p>{t("footer.saveHint")}</p>
         </div>
-        <nav className="flex flex-wrap gap-4 font-bold" aria-label="Footer">
+        <nav className="flex flex-wrap gap-4 font-bold" aria-label={t("nav.footer")}>
           <Link to="/" search={EMPTY_SEARCH} className="inline-flex min-h-11 items-center">
-            Squishies
+            {t("nav.squishies")}
           </Link>
           <Link to="/top" className="inline-flex min-h-11 items-center">
-            Hall of Fame
+            {t("nav.hall")}
           </Link>
           <Link to="/play" className="inline-flex min-h-11 items-center">
-            Quiz
+            {t("nav.quiz")}
           </Link>
           <Link to="/projects" className="inline-flex min-h-11 items-center">
-            Projects
+            {t("nav.projects")}
           </Link>
           <Link to="/about" className="inline-flex min-h-11 items-center">
-            About
+            {t("nav.about")}
           </Link>
           <Link to="/suggest" className="inline-flex min-h-11 items-center">
-            Suggest a squishy
+            {t("nav.suggest")}
           </Link>
         </nav>
       </div>

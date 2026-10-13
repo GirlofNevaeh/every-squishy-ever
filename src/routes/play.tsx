@@ -14,6 +14,10 @@ import {
   type QuizQuestion,
 } from "@/lib/quiz-bank";
 import { holdAudio, playAirHorn, playCheer, playFart, warmAudio } from "@/lib/quiz-sounds";
+import { useI18n } from "@/lib/i18n/context";
+import type { MessageKey } from "@/lib/i18n/messages";
+import { labelCategory, labelColor, labelTexture } from "@/lib/i18n/text";
+import type { Lang } from "@/lib/i18n/languages";
 
 export const Route = createFileRoute("/play")({
   head: () => ({
@@ -77,44 +81,59 @@ type Celebrate =
   | { kind: "draw"; teams: RosterTeam[] }
   | { kind: "dance"; dancer: string; teamName: string };
 
-function validateRoster(source: Draft[], asSolo: boolean) {
+function validateRoster(
+  source: Draft[],
+  asSolo: boolean,
+  t: (key: MessageKey, vars?: Record<string, string | number>) => string,
+) {
   if (asSolo) {
     const person = source[0];
-    if (!person?.name) return "Type your name first.";
-    if (!person.iconId) return "Pick a squishy to play as.";
+    if (!person?.name) return t("err.name");
+    if (!person.iconId) return t("err.icon");
     return "";
   }
-  if (source.length < 1 || source.length > MAX_TEAMS) return "Add between 1 and 10 teams.";
-  if (source.some((team) => !team.name)) return "Every team needs a team name.";
+  if (source.length < 1 || source.length > MAX_TEAMS) return t("err.teams");
+  if (source.some((team) => !team.name)) return t("err.teamName");
   const teamNames = source.map((team) => team.name.toLowerCase());
-  if (new Set(teamNames).size !== teamNames.length) return "Team names have to be different.";
-  if (source.some((team) => !team.iconId)) return "Every team picks a squishy.";
+  if (new Set(teamNames).size !== teamNames.length) return t("err.teamNames");
+  if (source.some((team) => !team.iconId)) return t("err.teamIcon");
   const icons = source.map((team) => team.iconId);
-  if (new Set(icons).size !== icons.length) return "Each team needs its own squishy.";
+  if (new Set(icons).size !== icons.length) return t("err.ownIcon");
   let playerCount = 0;
   for (const team of source) {
     if (team.players.length < 1 || team.players.length > MAX_PLAYERS) {
-      return "Each team needs 1 to 4 player names.";
+      return t("err.players");
     }
     const local = team.players.map((player) => player.toLowerCase());
-    if (new Set(local).size !== local.length) return `${team.name} has two players with the same name.`;
+    if (new Set(local).size !== local.length) return t("err.samePlayer", { name: team.name });
     playerCount += local.length;
   }
-  if (playerCount > MAX_TEAMS * MAX_PLAYERS) return "That's more than 40 players.";
+  if (playerCount > MAX_TEAMS * MAX_PLAYERS) return t("err.tooMany");
   return "";
 }
 
-function cheer(score: number, asked: number) {
-  if (asked > 0 && score === asked) return "You got every one. Squish legend!";
-  if (asked > 0 && score / asked >= 0.7) return "Wow, you really know your squishies.";
-  if (asked > 0 && score / asked >= 0.5) return "Nice squeezes. Play again if you want to beat that score.";
-  return "That was a tricky round. The shelf is still there if you want another look.";
+function cheerKey(score: number, asked: number): MessageKey {
+  if (asked > 0 && score === asked) return "cheer.perfect";
+  if (asked > 0 && score / asked >= 0.7) return "cheer.high";
+  if (asked > 0 && score / asked >= 0.5) return "cheer.mid";
+  return "cheer.low";
 }
 
-function joinTeams(names: string[]) {
+function joinTeams(names: string[], and: string) {
   if (names.length <= 1) return names[0] ?? "";
-  if (names.length === 2) return `${names[0]} and ${names[1]}`;
-  return `${names.slice(0, -1).join(", ")} and ${names.at(-1)}`;
+  if (names.length === 2) return `${names[0]} ${and} ${names[1]}`;
+  return `${names.slice(0, -1).join(", ")} ${and} ${names.at(-1)}`;
+}
+
+function questionKind(question: QuizQuestion) {
+  return question.id.split(":")[0] ?? "name";
+}
+
+function choiceLabel(kind: string, choice: string, lang: Lang) {
+  if (kind === "feel") return labelTexture(choice, lang);
+  if (kind === "category") return labelCategory(choice, lang);
+  if (kind === "color") return labelColor(choice, lang);
+  return choice;
 }
 
 function leadersOf(teams: RosterTeam[]) {
@@ -134,6 +153,7 @@ function danceGridClass(count: number) {
 }
 
 function PlayPage() {
+  const { t } = useI18n();
   const [mode, setMode] = useState<PlayMode>("solo");
   const [soloName, setSoloName] = useState("");
   const [soloIcon, setSoloIcon] = useState("");
@@ -340,7 +360,7 @@ function PlayPage() {
       name: team.name.trim(),
       players: team.players.map((player) => player.trim()).filter(Boolean),
     }));
-    const problem = validateRoster(source, asSolo);
+    const problem = validateRoster(source, asSolo, t);
     if (problem) {
       setError(problem);
       return;
@@ -453,7 +473,7 @@ function PlayPage() {
       {playingQuestion ? null : (
         <>
           <h1 className="mt-2 max-w-full font-display leading-none whitespace-nowrap text-ink [font-size:clamp(1.35rem,7.4vw,3rem)]">
-            Play Squishy Quiz
+            {t("play.title")}
           </h1>
         </>
       )}
@@ -497,8 +517,8 @@ function PlayPage() {
             turn={turn}
             solo={solo}
             teamCount={roster.length}
-            label={solo || roster.length === 1 ? "Your turn" : "Your team's turn"}
-            detail={solo ? null : `${turn.players.join(", ")}. One answer for the team.`}
+            label={solo || roster.length === 1 ? t("play.yourTurn") : t("play.teamTurn")}
+            detail={solo ? null : t("play.oneAnswer", { players: turn.players.join(", ") })}
             progress={`${round + 1} / ${quiz?.length ?? quizSize}`}
           />
           <AnswerBoard question={question} picked={picked} onChoose={choose} />
@@ -530,20 +550,27 @@ function PlayPage() {
               {decideLeft}
             </p>
             <h2 className="mt-1 font-display text-4xl">
-              {leader && leader.score === 0 ? "It's a tie at 0!" : "It's a tie at the top!"}
+              {leader && leader.score === 0 ? t("play.tieZero") : t("play.tieTop")}
             </h2>
             <p className="mt-2 text-lg" aria-live="polite">
               {decideLeft > 0
-                ? `${joinTeams(tiedTeams.map((team) => team.name))} are tied${leader?.score === 0 ? " on zero" : ""}. You have ${decideLeft} seconds to choose a Squishy Quiz Playoff or a Dance Off.`
-                : "Time is up. Choose a Squishy Quiz Playoff or a Dance Off."}
+                ? t("play.tied", {
+                    names: joinTeams(
+                      tiedTeams.map((team) => team.name),
+                      t("play.and"),
+                    ),
+                    zero: leader?.score === 0 ? t("play.zero") : "",
+                    seconds: decideLeft,
+                  })
+                : t("play.timeUp")}
             </p>
           </div>
           <div className="mt-3 grid gap-2 sm:grid-cols-2">
             <Button variant="ink" className="min-h-14 text-base" onClick={beginPlayoff}>
-              Squishy Quiz Playoff
+              {t("play.playoff")}
             </Button>
             <Button variant="butter" className="min-h-14 text-base" onClick={beginDancePick}>
-              Dance Off
+              {t("play.dance")}
             </Button>
           </div>
           <ScoreList teams={ranked} />
@@ -556,17 +583,17 @@ function PlayPage() {
             turn={playoffTeam}
             solo={false}
             teamCount={aliveTeams.length}
-            label="Playoff"
-            detail={`${playoffTeam.players.join(", ")}. One answer for the team.`}
-            progress={`Round ${playoffRound + 1} of ${PLAYOFF_ROUNDS}`}
+            label={t("play.playoffLabel")}
+            detail={t("play.oneAnswer", { players: playoffTeam.players.join(", ") })}
+            progress={t("play.round", { n: playoffRound + 1, total: PLAYOFF_ROUNDS })}
           />
           <AnswerBoard question={playoffQuestion} picked={picked} onChoose={choosePlayoff} />
         </section>
       ) : null}
       {phase === "dance-pick" ? (
         <section className="mt-6">
-          <h2 className="font-display text-4xl">There will now be a dance off.</h2>
-          <p className="mt-2 text-lg">Each team picks one dancer. Their names and a squishy show up together, then the dance begins.</p>
+          <h2 className="font-display text-4xl">{t("play.danceNow")}</h2>
+          <p className="mt-2 text-lg">{t("play.dancePick")}</p>
           <div className="mt-4 grid gap-4">
             {tiedTeams.map((team) => {
               const chosen = dancers.find((dancer) => dancer.teamKey === team.key)?.name;
@@ -600,8 +627,8 @@ function PlayPage() {
       ) : null}
       {phase === "dance-judge" ? (
         <section className="mt-6">
-          <h2 className="font-display text-4xl">Who won the dance off?</h2>
-          <p className="mt-2 text-lg">Pick the winning dancer.</p>
+          <h2 className="font-display text-4xl">{t("play.whoWon")}</h2>
+          <p className="mt-2 text-lg">{t("play.pickDancer")}</p>
           <div className="mt-4 grid gap-2">
             {dancers.map((dancer) => {
               const team = roster.find((item) => item.key === dancer.teamKey);
@@ -616,8 +643,8 @@ function PlayPage() {
         </section>
       ) : null}
       {phase === "draw-flash" ? (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-ink" role="status" aria-label="Draw">
-          <p className="draw-flash draw-word font-display text-butter">DRAW</p>
+        <div className="fixed inset-0 z-50 grid place-items-center bg-ink" role="status" aria-label={t("play.draw")}>
+          <p className="draw-flash draw-word font-display text-butter">{t("play.draw")}</p>
         </div>
       ) : null}
       {phase === "celebrate" && celebrate ? (
@@ -636,15 +663,27 @@ function AnswerBoard({
   picked: string | null;
   onChoose: (choice: string) => void;
 }) {
+  const { t, lang } = useI18n();
   const image = questionImage(question);
+  const kind = questionKind(question);
+  const name = image?.name ?? "";
+  const prompt =
+    kind === "feel"
+      ? t("quiz.feel", { name })
+      : kind === "category"
+        ? t("quiz.category", { name })
+        : kind === "color"
+          ? t("quiz.color", { name })
+          : t("quiz.name");
+  const shown = (choice: string) => choiceLabel(kind, choice, lang);
   return (
     <div className="mt-3 rounded-3xl bg-surface p-3 shadow-card">
-      <h2 className="font-display text-2xl leading-tight">{question.prompt}</h2>
+      <h2 className="font-display text-2xl leading-tight">{prompt}</h2>
       <div className={cn("mt-3 grid items-stretch gap-2", image ? "grid-cols-[minmax(7.5rem,42%)_minmax(0,1fr)]" : "grid-cols-1")}>
         {image ? (
           <div className="relative min-h-32 overflow-hidden rounded-2xl">
             <div className="absolute inset-0">
-              <SquishyPhoto item={image} alt={question.prompt} eager />
+              <SquishyPhoto item={image} alt={prompt} eager />
             </div>
           </div>
         ) : null}
@@ -663,7 +702,7 @@ function AnswerBoard({
                 onClick={() => onChoose(choice)}
                 disabled={picked != null}
               >
-                {choice}
+                {shown(choice)}
               </button>
             );
           })}
@@ -671,7 +710,7 @@ function AnswerBoard({
       </div>
       {picked ? (
         <p className="mt-2 font-display text-xl" role="status">
-          {picked === question.answer ? "Yes!" : `It was ${question.answer}.`}
+          {picked === question.answer ? t("play.yes") : t("play.itWas", { answer: shown(question.answer) })}
         </p>
       ) : null}
     </div>
@@ -719,30 +758,31 @@ function League({
   onAgain: () => void;
   onSetup: () => void;
 }) {
+  const { t } = useI18n();
   return (
     <section className="mt-6">
       {solo ? (
         <div className="rounded-3xl bg-butter p-6">
           <h2 className="font-display text-4xl">
-            {leader.score} out of {leader.asked}
+            {t("play.outOf", { score: leader.score, asked: leader.asked })}
           </h2>
           <p className="mt-2 text-lg">
-            Nice work, {leader.name}. {cheer(leader.score, leader.asked)}
+            {t("play.niceWork", { name: leader.name, cheer: t(cheerKey(leader.score, leader.asked)) })}
           </p>
         </div>
       ) : (
         <div className="rounded-3xl bg-butter p-6">
-          <h2 className="font-display text-4xl">{leader.name} wins!</h2>
-          <p className="mt-2 text-lg">{leader.asked} questions. One answer counted for each team.</p>
+          <h2 className="font-display text-4xl">{t("play.wins", { name: leader.name })}</h2>
+          <p className="mt-2 text-lg">{t("play.askedNote", { n: leader.asked })}</p>
         </div>
       )}
       {solo ? null : <ScoreList teams={ranked} />}
       <div className="mt-4 flex flex-wrap gap-2">
         <Button variant="ink" onClick={onAgain}>
-          Play again
+          {t("play.again")}
         </Button>
         <Button variant="surface" onClick={onSetup}>
-          {solo ? "Change name" : "Change teams"}
+          {solo ? t("play.changeName") : t("play.changeTeams")}
         </Button>
       </div>
     </section>
@@ -750,6 +790,7 @@ function League({
 }
 
 function ScoreList({ teams }: { teams: RosterTeam[] }) {
+  const { t } = useI18n();
   return (
     <ol className="mt-4 grid gap-3">
       {teams.map((team, index) => (
@@ -762,7 +803,7 @@ function ScoreList({ teams }: { teams: RosterTeam[] }) {
             <p className="font-display text-2xl leading-tight break-words">{team.name}</p>
             <p className="text-sm font-bold break-words">{team.players.join(", ")}</p>
             <p className="text-sm text-muted tabular-nums">
-              {team.score} right out of {team.asked}
+              {t("play.rightOut", { score: team.score, asked: team.asked })}
             </p>
           </div>
           <p className="font-display text-4xl tabular-nums">{team.score}</p>
@@ -773,19 +814,27 @@ function ScoreList({ teams }: { teams: RosterTeam[] }) {
 }
 
 function CelebrateScreen({ celebrate }: { celebrate: Celebrate }) {
+  const { t } = useI18n();
   return (
     <section className="mt-6">
       {celebrate.kind === "playoff" ? (
-        <h2 className="font-display text-5xl">{celebrate.teamName} has won!</h2>
+        <h2 className="font-display text-5xl">{t("play.hasWon", { name: celebrate.teamName })}</h2>
       ) : null}
       {celebrate.kind === "dance" ? (
         <h2 className="font-display text-4xl break-words">
-          {celebrate.dancer}'s incredible dancing won it for {celebrate.teamName}
+          {t("play.danceWin", { dancer: celebrate.dancer, team: celebrate.teamName })}
         </h2>
       ) : null}
       {celebrate.kind === "draw" ? (
         <div>
-          <h2 className="font-display text-4xl break-words">{joinTeams(celebrate.teams.map((team) => team.name))} WIN!</h2>
+          <h2 className="font-display text-4xl break-words">
+            {t("play.winWord", {
+              names: joinTeams(
+                celebrate.teams.map((team) => team.name),
+                t("play.and"),
+              ),
+            })}
+          </h2>
           <ul className="mt-4 grid gap-3">
             {celebrate.teams.map((team) => (
               <li key={team.key} className="rounded-3xl bg-surface p-4 shadow-card">
@@ -804,14 +853,14 @@ function CelebrateScreen({ celebrate }: { celebrate: Celebrate }) {
       ) : null}
       <p className="mt-6">
         <Link to="/" search={EMPTY_SEARCH} className="font-bold underline">
-          Leave the quiz
+          {t("play.leave")}
         </Link>
       </p>
       <p
         className="congrats-flash fixed inset-x-0 bottom-0 z-30 bg-ink px-4 py-4 text-center font-display text-3xl tracking-wide text-butter sm:text-5xl"
         role="status"
       >
-        CONGRATULATIONS!
+        {t("play.congrats")}
       </p>
     </section>
   );
@@ -826,6 +875,7 @@ function rowClass(count: number) {
 }
 
 function DanceStage({ dancers, teams, seconds }: { dancers: Dancer[]; teams: RosterTeam[]; seconds: number }) {
+  const { t } = useI18n();
   const big = seconds <= 10;
 
   function card(dancer: Dancer, index: number) {
@@ -894,10 +944,10 @@ function DanceStage({ dancers, teams, seconds }: { dancers: Dancer[]; teams: Ros
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden bg-cream text-ink">
-      <p className="absolute top-3 left-3 z-20 rounded-full bg-butter px-3 py-2 text-sm font-bold">Dance off</p>
+      <p className="absolute top-3 left-3 z-20 rounded-full bg-butter px-3 py-2 text-sm font-bold">{t("play.dance")}</p>
       <p
         className="absolute top-3 right-3 z-20 grid size-16 place-items-center rounded-2xl bg-ink font-display text-3xl text-cream tabular-nums"
-        aria-label={`${seconds} seconds left`}
+        aria-label={t("play.seconds", { n: seconds })}
       >
         {seconds}
       </p>
@@ -943,23 +993,20 @@ function Setup({
   onRemove: (key: number) => void;
   onStart: () => void;
 }) {
+  const { t } = useI18n();
   const taken = new Set(drafts.map((team) => team.iconId).filter(Boolean));
   const named = drafts.reduce((count, team) => count + team.players.filter((player) => player.trim()).length, 0);
   return (
     <div className="mt-4">
-      <p className="text-lg">
-        Pick a quick quiz or a mega quiz. Both use the bank of 100 hall of fame squishies, and the next game asks
-        different ones. Play by yourself, or with teams of up to 4. Your team can play against as many as 9 other
-        teams, 40 players in all. A team gives one answer together.
-      </p>
-      <div className="mt-4 grid grid-cols-2 gap-2 rounded-full bg-cream-deep p-1" role="group" aria-label="Quiz length">
+      <p className="text-lg">{t("play.intro")}</p>
+      <div className="mt-4 grid grid-cols-2 gap-2 rounded-full bg-cream-deep p-1" role="group" aria-label={t("play.length")}>
         <button
           type="button"
           aria-pressed={quizSize === QUIZ_QUICK}
           className={cn("min-h-11 rounded-full font-bold", quizSize === QUIZ_QUICK ? "bg-ink text-cream" : "text-ink")}
           onClick={() => onQuizSize(QUIZ_QUICK)}
         >
-          Quick quiz
+          {t("play.quick")}
         </button>
         <button
           type="button"
@@ -967,20 +1014,20 @@ function Setup({
           className={cn("min-h-11 rounded-full font-bold", quizSize === QUIZ_MEGA ? "bg-ink text-cream" : "text-ink")}
           onClick={() => onQuizSize(QUIZ_MEGA)}
         >
-          Mega quiz
+          {t("play.mega")}
         </button>
       </div>
       <p className="mt-2 text-sm font-bold text-muted">
-        {quizSize === QUIZ_MEGA ? "Mega quiz is 25 questions." : "Quick quiz is 10 questions."}
+        {quizSize === QUIZ_MEGA ? t("play.megaHelp") : t("play.quickHelp")}
       </p>
-      <div className="mt-4 grid grid-cols-2 gap-2 rounded-full bg-cream-deep p-1" role="group" aria-label="Who is playing">
+      <div className="mt-4 grid grid-cols-2 gap-2 rounded-full bg-cream-deep p-1" role="group" aria-label={t("play.who")}>
         <button
           type="button"
           aria-pressed={mode === "solo"}
           className={cn("min-h-11 rounded-full font-bold", mode === "solo" ? "bg-ink text-cream" : "text-ink")}
           onClick={() => onMode("solo")}
         >
-          Just me
+          {t("play.solo")}
         </button>
         <button
           type="button"
@@ -988,16 +1035,16 @@ function Setup({
           className={cn("min-h-11 rounded-full font-bold", mode === "teams" ? "bg-ink text-cream" : "text-ink")}
           onClick={() => onMode("teams")}
         >
-          Teams
+          {t("play.teams")}
         </button>
       </div>
       {mode === "solo" ? (
         <section className="mt-4 rounded-3xl bg-surface p-4 shadow-card" aria-labelledby="solo-name-label">
           <h2 id="solo-name-label" className="font-display text-2xl">
-            Your name
+            {t("play.yourName")}
           </h2>
           <label className="mt-2 block text-sm font-bold" htmlFor="solo-name">
-            What should we call you?
+            {t("play.callYou")}
           </label>
           <input
             id="solo-name"
@@ -1008,22 +1055,27 @@ function Setup({
             className="mt-1 min-h-11 w-full rounded-full bg-cream px-4 text-ink shadow-card"
           />
           <p className="mt-3 text-sm font-bold" id="solo-icon">
-            Your squishy
+            {t("play.yourSquishy")}
           </p>
           <IconPicker selectedId={soloIcon} taken={new Set()} labelId="solo-icon" onPick={onSoloIcon} />
         </section>
       ) : (
         <div className="mt-4 grid gap-4">
           <p className="text-sm font-bold">
-            {drafts.length} of {MAX_TEAMS} teams · {named} of {MAX_TEAMS * MAX_PLAYERS} players named
+            {t("play.teamCount", {
+              teams: drafts.length,
+              maxTeams: MAX_TEAMS,
+              players: named,
+              maxPlayers: MAX_TEAMS * MAX_PLAYERS,
+            })}
           </p>
           {drafts.map((team, index) => (
             <section key={team.key} className="rounded-3xl bg-surface p-4 shadow-card" aria-labelledby={`team-name-label-${team.key}`}>
               <h2 id={`team-name-label-${team.key}`} className="font-display text-2xl">
-                Team {index + 1}
+                {t("play.team", { n: index + 1 })}
               </h2>
               <label className="mt-2 block text-sm font-bold" htmlFor={`team-name-${team.key}`}>
-                Team name
+                {t("play.teamName")}
               </label>
               <input
                 id={`team-name-${team.key}`}
@@ -1033,17 +1085,17 @@ function Setup({
                 placeholder="Lemon Lions"
                 className="mt-1 min-h-11 w-full rounded-full bg-cream px-4 text-ink shadow-card"
               />
-              <p className="mt-3 text-sm font-bold">Players</p>
-              <p className="text-sm text-muted">Add each person's name. The team still shares one answer.</p>
+              <p className="mt-3 text-sm font-bold">{t("play.players")}</p>
+              <p className="text-sm text-muted">{t("play.playersHelp")}</p>
               <div className="mt-2 grid gap-2">
                 {team.players.map((player, playerIndex) => (
                   <div key={`${team.key}-${playerIndex}`} className="flex gap-2">
                     <input
                       value={player}
                       maxLength={24}
-                      aria-label={`Player ${playerIndex + 1} on team ${index + 1}`}
+                      aria-label={t("play.playerAria", { player: playerIndex + 1, team: index + 1 })}
                       onChange={(event) => onPlayer(team.key, playerIndex, event.target.value)}
-                      placeholder={playerIndex === 0 ? "Nancy" : "Another player"}
+                      placeholder={playerIndex === 0 ? "Nancy" : t("play.another")}
                       className="min-h-11 min-w-0 flex-1 rounded-full bg-cream px-4 text-ink shadow-card"
                     />
                     {team.players.length > 1 ? (
@@ -1052,7 +1104,7 @@ function Setup({
                         className="min-h-11 shrink-0 rounded-full px-3 font-bold"
                         onClick={() => onRemovePlayer(team.key, playerIndex)}
                       >
-                        Remove
+                        {t("play.remove")}
                       </button>
                     ) : null}
                   </div>
@@ -1060,11 +1112,11 @@ function Setup({
               </div>
               {team.players.length < MAX_PLAYERS ? (
                 <button type="button" className="mt-2 min-h-11 font-bold" onClick={() => onAddPlayer(team.key)}>
-                  Add a player
+                  {t("play.addPlayer")}
                 </button>
               ) : null}
               <p className="mt-3 text-sm font-bold" id={`team-icon-${team.key}`}>
-                Squishy icon
+                {t("play.icon")}
               </p>
               <IconPicker
                 selectedId={team.iconId}
@@ -1074,7 +1126,7 @@ function Setup({
               />
               {drafts.length > 1 ? (
                 <button type="button" className="mt-3 min-h-11 font-bold" onClick={() => onRemove(team.key)}>
-                  Remove team
+                  {t("play.removeTeam")}
                 </button>
               ) : null}
             </section>
@@ -1089,11 +1141,11 @@ function Setup({
       <div className="mt-4 flex flex-wrap gap-2">
         {mode === "teams" && drafts.length < MAX_TEAMS ? (
           <Button variant="surface" onClick={onAdd}>
-            Add a team
+            {t("play.addTeam")}
           </Button>
         ) : null}
         <Button variant="ink" onClick={onStart}>
-          {quizSize === QUIZ_MEGA ? "Start mega quiz" : "Start quick quiz"}
+          {quizSize === QUIZ_MEGA ? t("play.startMega") : t("play.startQuick")}
         </Button>
       </div>
     </div>
@@ -1111,6 +1163,7 @@ function IconPicker({
   labelId: string;
   onPick: (id: string) => void;
 }) {
+  const { t } = useI18n();
   const picked = ICONS.find((icon) => icon.id === selectedId);
   return (
     <div>
@@ -1132,7 +1185,7 @@ function IconPicker({
                 value={icon.id}
                 checked={selected}
                 disabled={used}
-                aria-label={used ? `${icon.name} is already picked` : icon.name}
+                aria-label={used ? t("play.taken", { name: icon.name }) : icon.name}
                 onChange={() => {
                   if (!used) onPick(icon.id);
                 }}
@@ -1154,15 +1207,16 @@ function IconPicker({
         })}
       </div>
       <p className="mt-2 text-sm font-bold" aria-live="polite">
-        {picked ? `Picked ${picked.name}` : "Tap a squishy to choose it."}
+        {picked ? t("play.picked", { name: picked.name }) : t("play.tap")}
       </p>
     </div>
   );
 }
 
 function ScoreStrip({ teams, activeKey }: { teams: RosterTeam[]; activeKey: number }) {
+  const { t } = useI18n();
   return (
-    <ul className="flex gap-2 overflow-x-auto" aria-label="Scores so far">
+    <ul className="flex gap-2 overflow-x-auto" aria-label={t("play.scores")}>
       {teams.map((team) => (
         <li
           key={team.key}
