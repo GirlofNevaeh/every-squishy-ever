@@ -10,7 +10,7 @@ export const Route = createFileRoute("/projects")({
       { title: "Projects · Every Squishy Ever" },
       {
         name: "description",
-        content: "Individual and team squishy projects for Age 5-6 through Age 11-12.",
+        content: "Individual and team squishy projects for Age 5-12.",
       },
     ],
   }),

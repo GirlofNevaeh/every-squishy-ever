@@ -184,8 +184,8 @@ export const DE: Record<string, string> = {
   "Each team needs 1 to 4 player names.": "Jedes Team braucht 1 bis 4 Spielernamen.",
   "{name} has two players with the same name.": "{name} hat zwei Spieler mit demselben Namen.",
   "That's more than 40 players.": "Das sind mehr als 40 Spieler.",
-  "Individual and team projects for Age 5-6 through Age 11-12. Use a squishy from home or a picture from the shelf. Toys stay in hands, not mouths. An adult helps with sharing and timing.":
-    "Einzel- und Teamprojekte für Alter 5-6 bis Alter 11-12. Nimm ein Squishy von zu Hause oder ein Bild aus dem Regal. Spielzeuge bleiben in den Händen, nicht im Mund. Ein Erwachsener hilft beim Teilen und bei der Zeit.",
+  "Individual and team projects for Age 5-12. Use a squishy from home or a picture from the shelf. Toys stay in hands, not mouths. An adult helps with sharing and timing.":
+    "Einzel- und Teamprojekte für Alter 5-12. Nimm ein Squishy von zu Hause oder ein Bild aus dem Regal. Spielzeuge bleiben in den Händen, nicht im Mund. Ein Erwachsener hilft beim Teilen und bei der Zeit.",
   "Age": "Alter",
   "Project type": "Projektart",
   "All ages": "Alle Alter",
