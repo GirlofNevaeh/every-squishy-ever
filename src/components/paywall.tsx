@@ -6,8 +6,6 @@ import { useI18n } from "@/lib/i18n/context";
 
 const PEEKS = ["/squishies/nice-cube.jpg", "/squishies/cheese-wedge.jpg", "/squishies/butter-stick.jpg"];
 
-const BUY_URL = "https://everyschoolever.com";
-
 export function Paywall() {
   const { t } = useI18n();
   const [busy, setBusy] = useState(false);
@@ -56,10 +54,6 @@ export function Paywall() {
       <h1 className="mt-2 font-display text-4xl text-ink">{t("brand")}</h1>
       <p className="mt-3 text-lg text-ink">{t("gate.intro")}</p>
       <p className="mt-3 font-bold text-ink">{t("gate.locked")}</p>
-      <p className="mt-2 text-ink">{t("gate.buy")}</p>
-      <a href={BUY_URL} target="_blank" rel="noopener noreferrer" className={`${buttonClass("butter")} mt-4 w-full`}>
-        {t("gate.buyCta")}
-      </a>
       <form onSubmit={onSubmit} className="mt-6 rounded-3xl bg-surface p-4 shadow-card">
         <label htmlFor="access-key" className="font-display text-lg">
           {t("gate.keyLabel")}

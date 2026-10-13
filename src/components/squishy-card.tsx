@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { CirclePlay, ExternalLink } from "lucide-react";
+import { CirclePlay } from "lucide-react";
 import { SquishyPhoto, PhotoCredit } from "@/components/squishy-photo";
 import { buttonClass } from "@/components/ui/button";
-import { amazonUrl, CATEGORY_CHIP, youtubeUrl, type Squishy } from "@/lib/catalog";
+import { CATEGORY_CHIP, youtubeUrl, type Squishy } from "@/lib/catalog";
 import { useI18n } from "@/lib/i18n/context";
 import { labelBrand, labelTexture, localizedFeel } from "@/lib/i18n/text";
 
@@ -43,18 +43,6 @@ export function SquishyCard({ item }: { item: Squishy }) {
           <Link to="/squishy/$id" params={{ id: item.id }} className={buttonClass("ink", "flex-1")}>
             {t("card.see")}
           </Link>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <a
-            href={amazonUrl(item)}
-            target="_blank"
-            rel="noreferrer"
-            className={buttonClass("butter", "flex-1")}
-            aria-label={t("card.buyAria", { name: item.name })}
-          >
-            {t("card.buy")}
-            <ExternalLink className="size-4" aria-hidden="true" />
-          </a>
           <a
             href={youtubeUrl(item.youtubeQuery)}
             target="_blank"

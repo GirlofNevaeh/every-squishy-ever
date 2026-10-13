@@ -1,5 +1,4 @@
 import raw from "@/data/squishies.json";
-import { AFFILIATE_TAG } from "@/data/config";
 
 export const CATEGORIES = [
   "NeeDoh",
@@ -153,19 +152,6 @@ export function toggleToken(value: string, token: string): string {
   const current = tokens(value);
   const next = current.includes(token) ? current.filter((item) => item !== token) : [...current, token];
   return next.join(",");
-}
-
-export function amazonUrl(item: Pick<Squishy, "amazonQuery" | "amazonAsin">): string {
-  const tag = AFFILIATE_TAG.trim();
-  if (item.amazonAsin) {
-    const url = new URL(`https://www.amazon.com/dp/${item.amazonAsin}`);
-    if (tag) url.searchParams.set("tag", tag);
-    return url.toString();
-  }
-  const url = new URL("https://www.amazon.com/s");
-  url.searchParams.set("k", item.amazonQuery);
-  if (tag) url.searchParams.set("tag", tag);
-  return url.toString();
 }
 
 export function youtubeUrl(query: string): string {

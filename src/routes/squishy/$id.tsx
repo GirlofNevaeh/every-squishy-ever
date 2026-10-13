@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CirclePlay, ExternalLink } from "lucide-react";
+import { CirclePlay } from "lucide-react";
 import { SquishyCard } from "@/components/squishy-card";
 import { SquishyPhoto, PhotoCredit } from "@/components/squishy-photo";
 import { buttonClass } from "@/components/ui/button";
-import { amazonUrl, CATEGORY_CHIP, EMPTY_SEARCH, getSquishy, relatedSquishies, youtubeUrl } from "@/lib/catalog";
+import { CATEGORY_CHIP, EMPTY_SEARCH, getSquishy, relatedSquishies, youtubeUrl } from "@/lib/catalog";
 import { useI18n } from "@/lib/i18n/context";
 import { labelBrand, labelCategory, labelColor, labelPrice, labelSize, labelTexture, localizedDescription } from "@/lib/i18n/text";
 import { swatch } from "@/lib/swatches";
@@ -99,15 +99,6 @@ function Detail() {
             <p className="mt-1">{labelPrice(item.priceNote, lang)}</p>
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
-            <a
-              href={amazonUrl(item)}
-              target="_blank"
-              rel="noreferrer"
-              className={buttonClass("butter")}
-            >
-              {t("detail.buy")}
-              <ExternalLink className="size-4" aria-hidden="true" />
-            </a>
             <a
               href={youtubeUrl(item.youtubeQuery)}
               target="_blank"
