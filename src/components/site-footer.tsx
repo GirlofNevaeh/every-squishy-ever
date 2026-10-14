@@ -1,7 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
 import { AddToHome } from "@/components/add-to-home";
-import { lockShelf } from "@/lib/access/gate";
 import { EMPTY_SEARCH } from "@/lib/catalog";
 import { useI18n } from "@/lib/i18n/context";
 
@@ -33,29 +31,8 @@ export function SiteFooter() {
           <Link to="/suggest" className="inline-flex min-h-11 items-center">
             {t("nav.suggest")}
           </Link>
-          <LockButton />
         </nav>
       </div>
     </footer>
-  );
-}
-
-function LockButton() {
-  const { t } = useI18n();
-  const [busy, setBusy] = useState(false);
-
-  async function lock() {
-    setBusy(true);
-    try {
-      await lockShelf();
-    } finally {
-      window.location.assign("/");
-    }
-  }
-
-  return (
-    <button type="button" className="inline-flex min-h-11 items-center" onClick={lock} disabled={busy}>
-      {t("gate.lock")}
-    </button>
   );
 }

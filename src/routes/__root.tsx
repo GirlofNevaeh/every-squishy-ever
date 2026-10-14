@@ -1,10 +1,8 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
-import { Paywall } from "@/components/paywall";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { readAccess } from "@/lib/access/gate";
 import { LanguageProvider } from "@/lib/i18n/context";
 import { parseLang } from "@/lib/i18n/languages";
 import { readLangCookie } from "@/lib/i18n/read-lang";
@@ -12,8 +10,8 @@ import appCss from "../styles.css?url";
 
 export const Route = createRootRoute({
   beforeLoad: async () => {
-    const [raw, unlocked] = await Promise.all([readLangCookie(), readAccess()]);
-    return { lang: parseLang(raw), unlocked };
+    const raw = await readLangCookie();
+    return { lang: parseLang(raw) };
   },
   head: () => ({
     meta: [
@@ -45,7 +43,7 @@ export const Route = createRootRoute({
 });
 
 function RootShell() {
-  const { lang, unlocked } = Route.useRouteContext();
+  const { lang } = Route.useRouteContext();
   return (
     <html lang={lang} suppressHydrationWarning>
       <head>
@@ -55,17 +53,13 @@ function RootShell() {
         <LanguageProvider initial={lang}>
           <PreviewHostBridge />
           <AuthProvider>
-            {unlocked ? (
-              <div className="flex min-h-screen flex-col">
-                <SiteHeader />
-                <div className="flex-1">
-                  <Outlet />
-                </div>
-                <SiteFooter />
+            <div className="flex min-h-screen flex-col">
+              <SiteHeader />
+              <div className="flex-1">
+                <Outlet />
               </div>
-            ) : (
-              <Paywall />
-            )}
+              <SiteFooter />
+            </div>
           </AuthProvider>
           <Scripts />
         </LanguageProvider>
