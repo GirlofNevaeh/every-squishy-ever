@@ -23,7 +23,9 @@ export const DE: Record<string, string> = {
   "See the toy, learn the squish, then find it.": "Sieh das Spielzeug, lern den Druck, dann finde es.",
   "A picture shelf of squishy toys, with how each one feels, a quiz, and projects for primary school.":
     "Ein Bilderregal voller Squishy-Spielzeuge, mit dem Gefühl jedes einzelnen, einem Quiz und Projekten für die Grundschule.",
-  "The shelf stays closed until you enter an access key.": "Das Regal bleibt zu, bis du einen Zugangsschlüssel eingibst.",
+  "This page is locked": "Diese Seite ist zu",
+  "The home screen is free. The rest of the site stays locked until you enter an access key.":
+    "Die Startseite ist frei. Der Rest der Seite bleibt zu, bis du einen Zugangsschlüssel eingibst.",
   "Buy an access key from Every School Ever, then come back and type it here.":
     "Kauf einen Zugangsschlüssel bei Every School Ever, dann komm zurück und schreib ihn hier hin.",
   "Buy an access key": "Zugangsschlüssel kaufen",

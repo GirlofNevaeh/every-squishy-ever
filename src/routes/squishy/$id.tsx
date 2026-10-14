@@ -3,13 +3,23 @@ import { SquishyCard } from "@/components/squishy-card";
 import { SquishyPhoto, PhotoCredit } from "@/components/squishy-photo";
 import { buttonClass } from "@/components/ui/button";
 import { CATEGORY_CHIP, EMPTY_SEARCH, getSquishy, relatedSquishies } from "@/lib/catalog";
+import { readAccess } from "@/lib/access/gate";
 import { useI18n } from "@/lib/i18n/context";
 import { labelBrand, labelCategory, labelColor, labelPrice, labelSize, labelTexture, localizedDescription } from "@/lib/i18n/text";
 import { swatch } from "@/lib/swatches";
 
 export const Route = createFileRoute("/squishy/$id")({
-  head: ({ params }) => {
+  head: async ({ params }) => {
     const item = getSquishy(params.id);
+    const unlocked = await readAccess();
+    if (!unlocked) {
+      return {
+        meta: [
+          { title: "Every Squishy Ever" },
+          { name: "description", content: "This page stays locked until you enter an access key." },
+        ],
+      };
+    }
     return {
       meta: [
         { title: item ? `${item.name} · Every Squishy Ever` : "Missing squishy · Every Squishy Ever" },
