@@ -8,7 +8,7 @@ export const Route = createFileRoute("/top")({
   head: () =>
     gateMeta(
       "Hall of Fame · Every Squishy Ever",
-      "The hall of fame of squishies people have loved and bought the most.",
+      "The Hall of Fame of squishies people have loved and bought the most.",
     ),
   component: TopPage,
 });

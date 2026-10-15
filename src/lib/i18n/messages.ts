@@ -65,7 +65,7 @@ export const MESSAGES = {
     "Такого имени сквиши пока нет.",
   ),
   "hero.before": m(
-    "A Squishy Encyclopaedia For ",
+    "A Squishy Encyclopaedia for ",
     "Leabhar-eòlais squishy do ",
     "Gwyddoniadur sgwishi i ",
     "Ciclipéid squishy do ",
@@ -225,7 +225,7 @@ export const MESSAGES = {
   ),
   "count.for": m(" for “{q}”", " airson “{q}”", " am “{q}”", " ar “{q}”", " pour « {q} »", " per “{q}”", " para “{q}”", " по запросу «{q}»"),
   "count.hall": m(
-    " in the hall of fame",
+    " in the Hall of Fame",
     " anns an Talla Cliù",
     " yn y Neuadd Enwogion",
     " i Halla na Laoch",
@@ -540,7 +540,7 @@ export const MESSAGES = {
     "Викторина сквиши",
   ),
   "play.intro": m(
-    "Pick a quick quiz or a mega quiz. Both use the bank of 100 hall of fame squishies, and the next game asks different ones. Play by yourself, or with teams of up to 4. Your team can play against as many as 9 other teams, 40 players in all. A team gives one answer together.",
+    "Pick a quick quiz or a mega quiz. Both use the bank of 100 Hall of Fame squishies, and the next game asks different ones. Play by yourself, or with teams of up to 4. Your team can play against as many as 9 other teams, 40 players in all. A team gives one answer together.",
     "Tagh ceist ghoirid no ceist mhòr. Bidh an dà chuid a’ cleachdadh banca de 100 squishy bhon Talla Cliù, agus bidh an ath gheama eadar-dhealaichte. Cluich leat fhèin, no le sgiobaidhean de suas ri 4. Faodaidh an sgioba agad cluich an aghaidh suas ri 9 sgiobaidhean eile, 40 cluicheadair uile gu lèir. Bheir sgioba aon fhreagairt còmhla.",
     "Dewiswch gwis cyflym neu gwis anferth. Mae’r ddau’n defnyddio banc o 100 sgwishi’r Neuadd Enwogion, ac mae’r gêm nesaf yn gofyn rhai gwahanol. Chwaraewch ar eich pen eich hun, neu gyda thimau o hyd at 4. Gall eich tîm chwarae yn erbyn hyd at 9 tîm arall, 40 chwaraewr i gyd. Mae tîm yn rhoi un ateb gyda’i gilydd.",
     "Roghnaigh tráth tapa nó tráth mór. Úsáideann an dá cheann banc de 100 squishy ó Halla na Laoch, agus fiafraíonn an chéad chluiche eile cinn eile. Imir leat féin, nó le foirne suas le 4. Is féidir le d’fhoireann imirt in aghaidh suas le 9 bhfoireann eile, 40 imreoir ar fad. Tugann foireann freagra amháin le chéile.",
@@ -549,7 +549,7 @@ export const MESSAGES = {
     "Elige un quiz rápido o un mega quiz. Los dos usan el banco de 100 squishies del salón, y la siguiente partida pregunta otros. Juega tú solo, o en equipos de hasta 4. Tu equipo puede jugar contra hasta 9 equipos más, 40 jugadores en total. Un equipo da una sola respuesta juntos.",
     "Выбери быструю викторину или большую. Обе берут вопросы из банка 100 сквиши зала славы, и следующая игра задаёт другие. Играй один или командами до 4 человек. Можно играть против ещё 9 команд, всего 40 игроков. Команда даёт один общий ответ.",
   ),
-  "play.length": m("Quiz length", "Faid na ceiste", "Hyd y cwis", "Fad an trátha", "Longueur du quiz", "Lunghezza del quiz", "Largo del quiz", "Длина викторины"),
+  "play.length": m("Quiz length", "Faid na ceiste", "Hyd y cwis", "Fad an trátha", "Longueur du quiz", "Lunghezza del quiz", "Duración del quiz", "Длина викторины"),
   "play.quick": m("Quick quiz", "Ceist ghoirid", "Cwis cyflym", "Tráth tapa", "Quiz court", "Quiz veloce", "Quiz rápido", "Быстрая"),
   "play.mega": m("Mega quiz", "Ceist mhòr", "Cwis anferth", "Tráth mór", "Méga quiz", "Mega quiz", "Mega quiz", "Большая"),
   "play.quickHelp": m("Quick quiz is 10 questions.", "Tha 10 ceistean anns a’ cheist ghoirid.", "Mae 10 cwestiwn yn y cwis cyflym.", "Tá 10 gceist sa tráth tapa.", "Le quiz court a 10 questions.", "Il quiz veloce ha 10 domande.", "El quiz rápido tiene 10 preguntas.", "В быстрой 10 вопросов."),
