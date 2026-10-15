@@ -3,17 +3,10 @@ import { useState, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { useI18n } from "@/lib/i18n/context";
 import { PROJECT_COPY, PROJECT_META, type ProjectKind } from "@/lib/i18n/projects-copy";
+import { gateMeta } from "@/lib/access/public-head";
 
 export const Route = createFileRoute("/projects")({
-  head: () => ({
-    meta: [
-      { title: "Projects · Every Squishy Ever" },
-      {
-        name: "description",
-        content: "Individual and team squishy projects for Age 5-12.",
-      },
-    ],
-  }),
+  head: () => gateMeta("Projects · Every Squishy Ever", "Individual and team squishy projects for Age 5-12."),
   component: ProjectsPage,
 });
 

@@ -54,7 +54,7 @@ function RootShell() {
         <HeadContent />
       </head>
       <body>
-        <LanguageProvider initial={lang}>
+        <LanguageProvider initial={lang} unlocked={unlocked}>
           <PreviewHostBridge />
           <AuthProvider>
             <div className="flex min-h-screen flex-col">

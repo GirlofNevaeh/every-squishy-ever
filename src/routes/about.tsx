@@ -1,17 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { EMPTY_SEARCH } from "@/lib/catalog";
+import { gateMeta } from "@/lib/access/public-head";
 import { useI18n } from "@/lib/i18n/context";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About · Every Squishy Ever" },
-      {
-        name: "description",
-        content: "What a squishy is on this shelf, and why the list keeps growing.",
-      },
-    ],
-  }),
+  head: () =>
+    gateMeta("About · Every Squishy Ever", "What a squishy is on this shelf, and why the list keeps growing."),
   component: About,
 });
 

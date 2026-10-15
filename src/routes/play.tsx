@@ -18,17 +18,14 @@ import { useI18n } from "@/lib/i18n/context";
 import type { MessageKey } from "@/lib/i18n/messages";
 import { labelCategory, labelColor, labelTexture } from "@/lib/i18n/text";
 import type { Lang } from "@/lib/i18n/languages";
+import { gateMeta } from "@/lib/access/public-head";
 
 export const Route = createFileRoute("/play")({
-  head: () => ({
-    meta: [
-      { title: "Play Squishy Quiz · Every Squishy Ever" },
-      {
-        name: "description",
-        content: "A quick 10-question quiz or a 25-question mega quiz, for one player or up to 10 teams of 4.",
-      },
-    ],
-  }),
+  head: () =>
+    gateMeta(
+      "Play Squishy Quiz · Every Squishy Ever",
+      "A quick 10-question quiz or a 25-question mega quiz, for one player or up to 10 teams of 4.",
+    ),
   component: PlayPage,
 });
 

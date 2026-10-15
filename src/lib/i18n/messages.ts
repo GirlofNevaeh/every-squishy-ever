@@ -235,7 +235,7 @@ export const MESSAGES = {
     " в зале славы",
   ),
   "empty.title": m(
-    "That squish hasn’t been squished into the catalog yet",
+    "That squishy hasn’t been squished into the catalog yet",
     "Chan eil an squishy sin sa chatalog fhathast",
     "Dydy’r sgwishi hwnnw ddim yn y catalog eto",
     "Níl an squishy sin sa chatalóg fós",
@@ -324,8 +324,8 @@ export const MESSAGES = {
     "Beth sy’n cyfrif fel sgwishi",
     "Cad a áirítear mar squishy",
     "Qu’est-ce qu’un squishy",
-    "Che cosa è uno squishy",
-    "Qué cuenta como squishy",
+    "Che cos’è uno squishy",
+    "¿Qué cuenta como un squishy?",
     "Что такое сквиши",
   ),
   "about.p1": m(
@@ -731,7 +731,7 @@ export const MESSAGES = {
     "Brùthaidhean matha. Cluich a-rithist ma tha thu airson an sgòr sin a bhualadh.",
     "Gwasgiadau da. Chwaraewch eto os ydych am guro’r sgôr honno.",
     "Brúnna deasa. Imir arís más mian leat an scór sin a bhualadh.",
-    "Jolis pressions. Rejoue si tu veux battre ce score.",
+    "Belles pressions. Rejoue si tu veux battre ce score.",
     "Belle strette. Gioca ancora se vuoi battere quel punteggio.",
     "Buenos apretones. Juega otra vez si quieres superar esa puntuación.",
     "Хорошие нажатия. Сыграй ещё, если хочешь побить этот счёт.",

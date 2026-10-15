@@ -20,7 +20,15 @@ const TITLE_KEY: Record<string, MessageKey> = {
   "/suggest": "meta.suggest",
 };
 
-export function LanguageProvider({ initial, children }: { initial: Lang; children: ReactNode }) {
+export function LanguageProvider({
+  initial,
+  unlocked,
+  children,
+}: {
+  initial: Lang;
+  unlocked: boolean;
+  children: ReactNode;
+}) {
   const [lang, setLangState] = useState<Lang>(initial);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
 
@@ -38,9 +46,13 @@ export function LanguageProvider({ initial, children }: { initial: Lang; childre
 
   useEffect(() => {
     document.documentElement.lang = lang;
+    if (!unlocked && pathname !== "/") {
+      document.title = "Every Squishy Ever";
+      return;
+    }
     const key = TITLE_KEY[pathname];
     if (key) document.title = translate(lang, key);
-  }, [lang, pathname]);
+  }, [lang, pathname, unlocked]);
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
 }

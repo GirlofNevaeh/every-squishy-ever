@@ -1,18 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SquishyCard } from "@/components/squishy-card";
+import { gateMeta } from "@/lib/access/public-head";
 import { topSellers } from "@/lib/catalog";
 import { useI18n } from "@/lib/i18n/context";
 
 export const Route = createFileRoute("/top")({
-  head: () => ({
-    meta: [
-      { title: "Hall of Fame · Every Squishy Ever" },
-      {
-        name: "description",
-        content: "The hall of fame of squishies people have loved and bought the most.",
-      },
-    ],
-  }),
+  head: () =>
+    gateMeta(
+      "Hall of Fame · Every Squishy Ever",
+      "The hall of fame of squishies people have loved and bought the most.",
+    ),
   component: TopPage,
 });
 

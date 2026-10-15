@@ -6,17 +6,14 @@ import { CATEGORIES, slugify, type Category } from "@/lib/catalog";
 import { useI18n } from "@/lib/i18n/context";
 import { labelCategory } from "@/lib/i18n/text";
 import type { MessageKey } from "@/lib/i18n/messages";
+import { gateMeta } from "@/lib/access/public-head";
 
 export const Route = createFileRoute("/suggest")({
-  head: () => ({
-    meta: [
-      { title: "Suggest a squishy · Every Squishy Ever" },
-      {
-        name: "description",
-        content: "Suggest a squishy for the catalog. The form builds an email and a JSON object — no account needed.",
-      },
-    ],
-  }),
+  head: () =>
+    gateMeta(
+      "Suggest a squishy · Every Squishy Ever",
+      "Suggest a squishy for the catalog. The form builds an email and a JSON object — no account needed.",
+    ),
   component: Suggest,
 });
 
