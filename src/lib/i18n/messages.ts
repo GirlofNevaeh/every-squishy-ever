@@ -74,7 +74,7 @@ export const MESSAGES = {
     "Enciclopedia squishy para ",
     "Энциклопедия сквиши для ",
   ),
-  "hero.kids": m("kids", "chloinn", "blant", "pháistí", "enfants", "bambini", "niños", "детей"),
+  "hero.kids": m("Kids", "chloinn", "blant", "pháistí", "enfants", "bambini", "niños", "детей"),
   "hero.lead": m(
     "See the toy, learn the squish, then find it.",
     "Faic an dèideag, ionnsaich an squis, an uair sin lorg i.",

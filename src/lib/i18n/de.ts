@@ -19,7 +19,7 @@ export const DE: Record<string, string> = {
   "Matching squishy names": "Passende Squishy-Namen",
   "No squishy name matches that yet.": "Noch kein Squishy-Name passt dazu.",
   "A Squishy Encyclopaedia for ": "Eine Squishy-Enzyklopädie für ",
-  "kids": "Kinder",
+  "Kids": "Kinder",
   "See the toy, learn the squish, then find it.": "Sieh das Spielzeug, lern den Druck, dann finde es.",
   "A picture shelf of squishy toys, with how each one feels, a quiz, and projects for primary school.":
     "Ein Bilderregal voller Squishy-Spielzeuge, mit dem Gefühl jedes einzelnen, einem Quiz und Projekten für die Grundschule.",
