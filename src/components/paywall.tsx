@@ -3,6 +3,8 @@ import { buttonClass } from "@/components/ui/button";
 import { unlockWithKey } from "@/lib/access/gate";
 import { useI18n } from "@/lib/i18n/context";
 
+const PRICING_URL = "https://www.everyschoolever.com/pricing?plan=";
+
 export function Paywall() {
   const { t } = useI18n();
   const [busy, setBusy] = useState(false);
@@ -35,6 +37,10 @@ export function Paywall() {
     <main id="main" className="mx-auto flex w-full max-w-lg flex-col px-4 py-10">
       <h1 className="font-display text-4xl text-ink">{t("gate.lockedTitle")}</h1>
       <p className="mt-3 text-lg text-ink">{t("gate.locked")}</p>
+      <p className="mt-3 text-lg text-ink">{t("gate.buy")}</p>
+      <a href={PRICING_URL} className={`${buttonClass("butter")} mt-4 w-full`}>
+        {t("gate.buyCta")}
+      </a>
       <form onSubmit={onSubmit} className="mt-6 rounded-3xl bg-surface p-4 shadow-card">
         <label htmlFor="access-key" className="font-display text-lg">
           {t("gate.keyLabel")}
