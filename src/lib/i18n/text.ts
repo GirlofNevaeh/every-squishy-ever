@@ -1,5 +1,6 @@
 import descriptions from "@/data/i18n/descriptions.json";
 import type { Squishy } from "@/lib/catalog";
+import { americanize } from "@/lib/i18n/american";
 import { BRAND_LABEL, CATEGORY_LABEL, COLOR_LABEL, lookup, PRICE_LABEL, SIZE_LABEL, TEXTURE_LABEL } from "@/lib/i18n/lexicon";
 import type { Lang } from "@/lib/i18n/languages";
 
@@ -9,6 +10,7 @@ const COPY = descriptions as DescriptionMap;
 
 export function localizedDescription(item: Squishy, lang: Lang): string {
   if (lang === "en") return item.description;
+  if (lang === "en-US") return americanize(item.description);
   return COPY[item.id]?.[lang] || item.description;
 }
 
@@ -43,7 +45,7 @@ export function labelPrice(value: string, lang: Lang): string {
 }
 
 export function searchBlob(item: Squishy, lang: Lang): string {
-  if (lang === "en") return "";
+  if (lang === "en" || lang === "en-US") return "";
   return [
     localizedDescription(item, lang),
     labelCategory(item.category, lang),

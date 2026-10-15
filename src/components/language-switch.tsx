@@ -45,7 +45,7 @@ export function LanguageSwitch() {
           id={listId}
           role="listbox"
           aria-label={t("lang.choose")}
-          className="absolute top-full left-0 z-50 mt-1 max-h-[70vh] w-52 overflow-auto rounded-2xl bg-surface shadow-lift"
+          className="absolute top-full left-0 z-50 mt-1 max-h-[70vh] min-w-52 w-max overflow-auto rounded-2xl bg-surface shadow-lift"
         >
           {LANGS.map((code) => {
             const selected = code === lang;

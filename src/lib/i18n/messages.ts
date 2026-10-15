@@ -1,10 +1,11 @@
 import type { Lang } from "@/lib/i18n/languages";
+import { americanize } from "@/lib/i18n/american";
 import { DE } from "@/lib/i18n/de";
 
 type Row = Record<Lang, string>;
 
 function m(en: string, gd: string, cy: string, ga: string, fr: string, it: string, es: string, ru: string): Row {
-  return { en, de: DE[en] ?? en, gd, cy, ga, fr, it, es, ru };
+  return { en, "en-US": americanize(en), de: DE[en] ?? en, gd, cy, ga, fr, it, es, ru };
 }
 
 export const MESSAGES = {

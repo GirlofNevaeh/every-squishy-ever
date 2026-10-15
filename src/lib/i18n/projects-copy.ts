@@ -1,3 +1,4 @@
+import { americanize } from "@/lib/i18n/american";
 import type { Lang } from "@/lib/i18n/languages";
 
 export type ProjectKind = "individual" | "team";
@@ -176,4 +177,25 @@ const de: Copy[] = [
   { title: "Plan für eine Squishy-Messe", summary: "Plant eine Klassenmesse.", need: "Eine Seite für den Plan.", steps: ["Nehmt eine Teil-Regel und eine Abstimmung für die Ruhmeshalle auf.", "Plant zwei Stationen und wer jede leitet.", "Schreibt, was jede Station macht.", "Erzählt einem anderen Team den Plan in unter einer Minute."], learn: "Planen und sprechen." },
 ];
 
-export const PROJECT_COPY: Record<Lang, Copy[]> = { en, de, gd, cy, ga, fr, it, es, ru };
+function americanCopy(items: Copy[]): Copy[] {
+  return items.map((item) => ({
+    title: americanize(item.title),
+    summary: americanize(item.summary),
+    need: americanize(item.need),
+    steps: item.steps.map((step) => americanize(step)),
+    learn: americanize(item.learn),
+  }));
+}
+
+export const PROJECT_COPY: Record<Lang, Copy[]> = {
+  en,
+  "en-US": americanCopy(en),
+  de,
+  gd,
+  cy,
+  ga,
+  fr,
+  it,
+  es,
+  ru,
+};

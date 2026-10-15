@@ -1,4 +1,4 @@
-export const LANGS = ["en", "de", "gd", "cy", "ga", "fr", "it", "es", "ru"] as const;
+export const LANGS = ["en", "en-US", "de", "gd", "cy", "ga", "fr", "it", "es", "ru"] as const;
 
 export type Lang = (typeof LANGS)[number];
 
@@ -6,6 +6,7 @@ export const LANG_COOKIE = "squishy-lang";
 
 export const LANG_LABEL: Record<Lang, string> = {
   en: "English",
+  "en-US": "American English",
   de: "Deutsch",
   gd: "Gàidhlig",
   cy: "Cymraeg",
@@ -18,7 +19,7 @@ export const LANG_LABEL: Record<Lang, string> = {
 
 export function parseLang(value: string | null | undefined): Lang {
   const code = (value ?? "").toLowerCase();
-  return (LANGS as readonly string[]).includes(code) ? (code as Lang) : "en";
+  return LANGS.find((lang) => lang.toLowerCase() === code) ?? "en";
 }
 
 export function readDocumentLang(): Lang {
